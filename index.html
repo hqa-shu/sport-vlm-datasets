@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>体育多模态微调数据集汇总 v2</title>
+<style>
+:root{--bg:#0f1117;--surface:#1a1d27;--surface2:#222633;--border:#2e3347;--text:#e4e6f0;--text2:#9ba1b7;--accent:#6c72cb;--green:#34d399;--yellow:#fbbf24;--red:#f87171}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.header{background:linear-gradient(135deg,#1a1d27 0%,#2a1f3d 100%);border-bottom:1px solid var(--border);padding:48px 0 36px;text-align:center}
+.header h1{font-size:2.2rem;font-weight:700;background:linear-gradient(135deg,#6c72cb,#cb69c1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px}
+.header .subtitle{color:var(--text2);font-size:0.95rem;max-width:720px;margin:0 auto}
+.header .meta{margin-top:16px;font-size:0.82rem;color:var(--text2)}
+.stats-bar{display:flex;justify-content:center;gap:32px;padding:20px;background:var(--surface);border-bottom:1px solid var(--border);flex-wrap:wrap}
+.stat-item{text-align:center}
+.stat-num{font-size:1.8rem;font-weight:700}
+.stat-num.green{color:var(--green)}
+.stat-num.yellow{color:var(--yellow)}
+.stat-num.red{color:var(--red)}
+.stat-label{font-size:0.78rem;color:var(--text2);margin-top:2px}
+.container{max-width:1200px;margin:0 auto;padding:24px 20px}
+.filter-bar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+.filter-label{font-size:0.85rem;color:var(--text2);margin-right:4px}
+.tab-btn{padding:6px 16px;border-radius:20px;border:1px solid var(--border);background:var(--surface);color:var(--text2);font-size:0.82rem;cursor:pointer;transition:all 0.2s;font-family:inherit}
+.tab-btn:hover{border-color:var(--accent);color:var(--text)}
+.tab-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.tab-btn .count{display:inline-block;background:rgba(255,255,255,0.15);border-radius:10px;padding:0 6px;font-size:0.72rem;margin-left:4px}
+.status-filters,.sport-filters{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.status-btn,.sport-btn{padding:5px 12px;border-radius:16px;font-size:0.78rem;cursor:pointer;border:1px solid var(--border);background:transparent;transition:all 0.2s;font-family:inherit}
+.status-btn.s-ok{color:var(--green)}
+.status-btn.s-warn{color:var(--yellow)}
+.status-btn.s-no{color:var(--red)}
+.status-btn:hover,.sport-btn:hover{opacity:0.8;color:var(--text)}
+.status-btn.active.s-ok{background:rgba(52,211,153,0.15);border-color:var(--green)}
+.status-btn.active.s-warn{background:rgba(251,191,36,0.15);border-color:var(--yellow)}
+.status-btn.active.s-no{background:rgba(248,113,113,0.15);border-color:var(--red)}
+.sport-btn{color:var(--text2)}
+.sport-btn.active{background:rgba(108,114,203,0.2);border-color:var(--accent);color:var(--text)}
+.tier-section{margin-bottom:36px}
+.tier-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.tier-badge{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;font-weight:700;font-size:1.1rem;color:#fff}
+.tier-badge.s{background:linear-gradient(135deg,#f59e0b,#d97706)}
+.tier-badge.a{background:linear-gradient(135deg,#3b82f6,#2563eb)}
+.tier-badge.b{background:linear-gradient(135deg,#8b5cf6,#7c3aed)}
+.tier-badge.c{background:linear-gradient(135deg,#6b7280,#4b5563)}
+.tier-badge.extra{background:linear-gradient(135deg,#ec4899,#db2777)}
+.tier-title{font-size:1.15rem;font-weight:600}
+.tier-desc{font-size:0.82rem;color:var(--text2)}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;transition:all 0.25s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.3)}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.card-name{font-size:1.05rem;font-weight:600}
+.card-status{font-size:1rem;flex-shrink:0}
+.card-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.tag{padding:2px 8px;border-radius:8px;font-size:0.72rem;font-weight:500}
+.tag-sport{background:rgba(108,114,203,0.15);color:#a5b4fc}
+.tag-model{background:rgba(52,211,153,0.12);color:#6ee7b7}
+.tag-format{background:rgba(251,191,36,0.12);color:#fcd34d}
+.tag-conf{background:rgba(248,113,113,0.12);color:#fca5a5}
+.card-scale{font-size:0.82rem;color:var(--text2);margin-bottom:12px}
+.card-links{display:flex;flex-direction:column;gap:4px}
+.link-row{display:flex;align-items:center;gap:6px;font-size:0.8rem}
+.link-icon{flex-shrink:0;width:18px;text-align:center}
+.link-row a{color:#93c5fd;text-decoration:none;word-break:break-all}
+.link-row a:hover{text-decoration:underline}
+.card-note{margin-top:10px;padding-top:10px;border-top:1px solid var(--border);font-size:0.78rem;color:var(--text2)}
+.section-title{font-size:1.3rem;font-weight:700;margin:48px 0 20px;padding-bottom:8px;border-bottom:2px solid var(--accent)}
+.ref-table-wrap{overflow-x:auto;margin-bottom:32px}
+.ref-table{width:100%;border-collapse:collapse;font-size:0.85rem}
+.ref-table th{text-align:left;padding:10px 12px;background:var(--surface2);border:1px solid var(--border);color:var(--text2);font-weight:600;white-space:nowrap}
+.ref-table td{padding:8px 12px;border:1px solid var(--border);vertical-align:top}
+.ref-table tr:hover td{background:rgba(108,114,203,0.05)}
+.rec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin-bottom:32px}
+.rec-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px}
+.rec-card h4{font-size:1rem;margin-bottom:12px;color:var(--accent)}
+.rec-list{list-style:none;padding:0}
+.rec-list li{padding:6px 0;font-size:0.85rem;border-bottom:1px solid var(--border)}
+.rec-list li:last-child{border-bottom:none}
+.badge{display:inline-block;padding:1px 6px;border-radius:6px;font-size:0.7rem;font-weight:600;margin-right:4px}
+.badge-ok{background:rgba(52,211,153,0.2);color:var(--green)}
+.badge-warn{background:rgba(251,191,36,0.2);color:var(--yellow)}
+.pending-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin-bottom:32px}
+.pending-card{background:var(--surface);border:1px dashed var(--border);border-radius:10px;padding:16px}
+.pending-card .name{font-weight:600;margin-bottom:4px}
+.pending-card .info{font-size:0.82rem;color:var(--text2)}
+.gap-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-bottom:48px}
+.gap-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px}
+.gap-card .name{font-weight:600;margin-bottom:4px}
+.gap-card .info{font-size:0.82rem;color:var(--text2)}
+.footer{text-align:center;padding:32px 20px;color:var(--text2);font-size:0.8rem;border-top:1px solid var(--border)}
+.hidden{display:none!important}
+@media (max-width:768px){.card-grid{grid-template-columns:1fr}.stats-bar{gap:16px}.header h1{font-size:1.6rem}}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>体育多模态微调数据集汇总</h1>
+<p class="subtitle">面向 VLM 微调的体育领域开源数据集全景索引，按格式就绪度分 S/A/B/C 四级，所有获取路径已逐一验证</p>
+<div class="meta">v2 · 更新于 2026-06-05 · 共 32 个数据集</div>
+</div>
+<div class="stats-bar">
+<div class="stat-item"><div class="stat-num green">13</div><div class="stat-label">✅ 可直接下载</div></div>
+<div class="stat-item"><div class="stat-num yellow">11</div><div class="stat-label">⚠️ 需申请</div></div>
+<div class="stat-item"><div class="stat-num red">8</div><div class="stat-label">❌ 暂不可获取</div></div>
+</div>
+<div class="container">
+<div class="filter-bar">
+<span class="filter-label">等级</span>
+<button class="tab-btn active" data-tier="all">全部 <span class="count">32</span></button>
+<button class="tab-btn" data-tier="S">S级 <span class="count">5</span></button>
+<button class="tab-btn" data-tier="A">A级 <span class="count">7</span></button>
+<button class="tab-btn" data-tier="B">B级 <span class="count">12</span></button>
+<button class="tab-btn" data-tier="C">C级 <span class="count">7</span></button>
+<button class="tab-btn" data-tier="extra">额外 <span class="count">1</span></button>
+</div>
+<div class="status-filters">
+<span class="filter-label">状态</span>
+<button class="status-btn s-ok active" data-status="ok">✅ 可下载</button>
+<button class="status-btn s-warn active" data-status="warn">⚠️ 需申请</button>
+<button class="status-btn s-no active" data-status="no">❌ 不可获取</button>
+</div>
+<div class="sport-filters">
+<span class="filter-label">运动</span>
+<button class="sport-btn active" data-sport="all">全部</button>
+<button class="sport-btn" data-sport="足球">⚽ 足球</button>
+<button class="sport-btn" data-sport="网球">🎾 网球</button>
+<button class="sport-btn" data-sport="羽毛球">🏸 羽毛球</button>
+<button class="sport-btn" data-sport="乒乓球">🏓 乒乓球</button>
+<button class="sport-btn" data-sport="篮球">🏀 篮球</button>
+<button class="sport-btn" data-sport="健身">💪 健身</button>
+<button class="sport-btn" data-sport="多运动">🌐 多运动</button>
+<button class="sport-btn" data-sport="太极">🥋 太极</button>
+</div>
+</div>
+<div class="tier-section" data-tier-section="S">
+<div class="tier-header">
+<div class="tier-badge s">S</div>
+<div><div class="tier-title">格式调好 + 已有微调模型</div><div class="tier-desc">拿到就能复现，开箱即用</div></div>
+</div>
+<div class="card-grid">
+<div class="card" data-tier="S" data-status="ok" data-sport="足球">
+<div class="card-top"><div class="card-name">1. SoccerChat</div><div class="card-status">✅</div></div>
+<div class="card-tags"><span class="tag tag-sport">⚽ 足球</span><span class="tag tag-model">Qwen2-VL-7B LoRA</span><span class="tag tag-format">parquet→SWIFT</span><span class="tag tag-conf">Apache 2.0</span></div>
+<div class="card-scale">~90K QA · 48GB视频 · 85,220 train + 4,625 val</div>
+<div class="card-links">
+<div class="link-row"><span class="link-icon">🤗</span><a href="https://huggingface.co/datasets/SimulaMet/SoccerChat" target="_blank">HuggingFace 数据集</a></div>
+<div class="link-row"><span class="link-icon">🤗</span><a href="https://huggingface.co/SimulaMet/SoccerChat-qwen2-vl-7b" target="_blank">HuggingFace 模型</a></div>
+<div class="link-row"><span class="link-icon">💻</span><a href="https://github.com/simula/SoccerChat" target="_blank">GitHub（含训练notebook）</a></div>
+<div class="link-row"><span class="link-icon">📄</span><a href="https://arxiv.org/abs/2505.16630" target="_blank">arXiv:2505.16630</a></div>
+</div>
+<div class="card-note">HF数据集完整可直接 load_dataset；GitHub含完整训练流程和格式转换代码</div>
+</div>
+<div class="card" data-tier="S" data-status="warn" data-sport="网球">
+<div class="card-top"><div class="card-name">2. TennisVL / TennisExpert</div><div class="card-status">⚠️</div></div>
+<div class="card-tags"><span class="tag tag-sport">🎾 网球</span><span class="tag tag-model">Qwen3-VL-8B</span><span class="tag tag-format">LLaMA-Factory</span><span class="tag tag-conf">CC BY 4.0</span></div>
+<div class="card-scale">202场 · 471.9小时 · 40,523回合片段 · 四大满贯</div>
+<div class="card-links">
+<div class="link-row"><span class="link-icon">💻</span><a href="https://github.com/LZYAndy/TennisExpert" target="_blank">GitHub（代码+JSON标注）</a></div>
+<div class="link-row"><span class="link-icon">📦</span><a href="https://drive.google.com/drive/folders/1GkLHT6tyFb874HcEEmIu0S47wYzzbhkN" target="_blank">模型权重 (Google Drive)</a></div>
+<div class="link-row"><span class="link-icon">📄</span><a href="https://arxiv.org/abs/2603.13397" target="_blank">arXiv:2603.13397</a></div>
+</div>
+<div class="card-note">代码仓库完整可用；视频/权重通过Google Drive获取，可能需申请权限</div>
+</div>
+<div class="card" data-tier="S" data-status="no" data-sport="多运动">
+<div class="card-top"><div class="card-name">3. SportR</div><div class="card-status">❌</div></div>
+<div class="card-tags"><span class="tag tag-sport">🏀⚽🏓🏸 多运动</span><span class="tag tag-model">Qwen-2.5VL-7B SFT+GRPO</span><span class="tag tag-conf">CC BY-NC-SA 4.0</span></div>
+<div class="card-scale">5,017 images + 2,101 videos · 20K+ QA · 6,841 CoT</div>
+<div class="card-links">
+<div class="link-row"><span class="link-icon">💻</span><a href="https://github.com/chili-lab/SportR" target="_blank">GitHub（仅README+空目录）</a></div>
+<div class="link-row"><span class="link-icon">📄</span><a href="https://arxiv.org/abs/2511.06499" target="_blank">arXiv:2511.06499 (ICLR 2026)</a></div>
+</div>
+<div class="card-note">⚠️ 数据集尚未释放，承诺 ICLR 2026 会议前发布。当前无法获取任何数据</div>
+</div>
+<div class="card" data-tier="S" data-status="warn" data-sport="健身">
+<div class="card-top"><div class="card-name">4. Fitness-AQA (UMAP25版)</div><div class="card-status">⚠️</div></div>
+<div class="card-tags"><span class="tag tag-sport">💪 健身</span><span class="tag tag-model">LLaVA-Video-7B</span><span class="tag tag-format">LLaVA对话</span><span class="tag tag-conf">UMAP 2025</span></div>
+<div class="card-scale">BackSquat + OverheadPress · 小规模</div>
+<div class="card-links">
+<div class="link-row"><span class="link-icon">💻</span><a href="https://github.com/GaetanoDibenedetto/UMAP25" target="_blank">UMAP25仓库（数据链接断）</a></div>
+<div class="link-row"><span class="link-icon">💻</span><a href="https://github.com/ParitoshParmar/Fitness-AQA" target="_blank">原始Fitness-AQA (ECCV 2022)</a></div>
+<div class="link-row"><span class="link-icon">📋</span><a href="https://forms.gle/PbPTX1eVxGpa3QG88" target="_blank">原始数据Google Form</a></div>
+</div>
+<div class="card-note">UMAP25代码可用但 archives_data/ 符号链接已失效，需先申请原始Fitness-AQA数据</div>
+</div>
+<div class="card" data-tier="S" data-status="ok" data-sport="多运动">
+<div class="card-top"><div class="card-name">5. VideoNet</div><div class="card-status">✅</div></div>
+<div class="card-tags"><span class="tag tag-sport">🌐 37域</span><span class="tag tag-model">Molmo2-4B</span><span class="tag tag-conf">CC BY 4.0 · CVPR 2026</span></div>
+<div class="card-scale">160K clips · ~500K video QA · 1000动作类别</div>
+<div class="card-links">
+<div class="link-row"><span class="link-icon">🤗</span><a href="https://huggingface.co/datasets/raivn/VideoNet" target="_blank">HuggingFace（可直接加载）</a></div>
+<div class="link-row"><span class="link-icon">🌐</span><a href="https://tanu.sh/research/videonet" target="_blank">项目页</a></div>
+<div class="link-row"><span class="link-icon">📄</span><a href="https://arxiv.org/abs/2605.02834" target="_blank">arXiv:2605.02834</a></div>
+</div>
+<div class="card-note">HF可直接下载，含完整数据</div>
+</div>
+</div>
+</div><div class="tier-section" data-tier-section="A">
+<div class="tier-header">
+<div class="tier-badge a">A</div>
+<div><div class="tier-title">格式调好，还没微调过</div><div class="tier-desc">零转换成本，拿来做SFT即可</div></div>
+</div>
+<div class="card-grid">
+<div class="card" data-tier="A" data-status="ok" data-sport="足球">
+<div class="card-top"><div class="card-name">6. SoccerNet-XFoul</div><div class="card-status">✅</div></div>
+<div class="card-tags"><span class="tag tag-sport">⚽ 足球</span><span class="tag tag-format">Video-QA三元组</span></div>
+<div class="card-scale">22K+ video-QA · 70+职业裁判标注</div>
+<div class="card-links">
+<div class="link-row"><span class="link-icon">🌐</span><a href="https://www.soccer-net.org/" target="_blank">官网（注册后下载，550场比赛）</a></div>
+<div class="link-row"><span class="link-icon">📄</span><a href="https://arxiv.org/abs/2404.06332" target="_blank">arXiv:2404.06332</a></div>
+</div>
+</div>
+<div class="card" data-tier="A" data-status="ok" data-sport="健身">
+<div class="card-top"><div class="card-name">7. QEVD</div><div class="card-status">✅</div></div>
+<div class="card-tags"><span class="tag tag-sport">💪 健身(89种)</span><span class="tag tag-format">JSON</span><span class="tag tag-conf">Qualcomm License</span></div>
+<div class="card-scale">474+小时 · 1M+ QA · 650K+反馈</div>
+<div class="card-links">
+<div class="link-row"><span class="link-icon">🌐</span><a href="https://www.qualcomm.com/developer/software/qevd-dataset/downloads" target="_blank">Qualcomm官网（4部分zip直接下载）</a></div>
+<div class="link-row"><span class="link-icon">🤗</span><a href="https://huggingface.co/datasets/Voxel51/qualcomm-exercise-video-dataset-benchmark" target="_blank">HF Benchmark</a></div>
+<div class="link-row"><span class="link-icon">💻</span><a href="https://github.com/varworkshop/ai_coach_fitness_2026" target="_blank">GitHub 快速开始</a></div>
+<div class="link-row"><span class="link-icon">💻</span><a href="https://github.com/Qualcomm-AI-research/FitCoach" target="_blank">Stream-VLM 代码</a></div>
+</div>
+</div>
+<div class="card" data-tier="A" data-status="warn" data-sport="健身">
+<div class="card-top"><div class="card-name">8. BioCoach</div><div class="card-status">⚠️</div></div>
+<div class="card-tags"><span class="tag tag-sport">💪 健身(23种)</span><span class="tag tag-conf">需联系作者</span></div>
+<div class="card-scale">149训练+74测试 · QEVD增强版·生物力学反馈</div>
+<div class="card-links">
+<div class="link-row"><span class="link-icon">📄</span><a href="https://arxiv.org/abs/2603.26938" target="_blank">arXiv:2603.26938</a></div>
+</div>
+<div class="card-note">数据集未独立发布，需联系作者。基于QEVD数据增强</div>
+</div>
+<div class="card" data-tier="A" data-status="warn" data-sport="多运动">
+<div class="card-top"><div class="card-name">9. SPORTU</div><div class="card-status">⚠️</div></div>
+<div class="card-tags"><span class="tag tag-sport">🌐 7种运动</span><span class="tag tag-conf">ICLR 2025</span></div>
+<div class="card-scale">1,701视频 · 12,048 QA</div>
+<div class="card-links">
+<div class="link-row"><span class="link-icon">💻</span><a href="https://github.com/chili-lab/SPORTU" target="_blank">GitHub（文本QA可直接下载）</a></div>
+<div class="link-row"><span class="link-icon">🎬</span><a href="https://drive.google.com/drive/folders/1nvA8gqF32lrhqzhbJ2r39-TwwW5tEvsu" target="_blank">视频 (Google Drive，需申请)</a></div>
+</div>
+<div class="card-note">⚠️ 正确仓库是 chili-lab/SPORTU。文本标注可直接下载，视频需申请GD权限</div>
+</div>
+<div class="card" data-tier="A" data-status="warn" data-sport="多运动">
+<div class="card-top"><div class="card-name">10. Sports-QA</div><div class="card-status">⚠️</div></div>
+<div class="card-tags"><span class="tag tag-sport">🌐 8种运动</span></div>
+<div class="card-scale">~94K QA · 描述/时序/因果/反事实四类</div>
+<div class="card-links">
+<div class="link-row"><span class="link-icon">💻</span><a href="https://github.com/HopLee6/Sports-QA" target="_blank">GitHub</a></div>
+<div class="link-row"><span class="link-icon">📄</span><a href="https://arxiv.org/abs/2401.01505" target="_blank">arXiv:2401.01505</a></div>
+</div>
+<div class="card-note">视频数据可能需邮件申请</div>
+</div>
+<div class="card" data-tier="A" data-status="ok" data-sport="多运动">
+<div class="card-top"><div class="card-name">11. ExAct</div><div class="card-status">✅</div></div>
+<div class="card-tags"><span class="tag tag-sport">🏀 多域6类</span><span class="tag tag-format">MCQ</span><span class="tag tag-conf">CC BY 4.0 · NeurIPS 2025</span></div>
+<div class="card-scale">3,521 video QA（5选1）</div>
+<div class="card-links">
+<div class="link-row"><span class="link-icon">🤗</span><a href="https://huggingface.co/datasets/Alexhimself/ExAct" target="_blank">HuggingFace（可直接加载）</a></div>
+<div class="link-row"><span class="link-icon">💻</span><a href="https://github.com/Texaser/Exact" target="_blank">GitHub（代码+metadata.jsonl）</a></div>
+<div class="link-row"><span class="link-icon">🌐</span><a href="https://texaser.github.io/exact_project_page/" target="_blank">项目页</a></div>
+</div>
+</div>
+<div class="card" data-tier="A" data-status="warn" data-sport="足球">
+<div class="card-top"><div class="card-name">12. Domain Adaptation VLM for Soccer</div><div class="card-status">⚠️</div></div>
+<div class="card-tags"><span class="tag tag-sport">⚽ 足球</span><span class="tag tag-conf">CVSports@CVPR 2025</span></div>
+<div class="card-scale">20K instruction样本 · 3阶段Prompt模板</div>
+<div class="card-links">
+<div class="link-row"><span class="link-icon">📄</span><a href="https://arxiv.org/abs/2505.13860" target="_blank">arXiv:2505.13860</a></div>
+</div>
+<div class="card-note">数据集未公开发布，论文提供了Prompt模板但数据未放出</div>
+</div>
+</div>
+</div><div class="tier-section" data-tier-section="B">
+<div class="tier-header">
+<div class="tier-badge b">B</div>
+<div><div class="tier-title">多模态兼容，需GPT帮转格式</div><div class="tier-desc">有文本标注但非instruction格式，可用GPT转换</div></div>
+</div>
+<div class="card-grid">
+<div class="card" data-tier="B" data-status="warn" data-sport="羽毛球">
+<div class="card-top"><div class="card-name">13. FineBadminton</div><div class="card-status">⚠️</div></div>
+<div class="card-tags"><span class="tag tag-sport">🏸 羽毛球</span><span class="tag tag-conf">ACM MM 2025</span></div>
+<div class="card-scale">3,215回合/33,325击球 · 120场</div>
+<div class="card-links">
+<div class="link-row"><span class="link-icon">🌐</span><a href="https://finebadminton.github.io/FineBadminton/" target="_blank">项目页（需联系作者）</a></div>
+<div class="link-row"><span class="link-icon">📄</span><a href="https://arxiv.org/abs/2508.07554" target="_blank">arXiv:2508.07554</a></div>
+</div>
+<div class="card-note">项目页无直接下载链接，需联系作者申请</div>
+</div>
+<div class="card" data-tier="B" data-status="ok" data-sport="羽毛球">
+<div class="card-top"><div class="card-name">14. BFMD</div><div class="card-status">✅</div></div>
+<div class="card-tags"><span class="tag tag-sport">🏸 羽毛球</span><span class="tag tag-conf">CVPR 2026W</span></div>
+<div class="card-scale">19场 · 1,687回合/16,751击球 · 20+小时</div>
+<div class="card-links">
+<div class="link-row"><span class="link-icon">💻</span><a href="https://github.com/Ning-D/BFMD" target="_blank">GitHub（标注+代码+视频demo）</a></div>
+</div>
+<div class="card-note">GitHub仓库完整含标注文件；视频可能需从YouTube下载或联系作者</div>
+</div>
+<div class="card" data-tier="B" data-status="warn" data-sport="羽毛球">
+<div class="card-top"><div class="card-name">15. Shot2Tactic-Caption</div><div class="card-status">⚠️</div></div>
+<div class="card-tags"><span class="tag tag-sport">🏸 羽毛球双打</span><span class="tag tag-conf">ACM MMSports 2025</span></div>
+<div class="card-scale">5,494击球caption + 544战术caption</div>
+<div class="card-links">
+<div class="link-row"><span class="link-icon">📄</span><a href="https://arxiv.org/abs/2510.14617" target="_blank">arXiv:2510.14617</a></div>
+</div>
+<div class="card-note">数据集未直接发布，需联系作者获取</div>
+</div>
+<div class="card" data-tier="B" data-status="no" data-sport="健身">
+<div class="card-top"><div class="card-name">16. FLEX + FLEX-VideoQA</div><div class="card-status">❌</div></div>
+<div class="card-tags"><span class="tag tag-sport">💪 健身(20种)</span></div>
+<div class="card-scale">7,500+多视角录制 · RGB+3D+sEMG+心率</div>
+<div class="card-links">
+<div class="link-row"><span class="link-icon">📄</span><a href="https://openreview.net/forum?id=Fje6v8JnB0" target="_blank">OpenReview</a></div>
+</div>
+<div class="card-note">❌ ICLR 2026被拒，作者承诺接受后开源，当前未发布</div>
+</div>
+<div class="card" data-tier="B" data-status="no" data-sport="多运动">
+<div class="card-top"><div class="card-name">17. SportSkills</div><div class="card-status">❌</div></div>
+<div class="card-tags"><span class="tag tag-sport">🌐 55种运动</span></div>
+<div class="card-scale">638,399视频+教学旁白</div>
+<div class="card-links">
+<div class="link-row"><span class="link-icon">📄</span><a href="https://arxiv.org/abs/2603.25163" target="_blank">arXiv:2603.25163</a></div>
+</div>
+<div class="card-note">❌ 论文说明"will be publicly available"但尚未发布</div>
+</div>
+<div class="card" data-tier="B" data-status="ok" data-sport="健身">
+<div class="card-top"><div class="card-name">18. MotionMillion</div><div class="card-status">✅</div></div>
+<div class="card-tags"><span class="tag tag-sport">💪🥋 健身/武术/舞蹈</span><span class="tag tag-format">WebDataset</span></div>
+<div class="card-scale">1M+样本 · 2000+小时</div>
+<div class="card-links">
+<div class="link-row"><span class="link-icon">🤗</span><a href="https://huggingface.co/datasets/InternRobotics/MotionMillion" target="_blank">HuggingFace（可直接加载）</a></div>
+</div>
+</div>
+<div class="card" data-tier="B" data-status="warn" data-sport="篮球">
+<div class="card-top"><div class="card-name">19. SpaceJam</div><div class="card-status">⚠️</div></div>
+<div class="card-tags"><span class="tag tag-sport">🏀 篮球</span></div>
+<div class="card-scale">32,560标注样本 · 10类动作</div>
+<div class="card-links">
+<div class="link-row"><span class="link-icon">💻</span><a href="https://gitcode.com/gh_mirrors/sp/SpaceJam" target="_blank">GitCode镜像（可用性存疑）</a></div>
+</div>
+<div class="card-note">镜像下载量极低无Release，可用性存疑</div>
+</div>
+<div class="card" data-tier="B" data-status="warn" data-sport="太极">
+<div class="card-top"><div class="card-name">20. TaiChi-AQA</div><div class="card-status">⚠️</div></div>
+<div class="card-tags"><span class="tag tag-sport">🥋 太极</span><span class="tag tag-conf">IET CV 2025</span></div>
+<div class="card-scale">1,313个动作视频</div>
+<div class="card-links">
+<div class="link-row"><span class="link-icon">💻</span><a href="https://github.com/mlxger/TaiChi-AQA" target="_blank">GitHub</a></div>
+</div>
+<div class="card-note">需填申请表发邮件至 fengyanlin128@gmail.com</div>
+</div>
+<div class="card" data-tier="B" data-status="warn" data-sport="健身">
+<div class="card-top"><div class="card-name">21. FLAG3D</div><div class="card-status">⚠️</div></div>
+<div class="card-tags"><span class="tag tag-sport">💪 健身</span><span class="tag tag-conf">CVPR 2023</span></div>
+<div class="card-scale">180K视频 · 60类健身动作 · 3D+语言指令</div>
+<div class="card-links">
+<div class="link-row"><span class="link-icon">🌐</span><a href="https://andytang15.github.io/FLAG3D/#data" target="_blank">项目页（部分数据可下载）</a></div>
+<div class="link-row"><span class="link-icon">💻</span><a href="https://github.com/AndyTang15/FLAG3D" target="_blank">GitHub（训练代码）</a></div>
+</div>
+<div class="card-note">部分数据可直接下载；Rendering Video仅1800子集；Raw Data需邮件联系作者</div>
+</div>
+<div class="card" data-tier="B" data-status="warn" data-sport="健身">
+<div class="card-top"><div class="card-name">22. EgoExo-Fitness</div><div class="card-status">⚠️</div></div>
+<div class="card-tags"><span class="tag tag-sport">💪 健身</span><span class="tag tag-conf">ECCV 2024</span></div>
+<div class="card-scale">1,276视频 · 6,000+动作 · 32小时 · 双视角</div>
+<div class="card-links">
+<div class="link-row"><span class="link-icon">💻</span><a href="https://github.com/iSEE-Laboratory/EgoExo-Fitness" target="_blank">GitHub（代码）</a></div>
+<div class="link-row"><span class="link-icon">📄</span><a href="https://arxiv.org/abs/2406.08877" target="_blank">arXiv:2406.08877</a></div>
+</div>
+<div class="card-note">GitHub有代码，数据集需联系作者获取</div>
+</div>
+<div class="card" data-tier="B" data-status="ok" data-sport="健身">
+<div class="card-top"><div class="card-name">23. RepCount</div><div class="card-status">✅</div></div>
+<div class="card-tags"><span class="tag tag-sport">💪 健身</span></div>
+<div class="card-scale">1,451视频 · ~20,000标注 · 重复计数</div>
+<div class="card-links">
+<div class="link-row"><span class="link-icon">🌐</span><a href="https://svip-lab.github.io/dataset/RepCount_dataset.html" target="_blank">官网</a></div>
+<div class="link-row"><span class="link-icon">☁️</span><a href="https://shanghaitecheducn-my.sharepoint.com/:f:/g/personal/dongsx_shanghaitech_edu_cn/EqveZdlGsPxPrfBLQcO_IrgBs6bz7KX1zGGSz_GtLDIfAg" target="_blank">OneDrive (repcount)</a></div>
+<div class="link-row"><span class="link-icon">💿</span><a href="https://pan.baidu.com/s/1M2ymrw6I95VMDytnftr-Jw" target="_blank">百度网盘 (svip)</a></div>
+<div class="link-row"><span class="link-icon">💻</span><a href="https://github.com/SvipRepetitionCounting/TransRAC" target="_blank">代码 GitHub</a></div>
+</div>
+</div>
+<div class="card" data-tier="B" data-status="ok" data-sport="健身">
+<div class="card-top"><div class="card-name">24. Fit3D / AIFit</div><div class="card-status">✅</div></div>
+<div class="card-tags"><span class="tag tag-sport">💪 健身(47种)</span><span class="tag tag-conf">CVPR 2021</span></div>
+<div class="card-scale">611序列 · 2.96M帧3D骨架 · 4视角</div>
+<div class="card-links">
+<div class="link-row"><span class="link-icon">🌐</span><a href="https://fit3d.imar.ro/" target="_blank">官网</a></div>
+<div class="link-row"><span class="link-icon">⬇️</span><a href="https://fit3d.imar.ro/data/fit3d_train.tar.gz" target="_blank">训练集 (18GB)</a></div>
+<div class="link-row"><span class="link-icon">⬇️</span><a href="https://fit3d.imar.ro/data/fit3d_test.tar.gz" target="_blank">测试集 (1.4GB)</a></div>
+</div>
+<div class="card-note">✅ 官网直接提供下载，无需申请</div>
+</div>
+</div>
+</div><div class="tier-section" data-tier-section="C">
+<div class="tier-header">
+<div class="tier-badge c">C</div>
+<div><div class="tier-title">和多模态不兼容</div><div class="tier-desc">结构化标注/纯坐标/纯CV，需大量工作</div></div>
+</div>
+<div class="card-grid">
+<div class="card" data-tier="C" data-status="warn" data-sport="羽毛球">
+<div class="card-top"><div class="card-name">25. ShuttleSet系列</div><div class="card-status">⚠️</div></div>
+<div class="card-tags"><span class="tag tag-sport">🏸 羽毛球</span><span class="tag tag-conf">AAAI'22/KDD'23/IJCAI'23</span></div>
+<div class="card-scale">33K-43K击球 · 纯结构化坐标</div>
+<div class="card-links">
+<div class="link-row"><span class="link-icon">💻</span><a href="https://github.com/wywyWang/CoachAI-Projects" target="_blank">CoachAI-Projects（标注可用）</a></div>
+</div>
+<div class="card-note">仓库有标注数据，视频需从BWF.tv等来源自行获取</div>
+</div>
+<div class="card" data-tier="C" data-status="no" data-sport="乒乓球">
+<div class="card-top"><div class="card-name">26. Extended OpenTTGames</div><div class="card-status">❌</div></div>
+<div class="card-tags"><span class="tag tag-sport">🏓 乒乓球</span></div>
+<div class="card-scale">1,457击球+282回合结局</div>
+<div class="card-links">
+<div class="link-row"><span class="link-icon">💻</span><a href="https://gitlab.compute.dtu.dk/emilh/table_tennis_data" target="_blank">GitLab（空仓库）</a></div>
+</div>
+</div>
+<div class="card" data-tier="C" data-status="ok" data-sport="乒乓球">
+<div class="card-top"><div class="card-name">27. OpenTTGames</div><div class="card-status">✅</div></div>
+<div class="card-tags"><span class="tag tag-sport">🏓 乒乓球</span><span class="tag tag-conf">CC BY-NC-SA 4.0</span></div>
+<div class="card-scale">12视频 · 4,271事件 · 120fps</div>
+<div class="card-links">
+<div class="link-row"><span class="link-icon">🌐</span><a href="https://lab.osai.ai/" target="_blank">官网（完整下载表）</a></div>
+</div>
+</div>
+<div class="card" data-tier="C" data-status="no" data-sport="羽毛球">
+<div class="card-top"><div class="card-name">28. MultiSenseBadminton</div><div class="card-status">❌</div></div>
+<div class="card-tags"><span class="tag tag-sport">🏸 羽毛球</span><span class="tag tag-conf">Scientific Data 2024</span></div>
+<div class="card-scale">7,763挥拍 · 25人 · 传感器数据为主</div>
+<div class="card-links"><div class="link-row" style="color:var(--text2)">未找到独立下载入口</div></div>
+</div>
+<div class="card" data-tier="C" data-status="warn" data-sport="乒乓球">
+<div class="card-top"><div class="card-name">29. P²ANet</div><div class="card-status">⚠️</div></div>
+<div class="card-tags"><span class="tag tag-sport">🏓 乒乓球</span><span class="tag tag-conf">TOMM 2024</span></div>
+<div class="card-scale">200视频 · 139K事件 · 纯事件标注</div>
+<div class="card-links"><div class="link-row" style="color:var(--text2)">需确认论文中的具体获取方式</div></div>
+</div>
+<div class="card" data-tier="C" data-status="ok" data-sport="健身">
+<div class="card-top"><div class="card-name">30. Free Exercise DB</div><div class="card-status">✅</div></div>
+<div class="card-tags"><span class="tag tag-sport">💪 健身</span><span class="tag tag-conf">Unlicense</span></div>
+<div class="card-scale">800+种健身动作 · JSON文本+图片</div>
+<div class="card-links">
+<div class="link-row"><span class="link-icon">💻</span><a href="https://github.com/wrkout/exercises.json" target="_blank">GitHub（直接clone）</a></div>
+</div>
+<div class="card-note">非视频数据集，JSON格式健身动作数据库</div>
+</div>
+<div class="card" data-tier="C" data-status="no" data-sport="健身">
+<div class="card-top"><div class="card-name">31. ALEX-GYM-1</div><div class="card-status">❌</div></div>
+<div class="card-tags"><span class="tag tag-sport">💪 健身</span><span class="tag tag-conf">SCITEPRESS 2025</span></div>
+<div class="card-scale">深蹲/弓步/罗马尼亚硬拉 · 准则特异性二分类</div>
+<div class="card-links"><div class="link-row" style="color:var(--text2)">未找到可下载的数据集或仓库</div></div>
+</div>
+</div>
+</div>
+<div class="tier-section" data-tier-section="extra">
+<div class="tier-header">
+<div class="tier-badge extra">+</div>
+<div><div class="tier-title">额外推荐</div><div class="tier-desc">大型多域数据集，体育为子集</div></div>
+</div>
+<div class="card-grid">
+<div class="card" data-tier="extra" data-status="ok" data-sport="多运动">
+<div class="card-top"><div class="card-name">Ego-Exo4D Expert Feedback</div><div class="card-status">✅</div></div>
+<div class="card-tags"><span class="tag tag-sport">🏀⚽💪 多域</span><span class="tag tag-conf">CVPR 2024 · EULA</span></div>
+<div class="card-scale">1286小时 · 740参与者 · 117,812句专家评论</div>
+<div class="card-links">
+<div class="link-row"><span class="link-icon">🌐</span><a href="https://ego-exo4d-data.org/" target="_blank">官网（注册+签EULA，审批~2天）</a></div>
+</div>
+<div class="card-note">需签署许可协议，审批约2天后通过CLI下载器获取</div>
+</div>
+</div>
+</div>
+<h2 class="section-title">按运动方向速查</h2>
+<div class="ref-table-wrap">
+<table class="ref-table">
+<thead><tr><th>方向</th><th>✅ 首选</th><th>⚠️ 备选</th><th>❌ 待发布</th></tr></thead>
+<tbody>
+<tr><td>⚽ 足球</td><td>SoccerChat, SoccerNet-XFoul</td><td>Domain Adaptation</td><td>-</td></tr>
+<tr><td>🎾 网球</td><td>-</td><td>TennisVL (GD申请)</td><td>-</td></tr>
+<tr><td>🏸 羽毛球</td><td>BFMD</td><td>FineBadminton, Shot2Tactic</td><td>-</td></tr>
+<tr><td>🏓 乒乓球</td><td>OpenTTGames</td><td>-</td><td>SportR</td></tr>
+<tr><td>🏀 篮球</td><td>ExAct(含)</td><td>-</td><td>SportR</td></tr>
+<tr><td>💪 健身(教练)</td><td>QEVD, RepCount, Fit3D</td><td>BioCoach, EgoExo-Fitness</td><td>FLEX</td></tr>
+<tr><td>💪 健身(评估)</td><td>ExAct, Fit3D</td><td>TaiChi-AQA, FLAG3D</td><td>FLEX</td></tr>
+<tr><td>🌐 多运动</td><td>VideoNet, ExAct, MotionMillion</td><td>SPORTU</td><td>SportR, SportSkills</td></tr>
+<tr><td>🥋 太极</td><td>-</td><td>TaiChi-AQA(申请)</td><td>-</td></tr>
+</tbody>
+</table>
+</div>
+<h2 class="section-title">健身方向专项推荐</h2>
+<div class="rec-grid">
+<div class="rec-card">
+<h4>🏋️ AI健身教练（实时反馈+纠正）</h4>
+<ul class="rec-list">
+<li><span class="badge badge-ok">A✅</span> <b>QEVD</b> — 1M+ QA，规模最大</li>
+<li><span class="badge badge-ok">B✅</span> <b>Fit3D/AIFit</b> — 3M+帧3D标注+自然语言反馈</li>
+<li><span class="badge badge-ok">B✅</span> <b>RepCount</b> — 1,451视频+细粒度重复标注</li>
+<li><span class="badge badge-ok">B✅</span> <b>MotionMillion</b> — 1M+样本，HF直接加载</li>
+<li><span class="badge badge-warn">S⚠️</span> <b>Fitness-AQA (UMAP25)</b> — 需先申请原始数据</li>
+</ul>
+</div>
+<div class="rec-card">
+<h4>📊 动作质量评估（打分）</h4>
+<ul class="rec-list">
+<li><span class="badge badge-ok">A✅</span> <b>ExAct</b> — 3,521视频QA，NeurIPS 2025</li>
+<li><span class="badge badge-ok">B✅</span> <b>Fit3D/AIFit</b> — 3M+帧3D标注</li>
+<li><span class="badge badge-warn">B⚠️</span> <b>TaiChi-AQA</b> — 需填申请表</li>
+</ul>
+</div>
+<div class="rec-card">
+<h4>🦴 3D姿态+语言</h4>
+<ul class="rec-list">
+<li><span class="badge badge-ok">B✅</span> <b>Fit3D</b> — 官网18GB直接下载</li>
+<li><span class="badge badge-warn">B⚠️</span> <b>FLAG3D</b> — 部分下载，Raw Data需邮件</li>
+</ul>
+</div>
+</div>
+<h2 class="section-title">⏳ 待关注（承诺开源但尚未释放）</h2>
+<div class="pending-grid">
+<div class="pending-card">
+<div class="name">🏅 SportR <span style="color:var(--red);font-size:0.8rem">S级</span></div>
+<div class="info">ICLR 2026前释放 · 篮球/足球/乒乓球/羽毛球/橄榄球 · 20K+ QA · 6,841 CoT</div>
+</div>
+<div class="pending-card">
+<div class="name">💪 FLEX-VideoQA <span style="color:var(--yellow);font-size:0.8rem">B级</span></div>
+<div class="info">作者承诺论文接受后开源 · 20种负重动作+知识图谱 · RGB+3D+sEMG</div>
+</div>
+<div class="pending-card">
+<div class="name">🌐 SportSkills <span style="color:var(--yellow);font-size:0.8rem">B级</span></div>
+<div class="info">638K视频+教学旁白 · 55种运动 · "will be publicly available"</div>
+</div>
+</div>
+<h2 class="section-title">🔍 空白方向</h2>
+<div class="gap-grid">
+<div class="gap-card"><div class="name">🏃 跑步/骑行/游泳</div><div class="info">基本空白，动作单一学术界不太关注</div></div>
+<div class="gap-card"><div class="name">🧘 瑜伽/舞蹈</div><div class="info">有原始视频但缺instruction QA，需GPT-4V自造</div></div>
+<div class="gap-card"><div class="name">🏓 乒乓球instruction</div><div class="info">无直接可用，建议OpenTTGames结构化标签+GPT造instruction</div></div>
+</div>
+</div>
+<div class="footer">
+体育多模态微调数据集汇总 v2 · 所有获取路径已逐一验证 · 更新于 2026-06-05
+</div>
+<script>
+document.querySelectorAll('.tab-btn').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');applyFilters()})});
+document.querySelectorAll('.status-btn').forEach(btn=>{btn.addEventListener('click',()=>{btn.classList.toggle('active');applyFilters()})});
+document.querySelectorAll('.sport-btn').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.sport-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');applyFilters()})});
+function applyFilters(){const tier=document.querySelector('.tab-btn.active')?.dataset.tier||'all';const statuses=[...document.querySelectorAll('.status-btn.active')].map(b=>b.dataset.status);const sport=document.querySelector('.sport-btn.active')?.dataset.sport||'all';const statusMap={ok:'✅',warn:'⚠️',no:'❌'};const activeEmoji=statuses.map(s=>statusMap[s]);document.querySelectorAll('.card').forEach(card=>{const cardTier=card.dataset.tier;const cardEmoji=card.querySelector('.card-status')?.textContent.trim();const cardSport=card.dataset.sport;let show=true;if(tier!=='all'&&tier!=='extra'&&cardTier!==tier)show=false;if(tier==='extra'&&cardTier!=='extra')show=false;if(!activeEmoji.includes(cardEmoji))show=false;if(sport!=='all'){if(!cardSport.includes(sport)&&cardSport!=='多运动')show=false}card.classList.toggle('hidden',!show)});document.querySelectorAll('.tier-section').forEach(section=>{const sectionTier=section.dataset.tierSection;if(tier!=='all'&&((tier==='extra'&&sectionTier!=='extra')||(tier!=='extra'&&sectionTier!==tier))){section.classList.add('hidden')}else{const visibleCards=section.querySelectorAll('.card:not(.hidden)');section.classList.toggle('hidden',visibleCards.length===0)}})}
+</script>
+</body>
+</html>
