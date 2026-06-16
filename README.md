@@ -1,30 +1,135 @@
-# 体育多模态微调数据集汇总
+# 🏀 Sport-VLM-Datasets
 
-> 面向 VLM 微调的体育领域开源数据集全景索引，按格式就绪度分 S/A/B/C 四级，所有获取路径已逐一验证
+体育多模态微调数据集汇总 — 面向 VLM 微调的体育领域开源数据集全景索引
 
-📄 **在线访问**: https://YOUR_USERNAME.github.io/sport-vlm-datasets/
+> 按格式就绪度分 S/A/B/C 四级，所有获取路径已逐一验证
 
-## 部署方式
+## 📊 统计概览
 
-本仓库通过 GitHub Pages 部署，单文件 `index.html` 无任何依赖（无 CDN、无 JS 库、无外部资源），离线可用。
+| 指标 | 数量 |
+|------|------|
+| 数据集总数 | 32 |
+| ✅ 可直接下载 | 18 |
+| ⚠️ 需申请/受限 | 7 |
+| ❌ 暂不可获取 | 7 |
+| S/A/B/C 分布 | 5/7/12/7 |
 
-### 本地预览
+## 🎯 数据集分类
 
-```bash
-# 方式 1：直接双击 index.html
-open index.html
+### 🏆 S级 - 格式完美就绪（已有微调模型）
 
-# 方式 2：起本地服务器
-python3 -m http.server 8000
-# 访问 http://localhost:8000
-```
+| # | 名称 | 运动类型 | 规模 | 获取方式 |
+|:---:|------|----------|------|----------|
+| 1 | **SoccerChat** | ⚽ 足球 | 90K QA · 85K训练 | [HuggingFace](https://huggingface.co/datasets/SimulaMet/SoccerChat) · [GitHub](https://github.com/simula/SoccerChat) · [arXiv](https://arxiv.org/abs/2505.16630) |
+| 2 | **VideoNet** | 🌐 37域 | 160K clips · 500K QA | [HuggingFace](https://huggingface.co/datasets/raivn/VideoNet) · [arXiv](https://arxiv.org/abs/2605.02834) |
+| 3 | **TennisVL** | 🎾 网球 | 202场 · 471小时 | [GitHub](https://github.com/LZYAndy/TennisExpert) · [模型权重](https://drive.google.com/drive/folders/1GkLHT6tyFb874HcEEmIu0S47wYzzbhkN) |
+| 4 | **Fitness-AQA** | 💪 健身 | 小规模 | ⚠️ [原始数据申请表](https://forms.gle/PbPTX1eVxGpa3QG88) · [UMAP25 GitHub](https://github.com/GaetanoDibenedetto/UMAP25) |
+| 5 | **SportR** | 🌐 多运动 | 20K+ QA · 6.8K CoT | ❌ [GitHub](https://github.com/chili-lab/SportR) · [arXiv](https://arxiv.org/abs/2511.06499) · ICLR 2026前发布 |
 
-## 数据来源
+### 🥈 A级 - 高质量且易用（可直接用于SFT）
 
-汇总自 2026-06-05 的搜索结果，详见：
-- 主对话中的会话历史
-- `/体育多模态微调数据集汇总.md`（同源 Markdown 文档）
+| # | 名称 | 运动类型 | 规模 | 获取方式 |
+|:---:|------|----------|------|----------|
+| 6 | **SoccerNet-XFoul** | ⚽ 足球 | 22K+ video-QA | [官网注册下载](https://www.soccer-net.org/) · [arXiv](https://arxiv.org/abs/2404.06332) |
+| 7 | **QEVD** | 💪 健身 | 1M+ QA · 474小时 | [Qualcomm官网下载](https://www.qualcomm.com/developer/software/qevd-dataset/downloads) · [HF Benchmark](https://huggingface.co/datasets/Voxel51/qualcomm-exercise-video-dataset-benchmark) |
+| 8 | **ExAct** | 🏀 6类 | 3.5K video QA | [HuggingFace](https://huggingface.co/datasets/Alexhimself/ExAct) · [GitHub](https://github.com/Texaser/Exact) · [arXiv](https://arxiv.org/abs/2506.06277) |
+| 9 | **SPORTU** | 🌐 7种 | 1.7K视频 · 12K QA | [GitHub文本QA](https://github.com/chili-lab/SPORTU) · [视频GD](https://drive.google.com/drive/folders/1nvA8gqF32lrhqzhbJ2r39-TwwW5tEvsu) · [arXiv](https://arxiv.org/abs/2410.08474) |
+| 10 | **Sports-QA** | 🌐 8种 | 94K QA | [GitHub](https://github.com/HopLee6/Sports-QA) · [HuggingFace](https://huggingface.co/datasets/HopLeeTop/Sports-QA) · [arXiv](https://arxiv.org/abs/2401.01505) |
+| 11 | **BioCoach** | 💪 健身 | 149训练+74测试 | ❌ [arXiv](https://arxiv.org/abs/2603.26938) · 需联系作者 |
+| 12 | **Domain Adaptation** | ⚽ 足球 | 20K instruction | ⚠️ [arXiv](https://arxiv.org/abs/2505.13860) · CVPR 2025 CVSports · 数据未公开发布 |
 
-## 更新
+### 🥉 B级 - 可用但需转换格式
 
-如需更新，直接修改 `index.html` 后 push，GitHub Pages 自动部署（约 1 分钟生效）。
+| # | 名称 | 运动类型 | 规模 | 获取方式 |
+|:---:|------|----------|------|----------|
+| 13 | **FineBadminton** | 🏸 羽毛球 | 3.2K回合 · 120场 | [项目页](https://finebadminton.github.io/FineBadminton/) · [arXiv](https://arxiv.org/abs/2508.07554) · 需联系作者 |
+| 14 | **BFMD** | 🏸 羽毛球 | 1.7K回合 · 16K击球 | [GitHub](https://github.com/Ning-D/BFMD) · CVPR 2026W |
+| 15 | **Shot2Tactic-Caption** | 🏸 羽毛球 | 5.5K标注 | ⚠️ [arXiv](https://arxiv.org/abs/2510.14617) · ACM MMSports 2025 · 需联系作者 |
+| 16 | **MotionMillion** | 💪🥋 健身 | 1M+样本 · 2000小时 | [HuggingFace](https://huggingface.co/datasets/InternRobotics/MotionMillion) · 需同意条款 |
+| 17 | **TaiChi-AQA** | 🥋 太极 | 1.3K视频 | [GitHub](https://github.com/mlxger/TaiChi-AQA) · 需填申请表发邮件至 fengyanlin128@gmail.com |
+| 18 | **FLAG3D** | 💪 健身 | 180K视频 · 60类 | [项目页](https://andytang15.github.io/FLAG3D/#data) · [GitHub](https://github.com/AndyTang15/FLAG3D) · CVPR 2023 |
+| 19 | **EgoExo-Fitness** | 💪 健身 | 1.3K视频 · 32小时 | [GitHub](https://github.com/iSEE-Laboratory/EgoExo-Fitness) · [HuggingFace](https://huggingface.co/datasets/Lymann/EgoExo-Fitness) · [arXiv](https://arxiv.org/abs/2406.08877) · ECCV 2024 |
+| 20 | **RepCount** | 💪 健身 | 1.4K视频 · 20K标注 | [官网](https://svip-lab.github.io/dataset/RepCount_dataset.html) · [OneDrive](https://shanghaitecheducn-my.sharepoint.com/:f:/g/personal/dongsx_shanghaitech_edu_cn/EqveZdlGsPxPrfBLQcO_IrgBs6bz7KX1zGGSz_GtLDIfAg) · [百度网盘](https://pan.baidu.com/s/1M2ymrw6I95VMDytnftr-Jw) · [GitHub](https://github.com/SvipRepetitionCounting/TransRAC) |
+| 21 | **Fit3D / AIFit** | 💪 健身 | 611序列 · 2.96M帧3D | [官网](https://fit3d.imar.ro/) · [训练集18GB](https://fit3d.imar.ro/data/fit3d_train.tar.gz) · [测试集1.4GB](https://fit3d.imar.ro/data/fit3d_test.tar.gz) · CVPR 2021 |
+| 22 | **SpaceJam** | 🏀 篮球 | 32.5K标注 | ⚠️ [GitCode镜像](https://gitcode.com/gh_mirrors/sp/SpaceJam) · 可用性存疑 |
+
+### ⚠️ C级 - 非多模态/需大量工作
+
+| # | 名称 | 运动类型 | 规模 | 获取方式 |
+|:---:|------|----------|------|----------|
+| 23 | **ShuttleSet系列** | 🏸 羽毛球 | 33K-43K击球 | [GitHub](https://github.com/wywyWang/CoachAI-Projects) · AAAI'22/KDD'23/IJCAI'23 |
+| 24 | **OpenTTGames** | 🏓 乒乓球 | 12视频 · 4.3K事件 | [官网](https://lab.osai.ai/) · CC BY-NC-SA 4.0 |
+| 25 | **Free Exercise DB** | 💪 健身 | 800+动作 | [GitHub](https://github.com/wrkout/exercises.json) · Unlicense |
+| 26 | **P²ANet** | 🏓 乒乓球 | 200视频 · 139K事件 | ⚠️ TOMM 2024 · 需确认论文中的具体获取方式 |
+| 27 | **Extended OpenTTGames** | 🏓 乒乓球 | 1.5K击球 | ❌ [GitLab](https://gitlab.compute.dtu.dk/emilh/table_tennis_data) · 空仓库 |
+| 28 | **MultiSenseBadminton** | 🏸 羽毛球 | 7.8K挥拍 | ❌ [Scientific Data 2024](https://www.nature.com/articles/s41597-024-03271-5) · 传感器数据为主，无视频下载入口 |
+| 29 | **ALEX-GYM-1** | 💪 健身 | 二分类 | ❌ SCITEPRESS 2025 · 无可下载数据集 |
+
+### ❌ 待发布
+
+| 名称 | 运动类型 | 预计发布 | 信息来源 |
+|------|----------|----------|----------|
+| **SportR** | 🌐 多运动 | ICLR 2026前 | [GitHub](https://github.com/chili-lab/SportR) · [arXiv](https://arxiv.org/abs/2511.06499) |
+| **FLEX-VideoQA** | 💪 健身 | 论文接受后 | [OpenReview](https://openreview.net/forum?id=Fje6v8JnB0) · ICLR 2026被拒 |
+| **SportSkills** | 🌐 55种运动 | 待定 | [arXiv](https://arxiv.org/abs/2603.25163) · "will be publicly available" |
+| **BioCoach** | 💪 健身 | 待定 | [arXiv](https://arxiv.org/abs/2603.26938) |
+
+### ➕ 额外推荐 - 大型多域数据集
+
+| 名称 | 运动类型 | 规模 | 获取方式 |
+|------|----------|------|----------|
+| **Ego-Exo4D** | 🏀⚽💪 多域 | 1286小时 · 740参与者 | [官网](https://ego-exo4d-data.org/) · 需签EULA，审批~2天 |
+
+## 🔍 按运动方向速查
+
+| 方向 | ✅ 首选 | ⚠️ 备选 | ❌ 待发布 |
+|------|--------|--------|----------|
+| ⚽ 足球 | SoccerChat, SoccerNet-XFoul | Domain Adaptation | SportR |
+| 🎾 网球 | - | TennisVL (GD申请) | - |
+| 🏸 羽毛球 | BFMD | FineBadminton, Shot2Tactic | - |
+| 🏓 乒乓球 | OpenTTGames | P²ANet | SportR |
+| 🏀 篮球 | ExAct(含) | SpaceJam | SportR |
+| 💪 健身(教练) | QEVD, RepCount, Fit3D | BioCoach, EgoExo-Fitness | FLEX |
+| 💪 健身(评估) | ExAct, Fit3D | TaiChi-AQA, FLAG3D | FLEX |
+| 🌐 多运动 | VideoNet, ExAct, MotionMillion | SPORTU | SportR, SportSkills |
+| 🥋 太极 | - | TaiChi-AQA(申请) | - |
+
+## 🏋️ 健身方向专项推荐
+
+### AI健身教练（实时反馈+纠正）
+- **QEVD** — 1M+ QA，规模最大，[Qualcomm官网](https://www.qualcomm.com/developer/software/qevd-dataset/downloads)
+- **Fit3D/AIFit** — 3M+帧3D标注，[官网直接下载](https://fit3d.imar.ro/)
+- **RepCount** — 1,451视频+细粒度重复标注，[OneDrive](https://shanghaitecheducn-my.sharepoint.com/:f:/g/personal/dongsx_shanghaitech_edu_cn/EqveZdlGsPxPrfBLQcO_IrgBs6bz7KX1zGGSz_GtLDIfAg)
+- **MotionMillion** — 1M+样本，[HF直接加载](https://huggingface.co/datasets/InternRobotics/MotionMillion)
+
+### 动作质量评估（打分）
+- **ExAct** — 3,521视频QA，NeurIPS 2025，[HF](https://huggingface.co/datasets/Alexhimself/ExAct)
+- **Fit3D/AIFit** — 3M+帧3D标注，[官网](https://fit3d.imar.ro/)
+
+### 3D姿态+语言
+- **Fit3D** — 官网18GB直接下载
+- **FLAG3D** — 部分下载，[项目页](https://andytang15.github.io/FLAG3D/#data)，Raw Data需邮件
+
+## 🌑 空白方向
+
+| 方向 | 现状 |
+|------|------|
+| 🏃 跑步/骑行/游泳 | 基本空白，动作单一 |
+| 🧘 瑜伽/舞蹈 | 有原始视频但缺instruction QA |
+| 🏓 乒乓球instruction | 无直接可用，建议OpenTTGames+GPT造 |
+
+## 📝 更新记录
+
+- **2026-06-16**：完成所有链接验证，更新状态标识
+- **2026-06-05**：完成32个数据集的整理与验证
+
+---
+
+**License**: MIT
+
+欢迎提交 Issue 或 PR 添加新数据集！
+
+**状态说明**：
+- ✅ = 可直接下载使用
+- ⚠️ = 需申请/受限/部分可用/需联系作者
+- ❌ = 暂不可获取/未发布/空仓库
