@@ -8,6 +8,8 @@
   <a href="https://github.com/hqa-shu/sport-vlm-datasets"><img src="https://img.shields.io/github/stars/hqa-shu/sport-vlm-datasets.svg?style=social"></a>
   <a href="https://github.com/hqa-shu/sport-vlm-datasets"><img src="https://img.shields.io/github/forks/hqa-shu/sport-vlm-datasets.svg?style=social"></a>
   <a href="https://github.com/hqa-shu/sport-vlm-datasets/issues"><img src="https://img.shields.io/github/issues/hqa-shu/sport-vlm-datasets.svg"></a>
+  <img src="https://img.shields.io/badge/license-MIT-blue.svg">
+  <img src="https://img.shields.io/badge/datasets-32-green.svg">
 </p>
 
 ## 📊 统计概览
@@ -152,9 +154,32 @@
 
 ---
 
-**License**: MIT
+## 📖 Citation
 
-欢迎提交 Issue 或 PR 添加新数据集！
+If you find this resource helpful, please consider giving a ⭐ and citing:
+
+```bibtex
+@misc{huang2026sportvlm,
+  title={Sport-VLM-Datasets: A Curated List of Sports Vision-Language Fine-Tuning Datasets},
+  author={Huang, Qian'an},
+  year={2026},
+  url={https://github.com/hqa-shu/sport-vlm-datasets}
+}
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Here's how you can help:
+
+1. **Add a dataset**: Open an [Issue](https://github.com/hqa-shu/sport-vlm-datasets/issues/new) with the dataset name, paper link, and access method
+2. **Fix a link**: Submit a PR with the corrected link
+3. **Update status**: If a previously unavailable dataset becomes accessible, let us know
+
+Please follow the existing tier format (S/A/B/C) when suggesting additions.
+
+---
+
+**License**: MIT — See [LICENSE](LICENSE) for details
 
 **状态说明**：
 - ✅ = 可直接下载使用
