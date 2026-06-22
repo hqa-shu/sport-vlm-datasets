@@ -9,14 +9,14 @@
   <a href="https://github.com/hqa-shu/sport-vlm-datasets"><img src="https://img.shields.io/github/forks/hqa-shu/sport-vlm-datasets.svg?style=social"></a>
   <a href="https://github.com/hqa-shu/sport-vlm-datasets/issues"><img src="https://img.shields.io/github/issues/hqa-shu/sport-vlm-datasets.svg"></a>
   <img src="https://img.shields.io/badge/license-MIT-blue.svg">
-  <img src="https://img.shields.io/badge/datasets-32-green.svg">
+  <img src="https://img.shields.io/badge/datasets-33-green.svg">
 </p>
 
 ## 📊 统计概览
 
 | 指标 | 数量 |
 |------|:----:|
-| 数据集总数 | 32 |
+| 数据集总数 | 33 |
 | ✅ 可直接下载 | 18 |
 | ⚠️ 需申请/受限 | 7 |
 | ❌ 暂不可获取 | 7 |
@@ -83,6 +83,7 @@
 | 27 | **Extended OpenTTGames** | 🏓 乒乓球 | 1.5K击球 | - | ❌ [[GitLab](https://gitlab.compute.dtu.dk/emilh/table_tennis_data)] · 空仓库 |
 | 28 | **MultiSenseBadminton** | 🏸 羽毛球 | 7.8K挥拍 | [[Scientific Data 2024]](https://www.nature.com/articles/s41597-024-03271-5)] | ❌ 传感器数据为主，无视频下载入口 |
 | 29 | **ALEX-GYM-1** | 💪 健身 | 二分类 | [[SCITEPRESS 2025]](https://arxiv.org/abs/2508.07554)] | ❌ 无可下载数据集 |
+| 30 | **CalTennis** | 🎾 网球 | 11M帧 · 51小时 · 40人 · 2-6视角 | [[arXiv](https://arxiv.org/abs/2606.20542)] | [[项目页](https://ilonadem.github.io/caltennis-website/)] [[HF](https://huggingface.co/datasets/demalenk/caltennis)] · 需转 VLM 格式 |
 
 <div align="right">
   <b><a href="#sport-vlm-datasets">↥ back to top</a></b>
@@ -106,7 +107,7 @@
 | **方向** | ✅ **首选** | ⚠️ **备选** | ❌ **待发布** |
 |----------|------------|------------|--------------|
 | ⚽ 足球 | SoccerChat, SoccerNet-XFoul | Domain Adaptation | SportR |
-| 🎾 网球 | - | TennisVL | - |
+| 🎾 网球 | - | TennisVL, CalTennis | - |
 | 🏸 羽毛球 | BFMD | FineBadminton, Shot2Tactic | - |
 | 🏓 乒乓球 | OpenTTGames | P²ANet | SportR |
 | 🏀 篮球 | ExAct | SpaceJam | SportR |
@@ -149,6 +150,7 @@
 
 ## 📝 更新记录
 
+- **2026-06-22**：新增 CalTennis (#30, B级网球) — Caltech 11M帧多视角网球数据集，arXiv:2606.20542
 - **2026-06-16**：完成所有链接验证，更新状态标识
 - **2026-06-05**：完成32个数据集的整理与验证
 
