@@ -9,14 +9,14 @@
   <a href="https://github.com/hqa-shu/sport-vlm-datasets"><img src="https://img.shields.io/github/forks/hqa-shu/sport-vlm-datasets.svg?style=social"></a>
   <a href="https://github.com/hqa-shu/sport-vlm-datasets/issues"><img src="https://img.shields.io/github/issues/hqa-shu/sport-vlm-datasets.svg"></a>
   <img src="https://img.shields.io/badge/license-MIT-blue.svg">
-  <img src="https://img.shields.io/badge/datasets-33-green.svg">
+  <img src="https://img.shields.io/badge/datasets-34-green.svg">
 </p>
 
 ## 📊 统计概览
 
 | 指标 | 数量 |
 |------|:----:|
-| 数据集总数 | 33 |
+| 数据集总数 | 34 |
 | ✅ 可直接下载 | 18 |
 | ⚠️ 需申请/受限 | 7 |
 | ❌ 暂不可获取 | 7 |
@@ -67,6 +67,7 @@
 | 20 | **RepCount** | 💪 健身 | 1.4K视频 · 20K标注 | [[arXiv](https://arxiv.org/abs/2508.07554)] | [[官网](https://svip-lab.github.io/dataset/RepCount_dataset.html)] [[OneDrive](https://shanghaitecheducn-my.sharepoint.com/:f:/g/personal/dongsx_shanghaitech_edu_cn/EqveZdlGsPxPrfBLQcO_IrgBs6bz7KX1zGGSz_GtLDIfAg)] [[GitHub](https://github.com/SvipRepetitionCounting/TransRAC)] |
 | 21 | **Fit3D / AIFit** | 💪 健身 | 611序列 · 2.96M帧3D | [[CVPR 2021]](https://arxiv.org/abs/2508.07554)] | [[官网](https://fit3d.imar.ro/)] [[训练集](https://fit3d.imar.ro/data/fit3d_train.tar.gz)] [[测试集](https://fit3d.imar.ro/data/fit3d_test.tar.gz)] |
 | 22 | **SpaceJam** | 🏀 篮球 | 32.5K标注 | [[arXiv](https://arxiv.org/abs/2508.07554)] | ⚠️ [[GitCode](https://gitcode.com/gh_mirrors/sp/SpaceJam)] · 可用性存疑 |
+| 24 | **SVHighlights** | 🌐 多运动(8种) | 320视频 · 640h · 2.0h avg | [[arXiv](https://arxiv.org/abs/2606.06926)] | [[HF](https://huggingface.co/datasets/ming9710/SVHighlights)] · KDD 2026 · 需转 VLM 格式 |
 
 <div align="right">
   <b><a href="#sport-vlm-datasets">↥ back to top</a></b>
@@ -76,14 +77,14 @@
 
 | # | **名称** | **运动类型** | **规模** | **论文** | **获取方式** |
 |:---:|----------|--------------|----------|:--------:|--------------|
-| 23 | **ShuttleSet系列** | 🏸 羽毛球 | 33K-43K击球 | [[AAAI'22/KDD'23/IJCAI'23]](https://arxiv.org/abs/2508.07554)] | [[GitHub](https://github.com/wywyWang/CoachAI-Projects)] |
-| 24 | **OpenTTGames** | 🏓 乒乓球 | 12视频 · 4.3K事件 | [[arXiv](https://arxiv.org/abs/2508.07554)] | [[官网](https://lab.osai.ai/)] · CC BY-NC-SA 4.0 |
-| 25 | **Free Exercise DB** | 💪 健身 | 800+动作 | - | [[GitHub](https://github.com/wrkout/exercises.json)] · Unlicense |
-| 26 | **P²ANet** | 🏓 乒乓球 | 200视频 · 139K事件 | [[TOMM 2024]](https://arxiv.org/abs/2508.07554)] | ⚠️ 需确认论文中的具体获取方式 |
-| 27 | **Extended OpenTTGames** | 🏓 乒乓球 | 1.5K击球 | - | ❌ [[GitLab](https://gitlab.compute.dtu.dk/emilh/table_tennis_data)] · 空仓库 |
-| 28 | **MultiSenseBadminton** | 🏸 羽毛球 | 7.8K挥拍 | [[Scientific Data 2024]](https://www.nature.com/articles/s41597-024-03271-5)] | ❌ 传感器数据为主，无视频下载入口 |
-| 29 | **ALEX-GYM-1** | 💪 健身 | 二分类 | [[SCITEPRESS 2025]](https://arxiv.org/abs/2508.07554)] | ❌ 无可下载数据集 |
-| 30 | **CalTennis** | 🎾 网球 | 11M帧 · 51小时 · 40人 · 2-6视角 | [[arXiv](https://arxiv.org/abs/2606.20542)] | [[项目页](https://ilonadem.github.io/caltennis-website/)] [[HF](https://huggingface.co/datasets/demalenk/caltennis)] · 需转 VLM 格式 |
+| 24 | **ShuttleSet系列** | 🏸 羽毛球 | 33K-43K击球 | [[AAAI'22/KDD'23/IJCAI'23]](https://arxiv.org/abs/2508.07554)] | [[GitHub](https://github.com/wywyWang/CoachAI-Projects)] |
+| 25 | **OpenTTGames** | 🏓 乒乓球 | 12视频 · 4.3K事件 | [[arXiv](https://arxiv.org/abs/2508.07554)] | [[官网](https://lab.osai.ai/)] · CC BY-NC-SA 4.0 |
+| 26 | **Free Exercise DB** | 💪 健身 | 800+动作 | - | [[GitHub](https://github.com/wrkout/exercises.json)] · Unlicense |
+| 27 | **P²ANet** | 🏓 乒乓球 | 200视频 · 139K事件 | [[TOMM 2024]](https://arxiv.org/abs/2508.07554)] | ⚠️ 需确认论文中的具体获取方式 |
+| 28 | **Extended OpenTTGames** | 🏓 乒乓球 | 1.5K击球 | - | ❌ [[GitLab](https://gitlab.compute.dtu.dk/emilh/table_tennis_data)] · 空仓库 |
+| 29 | **MultiSenseBadminton** | 🏸 羽毛球 | 7.8K挥拍 | [[Scientific Data 2024]](https://www.nature.com/articles/s41597-024-03271-5)] | ❌ 传感器数据为主，无视频下载入口 |
+| 30 | **ALEX-GYM-1** | 💪 健身 | 二分类 | [[SCITEPRESS 2025]](https://arxiv.org/abs/2508.07554)] | ❌ 无可下载数据集 |
+| 31 | **CalTennis** | 🎾 网球 | 11M帧 · 51小时 · 40人 · 2-6视角 | [[arXiv](https://arxiv.org/abs/2606.20542)] | [[项目页](https://ilonadem.github.io/caltennis-website/)] [[HF](https://huggingface.co/datasets/demalenk/caltennis)] · 需转 VLM 格式 |
 
 <div align="right">
   <b><a href="#sport-vlm-datasets">↥ back to top</a></b>
@@ -113,7 +114,7 @@
 | 🏀 篮球 | ExAct | SpaceJam | SportR |
 | 💪 健身(教练) | QEVD, RepCount, Fit3D | BioCoach, EgoExo-Fitness | FLEX |
 | 💪 健身(评估) | ExAct, Fit3D | TaiChi-AQA, FLAG3D | FLEX |
-| 🌐 多运动 | VideoNet, ExAct, MotionMillion | SPORTU | SportR, SportSkills |
+| 🌐 多运动 | VideoNet, ExAct, MotionMillion | SPORTU, SVHighlights | SportR, SportSkills |
 | 🥋 太极 | - | TaiChi-AQA | - |
 
 <div align="right">
@@ -150,6 +151,7 @@
 
 ## 📝 更新记录
 
+- **2026-06-23**：新增 SVHighlights (#23, B级多运动) — KDD 2026 首个长体育视频(>1h)高亮检测benchmark，arXiv:2606.06926
 - **2026-06-22**：新增 CalTennis (#30, B级网球) — Caltech 11M帧多视角网球数据集，arXiv:2606.20542
 - **2026-06-16**：完成所有链接验证，更新状态标识
 - **2026-06-05**：完成32个数据集的整理与验证
