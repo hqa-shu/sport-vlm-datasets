@@ -1,10 +1,12 @@
 # Sports Vision-Language Datasets
 
+![Sports dataset discovery, bilingual catalogs and Python data tools](hero.svg)
+
 **A curated index of sports datasets and benchmarks for VLM fine-tuning, video question answering, and action understanding.**
 
 体育多模态数据集索引：按运动领域、标注形式与准备成本比较研究资源。
 
-[English catalog](CATALOG.md) · [中文](README.zh-CN.md) · [JSON index](data/datasets.json) · [Suggest a dataset](https://github.com/hqa-shu/sport-vlm-datasets/issues/new?template=dataset.yml) · [Report a correction](https://github.com/hqa-shu/sport-vlm-datasets/issues/new?template=correction.yml) · [Contribute](CONTRIBUTING.md) · [Cite](#citation)
+[English catalog](CATALOG.md) · [中文](README.zh-CN.md) · [JSON index](data/datasets.json) · [Use the CLI](#search-and-reuse-locally) · [Contribute](CONTRIBUTING.md) · [Cite](#citation)
 
 ## Choose a task
 

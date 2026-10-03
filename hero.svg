@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="220" viewBox="0 0 1280 220" role="img" aria-labelledby="title desc">
+<title id="title">Sports Vision-Language Datasets</title>
+<desc id="desc">A bilingual resource index with local Python search, export and audit tools.</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0b1931"/><stop offset="1" stop-color="#183c53"/></linearGradient></defs>
+<rect width="1280" height="220" rx="18" fill="url(#bg)"/>
+<rect x="36" y="34" width="5" height="148" rx="2.5" fill="#65e5c1"/>
+<g font-family="Arial, Helvetica, sans-serif">
+<text x="62" y="55" fill="#9fbed1" font-size="17" letter-spacing="2.6">SPORTS × MULTIMODAL DATA</text>
+<text x="60" y="104" fill="#ffffff" font-size="39" font-weight="700">Discover. Compare. Reuse.</text>
+<text x="62" y="142" fill="#c6d8e5" font-size="21">Video QA · Action understanding · VLM fine-tuning</text>
+<text x="62" y="182" fill="#65e5c1" font-size="17">Bilingual catalog   /   Python search + export   /   Source review notes</text>
+</g>
+<g transform="translate(1015 30)" fill="none" stroke="#6bbcc8" stroke-width="2" opacity="0.75">
+<rect x="0" y="0" width="218" height="158" rx="9"/>
+<path d="M109 0v158M0 79h218M36 0v158M182 0v158"/>
+<circle cx="109" cy="79" r="28"/>
+<path d="M0 42h36v74H0M218 42h-36v74h36"/>
+<circle cx="109" cy="79" r="6" fill="#65e5c1" stroke="none"/>
+</g>
+</svg>
