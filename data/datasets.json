@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "catalog_revision_date": "2026-10-03",
+  "catalog_revision_date": "2026-10-04",
   "review_scope": "partial primary-source checks; no dataset download or training validation",
   "main_entries": 31,
   "additional_candidates": 2,
@@ -238,14 +238,18 @@
       "name": "BFMD",
       "tier_from_original_curation": "B",
       "sport": "🏸 羽毛球",
-      "scale_note": "1.7K回合 · 16K击球",
-      "paper_or_source_urls": [],
-      "access_urls": [
+      "scale_note": "论文：19 场、1,687 回合、16,751 击球；仓库发布包：1,058 回合、11,301 击球（规模口径不同）",
+      "paper_or_source_urls": [
+        "https://arxiv.org/abs/2603.25533",
         "https://github.com/Ning-D/BFMD"
       ],
-      "access_note": "[GitHub](https://github.com/Ning-D/BFMD)",
-      "source_review": "needs_review",
-      "source_review_date": null,
+      "access_urls": [
+        "https://github.com/Ning-D/BFMD",
+        "https://ning-d.github.io/BFMD-Dataset/"
+      ],
+      "access_note": "Official repository links annotations and helper scripts; source videos are not redistributed. The authors report different paper/package counts. Dataset page restricts use to non-commercial academic research; no download tested.",
+      "source_review": "partial_primary_source_check",
+      "source_review_date": "2026-10-04",
       "download_tested": false
     },
     {
@@ -285,14 +289,16 @@
       "name": "TaiChi-AQA",
       "tier_from_original_curation": "B",
       "sport": "🥋 太极",
-      "scale_note": "1.3K视频",
-      "paper_or_source_urls": [],
+      "scale_note": "1,313 视频 · 24 类动作（论文）",
+      "paper_or_source_urls": [
+        "https://doi.org/10.1049/cvi2.70053"
+      ],
       "access_urls": [
         "https://github.com/mlxger/TaiChi-AQA"
       ],
-      "access_note": "[GitHub](https://github.com/mlxger/TaiChi-AQA) · 需填申请表",
-      "source_review": "needs_review",
-      "source_review_date": null,
+      "access_note": "Official repository requires the request form to be completed and sent to the author; no application or download tested.",
+      "source_review": "partial_primary_source_check",
+      "source_review_date": "2026-10-04",
       "download_tested": false
     },
     {
@@ -355,16 +361,17 @@
       "name": "Fit3D / AIFit",
       "tier_from_original_curation": "B",
       "sport": "💪 健身",
-      "scale_note": "611序列 · 2.96M帧3D",
-      "paper_or_source_urls": [],
-      "access_urls": [
-        "https://fit3d.imar.ro/",
-        "https://fit3d.imar.ro/data/fit3d_train.tar.gz",
-        "https://fit3d.imar.ro/data/fit3d_test.tar.gz"
+      "scale_note": "611 多视角序列 · 2,964,236 3D 骨架（官网）",
+      "paper_or_source_urls": [
+        "https://fit3d.imar.ro/sites/default/files/public/pdf/Fieraru_2021_CVPR.pdf",
+        "https://fit3d.imar.ro/home"
       ],
-      "access_note": "[官网](https://fit3d.imar.ro/) [训练集](https://fit3d.imar.ro/data/fit3d_train.tar.gz) [测试集](https://fit3d.imar.ro/data/fit3d_test.tar.gz)",
-      "source_review": "needs_review",
-      "source_review_date": null,
+      "access_urls": [
+        "https://fit3d.imar.ro/download"
+      ],
+      "access_note": "Official download page requires a valid logged-in account and lists 18 GB training / 1.4 GB test packages; this index has not tested authentication or downloads.",
+      "source_review": "partial_primary_source_check",
+      "source_review_date": "2026-10-04",
       "download_tested": false
     },
     {
