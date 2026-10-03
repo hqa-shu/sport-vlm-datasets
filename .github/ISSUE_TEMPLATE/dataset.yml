@@ -1,0 +1,48 @@
+name: Suggest a dataset / 推荐数据集
+description: Add a sports vision-language dataset or benchmark with primary sources.
+title: "[Dataset] "
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Dataset or benchmark name / 名称
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Original paper or project URL / 原论文或项目链接
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Sport, task, modalities, format, and scale / 运动、任务、模态、格式及规模
+      description: Cite the source for numeric claims; mark unknown fields.
+    validations:
+      required: true
+  - type: textarea
+    id: access
+    attributes:
+      label: Official access URL, license, and restrictions / 获取入口及许可限制
+      description: Describe open, gated, application-required, or unknown access.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: What did you verify, and when? / 核查内容及日期
+      description: Separate viewing a page, downloading media, and testing a training format.
+    validations:
+      required: true
+  - type: dropdown
+    id: tier
+    attributes:
+      label: Suggested preparation tier / 建议准备成本分级
+      options:
+        - "Unknown / 待核实"
+        - "S - priority candidate"
+        - "A - QA or instruction candidate"
+        - "B - format conversion needed"
+        - "C - substantial preparation needed"
+
