@@ -6,11 +6,15 @@
 
 [Browse the catalog](#catalog) · [JSON index](data/datasets.json) · [Suggest a dataset](https://github.com/hqa-shu/sport-vlm-datasets/issues/new?template=dataset.yml) · [Report a correction](https://github.com/hqa-shu/sport-vlm-datasets/issues/new?template=correction.yml) · [Contribute](CONTRIBUTING.md) · [Cite](#citation)
 
-## Start here
+## Choose a task
 
-1. Pick a sport and a task: video QA, tactical reasoning, action analysis, or pose understanding.
-2. Follow the original paper and dataset access links in the catalog.
-3. Check the actual annotations, media access, usage terms, and official train/test split before training. An evaluation benchmark is not automatically SFT training data.
+| Goal | Starting point | What to check next |
+|------|----------------|--------------------|
+| Soccer video QA / fine-tuning | [SoccerChat](https://github.com/simula/SoccerChat) | Video + query/response fields; keep the official validation split separate. |
+| Expert action understanding | [ExAct](https://github.com/Texaser/Exact) | Multiple-choice evaluation; a HF split named `train` does not make the benchmark training data. |
+| Repetition counting | [RepCount / TransRAC](https://github.com/SvipRepetitionCounting/TransRAC) | Counting annotations need task-specific preparation rather than assumed language supervision. |
+
+These are source-backed entry points, not a best-dataset ranking. Check original media access, usage terms, and official splits before preparing any training data.
 
 **33 resources · 31 main entries + 2 candidates · Partial source review**
 
