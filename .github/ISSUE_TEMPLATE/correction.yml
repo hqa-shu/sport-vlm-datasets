@@ -1,0 +1,30 @@
+name: Correct a source or access note / 修正来源或状态
+description: Report an incorrect reference, size, access condition, or preparation claim.
+title: "[Correction] "
+body:
+  - type: input
+    id: dataset
+    attributes:
+      label: Resource name or row / 名称或条目
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Current claim and proposed correction / 当前内容及建议修正
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Primary source URL and supporting evidence / 一手来源与依据
+    validations:
+      required: true
+  - type: input
+    id: date
+    attributes:
+      label: Verification date and scope / 核查日期与范围
+      description: For example, page checked only; no media downloaded.
+    validations:
+      required: true
+
