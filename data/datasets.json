@@ -1,0 +1,552 @@
+{
+  "schema_version": 1,
+  "catalog_revision_date": "2026-10-03",
+  "review_scope": "partial primary-source checks; no dataset download or training validation",
+  "main_entries": 31,
+  "additional_candidates": 2,
+  "total_entries": 33,
+  "datasets": [
+    {
+      "id": 1,
+      "name": "SoccerChat",
+      "tier_from_original_curation": "S",
+      "sport": "⚽ 足球",
+      "scale_note": "90K QA · 85K训练",
+      "paper_or_source_urls": [
+        "https://arxiv.org/abs/2505.16630"
+      ],
+      "access_urls": [
+        "https://huggingface.co/datasets/SimulaMet/SoccerChat",
+        "https://github.com/simula/SoccerChat"
+      ],
+      "access_note": "[HF](https://huggingface.co/datasets/SimulaMet/SoccerChat) [GitHub](https://github.com/simula/SoccerChat)",
+      "source_review": "partial_primary_source_check",
+      "source_review_date": "2026-10-03",
+      "download_tested": false
+    },
+    {
+      "id": 2,
+      "name": "VideoNet",
+      "tier_from_original_curation": "S",
+      "sport": "🌐 37域",
+      "scale_note": "160K clips · 500K QA",
+      "paper_or_source_urls": [
+        "https://arxiv.org/abs/2605.02834"
+      ],
+      "access_urls": [
+        "https://huggingface.co/datasets/raivn/VideoNet"
+      ],
+      "access_note": "[HF](https://huggingface.co/datasets/raivn/VideoNet)",
+      "source_review": "partial_primary_source_check",
+      "source_review_date": "2026-10-03",
+      "download_tested": false
+    },
+    {
+      "id": 3,
+      "name": "TennisVL",
+      "tier_from_original_curation": "S",
+      "sport": "🎾 网球",
+      "scale_note": "202场 · 471小时",
+      "paper_or_source_urls": [
+        "https://arxiv.org/abs/2603.13397"
+      ],
+      "access_urls": [
+        "https://github.com/LZYAndy/TennisExpert",
+        "https://drive.google.com/drive/folders/1GkLHT6tyFb874HcEEmIu0S47wYzzbhkN"
+      ],
+      "access_note": "[GitHub](https://github.com/LZYAndy/TennisExpert) [GD](https://drive.google.com/drive/folders/1GkLHT6tyFb874HcEEmIu0S47wYzzbhkN)",
+      "source_review": "partial_primary_source_check",
+      "source_review_date": "2026-10-03",
+      "download_tested": false
+    },
+    {
+      "id": 4,
+      "name": "Fitness-AQA",
+      "tier_from_original_curation": "S",
+      "sport": "💪 健身",
+      "scale_note": "小规模",
+      "paper_or_source_urls": [],
+      "access_urls": [
+        "https://forms.gle/PbPTX1eVxGpa3QG88",
+        "https://github.com/GaetanoDibenedetto/UMAP25"
+      ],
+      "access_note": "⚠️ [申请表](https://forms.gle/PbPTX1eVxGpa3QG88) [GitHub](https://github.com/GaetanoDibenedetto/UMAP25)",
+      "source_review": "needs_review",
+      "source_review_date": null,
+      "download_tested": false
+    },
+    {
+      "id": 5,
+      "name": "SportR",
+      "tier_from_original_curation": "S",
+      "sport": "🌐 多运动",
+      "scale_note": "20K+ QA · 6.8K CoT",
+      "paper_or_source_urls": [
+        "https://arxiv.org/abs/2511.06499"
+      ],
+      "access_urls": [
+        "https://github.com/chili-lab/SportR/tree/main/annotations",
+        "https://huggingface.co/datasets/haotianxia/SportR"
+      ],
+      "access_note": "[GitHub annotations](https://github.com/chili-lab/SportR/tree/main/annotations) · [HF media](https://huggingface.co/datasets/haotianxia/SportR) · ⚠️ 媒体需申请，仅限非商业研究（2026-10-03 核查）",
+      "source_review": "partial_primary_source_check",
+      "source_review_date": "2026-10-03",
+      "download_tested": false
+    },
+    {
+      "id": 6,
+      "name": "SoccerNet-XFoul",
+      "tier_from_original_curation": "A",
+      "sport": "⚽ 足球",
+      "scale_note": "22K+ video-QA",
+      "paper_or_source_urls": [
+        "https://arxiv.org/abs/2404.06332"
+      ],
+      "access_urls": [
+        "https://www.soccer-net.org/"
+      ],
+      "access_note": "[官网](https://www.soccer-net.org/)",
+      "source_review": "partial_primary_source_check",
+      "source_review_date": "2026-10-03",
+      "download_tested": false
+    },
+    {
+      "id": 7,
+      "name": "QEVD",
+      "tier_from_original_curation": "A",
+      "sport": "💪 健身",
+      "scale_note": "1M+ QA · 474小时",
+      "paper_or_source_urls": [
+        "https://www.qualcomm.com/developer/software/qevd-dataset"
+      ],
+      "access_urls": [
+        "https://www.qualcomm.com/developer/software/qevd-dataset/downloads",
+        "https://huggingface.co/datasets/Voxel51/qualcomm-exercise-video-dataset-benchmark"
+      ],
+      "access_note": "[Qualcomm官网](https://www.qualcomm.com/developer/software/qevd-dataset/downloads) [HF Benchmark](https://huggingface.co/datasets/Voxel51/qualcomm-exercise-video-dataset-benchmark)",
+      "source_review": "partial_primary_source_check",
+      "source_review_date": "2026-10-03",
+      "download_tested": false
+    },
+    {
+      "id": 8,
+      "name": "ExAct",
+      "tier_from_original_curation": "A",
+      "sport": "🌐 多领域（含体育）",
+      "scale_note": "3,521 视频 / QA（主要为 MCQ 评估）",
+      "paper_or_source_urls": [
+        "https://arxiv.org/abs/2506.06277"
+      ],
+      "access_urls": [
+        "https://huggingface.co/datasets/Alexhimself/ExAct",
+        "https://github.com/Texaser/Exact"
+      ],
+      "access_note": "[HF](https://huggingface.co/datasets/Alexhimself/ExAct) [GitHub](https://github.com/Texaser/Exact)",
+      "source_review": "partial_primary_source_check",
+      "source_review_date": "2026-10-03",
+      "download_tested": false
+    },
+    {
+      "id": 9,
+      "name": "SPORTU",
+      "tier_from_original_curation": "A",
+      "sport": "🌐 7种",
+      "scale_note": "1.7K视频 · 12K QA",
+      "paper_or_source_urls": [
+        "https://arxiv.org/abs/2410.08474"
+      ],
+      "access_urls": [
+        "https://github.com/chili-lab/SPORTU",
+        "https://drive.google.com/drive/folders/1nvA8gqF32lrhqzhbJ2r39-TwwW5tEvsu"
+      ],
+      "access_note": "[GitHub](https://github.com/chili-lab/SPORTU) [GD](https://drive.google.com/drive/folders/1nvA8gqF32lrhqzhbJ2r39-TwwW5tEvsu)",
+      "source_review": "partial_primary_source_check",
+      "source_review_date": "2026-10-03",
+      "download_tested": false
+    },
+    {
+      "id": 10,
+      "name": "Sports-QA",
+      "tier_from_original_curation": "A",
+      "sport": "🌐 8种",
+      "scale_note": "94K QA",
+      "paper_or_source_urls": [
+        "https://arxiv.org/abs/2401.01505"
+      ],
+      "access_urls": [
+        "https://github.com/HopLee6/Sports-QA",
+        "https://huggingface.co/datasets/HopLeeTop/Sports-QA"
+      ],
+      "access_note": "[GitHub](https://github.com/HopLee6/Sports-QA) [HF](https://huggingface.co/datasets/HopLeeTop/Sports-QA)",
+      "source_review": "partial_primary_source_check",
+      "source_review_date": "2026-10-03",
+      "download_tested": false
+    },
+    {
+      "id": 11,
+      "name": "BioCoach",
+      "tier_from_original_curation": "A",
+      "sport": "💪 健身",
+      "scale_note": "规模待核实（原记录可能混用 QEVD 划分）",
+      "paper_or_source_urls": [
+        "https://arxiv.org/abs/2603.26938"
+      ],
+      "access_urls": [
+        "https://arxiv.org/abs/2603.26938"
+      ],
+      "access_note": "❌ [arXiv](https://arxiv.org/abs/2603.26938) · 需联系作者",
+      "source_review": "partial_primary_source_check",
+      "source_review_date": "2026-10-03",
+      "download_tested": false
+    },
+    {
+      "id": 12,
+      "name": "Domain Adaptation",
+      "tier_from_original_curation": "A",
+      "sport": "⚽ 足球",
+      "scale_note": "20K instruction",
+      "paper_or_source_urls": [
+        "https://arxiv.org/abs/2505.13860"
+      ],
+      "access_urls": [
+        "https://arxiv.org/abs/2505.13860"
+      ],
+      "access_note": "⚠️ [arXiv](https://arxiv.org/abs/2505.13860) · CVPR 2025 · 数据未公开发布",
+      "source_review": "partial_primary_source_check",
+      "source_review_date": "2026-10-03",
+      "download_tested": false
+    },
+    {
+      "id": 13,
+      "name": "FineBadminton",
+      "tier_from_original_curation": "B",
+      "sport": "🏸 羽毛球",
+      "scale_note": "3.2K回合 · 120场",
+      "paper_or_source_urls": [
+        "https://arxiv.org/abs/2508.07554"
+      ],
+      "access_urls": [
+        "https://finebadminton.github.io/FineBadminton/"
+      ],
+      "access_note": "[项目页](https://finebadminton.github.io/FineBadminton/) · 需联系作者",
+      "source_review": "partial_primary_source_check",
+      "source_review_date": "2026-10-03",
+      "download_tested": false
+    },
+    {
+      "id": 14,
+      "name": "BFMD",
+      "tier_from_original_curation": "B",
+      "sport": "🏸 羽毛球",
+      "scale_note": "1.7K回合 · 16K击球",
+      "paper_or_source_urls": [],
+      "access_urls": [
+        "https://github.com/Ning-D/BFMD"
+      ],
+      "access_note": "[GitHub](https://github.com/Ning-D/BFMD)",
+      "source_review": "needs_review",
+      "source_review_date": null,
+      "download_tested": false
+    },
+    {
+      "id": 15,
+      "name": "Shot2Tactic-Caption",
+      "tier_from_original_curation": "B",
+      "sport": "🏸 羽毛球",
+      "scale_note": "5.5K标注",
+      "paper_or_source_urls": [
+        "https://arxiv.org/abs/2510.14617"
+      ],
+      "access_urls": [
+        "https://arxiv.org/abs/2510.14617"
+      ],
+      "access_note": "⚠️ [arXiv](https://arxiv.org/abs/2510.14617) · ACM MMSports 2025 · 需联系作者",
+      "source_review": "partial_primary_source_check",
+      "source_review_date": "2026-10-03",
+      "download_tested": false
+    },
+    {
+      "id": 16,
+      "name": "MotionMillion",
+      "tier_from_original_curation": "B",
+      "sport": "💪🥋 健身",
+      "scale_note": "1M+样本 · 2000小时",
+      "paper_or_source_urls": [],
+      "access_urls": [
+        "https://huggingface.co/datasets/InternRobotics/MotionMillion"
+      ],
+      "access_note": "[HF](https://huggingface.co/datasets/InternRobotics/MotionMillion) · 需同意条款",
+      "source_review": "needs_review",
+      "source_review_date": null,
+      "download_tested": false
+    },
+    {
+      "id": 17,
+      "name": "TaiChi-AQA",
+      "tier_from_original_curation": "B",
+      "sport": "🥋 太极",
+      "scale_note": "1.3K视频",
+      "paper_or_source_urls": [],
+      "access_urls": [
+        "https://github.com/mlxger/TaiChi-AQA"
+      ],
+      "access_note": "[GitHub](https://github.com/mlxger/TaiChi-AQA) · 需填申请表",
+      "source_review": "needs_review",
+      "source_review_date": null,
+      "download_tested": false
+    },
+    {
+      "id": 18,
+      "name": "FLAG3D",
+      "tier_from_original_curation": "B",
+      "sport": "💪 健身",
+      "scale_note": "180K视频 · 60类",
+      "paper_or_source_urls": [
+        "https://arxiv.org/abs/2212.04638"
+      ],
+      "access_urls": [
+        "https://andytang15.github.io/FLAG3D/",
+        "https://github.com/AndyTang15/FLAG3D"
+      ],
+      "access_note": "[项目页](https://andytang15.github.io/FLAG3D/) [GitHub](https://github.com/AndyTang15/FLAG3D) · ⚠️ 按官网提交签署的许可协议申请（2026-10-03 核查）",
+      "source_review": "partial_primary_source_check",
+      "source_review_date": "2026-10-03",
+      "download_tested": false
+    },
+    {
+      "id": 19,
+      "name": "EgoExo-Fitness",
+      "tier_from_original_curation": "B",
+      "sport": "💪 健身",
+      "scale_note": "1.3K视频 · 32小时",
+      "paper_or_source_urls": [
+        "https://arxiv.org/abs/2406.08877"
+      ],
+      "access_urls": [
+        "https://github.com/iSEE-Laboratory/EgoExo-Fitness",
+        "https://huggingface.co/datasets/Lymann/EgoExo-Fitness"
+      ],
+      "access_note": "[GitHub](https://github.com/iSEE-Laboratory/EgoExo-Fitness) [HF](https://huggingface.co/datasets/Lymann/EgoExo-Fitness)",
+      "source_review": "partial_primary_source_check",
+      "source_review_date": "2026-10-03",
+      "download_tested": false
+    },
+    {
+      "id": 20,
+      "name": "RepCount",
+      "tier_from_original_curation": "B",
+      "sport": "💪 健身",
+      "scale_note": "1.4K视频 · 20K标注",
+      "paper_or_source_urls": [
+        "https://arxiv.org/abs/2204.01018"
+      ],
+      "access_urls": [
+        "https://svip-lab.github.io/dataset/RepCount_dataset.html",
+        "https://shanghaitecheducn-my.sharepoint.com/:f:/g/personal/dongsx_shanghaitech_edu_cn/EqveZdlGsPxPrfBLQcO_IrgBs6bz7KX1zGGSz_GtLDIfAg",
+        "https://github.com/SvipRepetitionCounting/TransRAC"
+      ],
+      "access_note": "[官网](https://svip-lab.github.io/dataset/RepCount_dataset.html) [OneDrive](https://shanghaitecheducn-my.sharepoint.com/:f:/g/personal/dongsx_shanghaitech_edu_cn/EqveZdlGsPxPrfBLQcO_IrgBs6bz7KX1zGGSz_GtLDIfAg) [GitHub](https://github.com/SvipRepetitionCounting/TransRAC)",
+      "source_review": "partial_primary_source_check",
+      "source_review_date": "2026-10-03",
+      "download_tested": false
+    },
+    {
+      "id": 21,
+      "name": "Fit3D / AIFit",
+      "tier_from_original_curation": "B",
+      "sport": "💪 健身",
+      "scale_note": "611序列 · 2.96M帧3D",
+      "paper_or_source_urls": [],
+      "access_urls": [
+        "https://fit3d.imar.ro/",
+        "https://fit3d.imar.ro/data/fit3d_train.tar.gz",
+        "https://fit3d.imar.ro/data/fit3d_test.tar.gz"
+      ],
+      "access_note": "[官网](https://fit3d.imar.ro/) [训练集](https://fit3d.imar.ro/data/fit3d_train.tar.gz) [测试集](https://fit3d.imar.ro/data/fit3d_test.tar.gz)",
+      "source_review": "needs_review",
+      "source_review_date": null,
+      "download_tested": false
+    },
+    {
+      "id": 22,
+      "name": "SpaceJam",
+      "tier_from_original_curation": "B",
+      "sport": "🏀 篮球",
+      "scale_note": "32.5K标注",
+      "paper_or_source_urls": [],
+      "access_urls": [
+        "https://gitcode.com/gh_mirrors/sp/SpaceJam"
+      ],
+      "access_note": "⚠️ [GitCode](https://gitcode.com/gh_mirrors/sp/SpaceJam) · 可用性存疑",
+      "source_review": "needs_review",
+      "source_review_date": null,
+      "download_tested": false
+    },
+    {
+      "id": 23,
+      "name": "SVHighlights",
+      "tier_from_original_curation": "B",
+      "sport": "🌐 多运动(8种)",
+      "scale_note": "320视频 · 640h · 2.0h avg",
+      "paper_or_source_urls": [
+        "https://arxiv.org/abs/2606.06926"
+      ],
+      "access_urls": [
+        "https://huggingface.co/datasets/ming9710/SVHighlights"
+      ],
+      "access_note": "[HF](https://huggingface.co/datasets/ming9710/SVHighlights) · KDD 2026 · 需转 VLM 格式",
+      "source_review": "partial_primary_source_check",
+      "source_review_date": "2026-10-03",
+      "download_tested": false
+    },
+    {
+      "id": 24,
+      "name": "ShuttleSet系列",
+      "tier_from_original_curation": "C",
+      "sport": "🏸 羽毛球",
+      "scale_note": "33K-43K击球",
+      "paper_or_source_urls": [],
+      "access_urls": [
+        "https://github.com/wywyWang/CoachAI-Projects"
+      ],
+      "access_note": "[GitHub](https://github.com/wywyWang/CoachAI-Projects)",
+      "source_review": "needs_review",
+      "source_review_date": null,
+      "download_tested": false
+    },
+    {
+      "id": 25,
+      "name": "OpenTTGames",
+      "tier_from_original_curation": "C",
+      "sport": "🏓 乒乓球",
+      "scale_note": "12视频 · 4.3K事件",
+      "paper_or_source_urls": [],
+      "access_urls": [
+        "https://lab.osai.ai/"
+      ],
+      "access_note": "[官网](https://lab.osai.ai/) · CC BY-NC-SA 4.0",
+      "source_review": "needs_review",
+      "source_review_date": null,
+      "download_tested": false
+    },
+    {
+      "id": 26,
+      "name": "Free Exercise DB",
+      "tier_from_original_curation": "C",
+      "sport": "💪 健身",
+      "scale_note": "800+动作",
+      "paper_or_source_urls": [],
+      "access_urls": [
+        "https://github.com/wrkout/exercises.json"
+      ],
+      "access_note": "[GitHub](https://github.com/wrkout/exercises.json) · Unlicense",
+      "source_review": "needs_review",
+      "source_review_date": null,
+      "download_tested": false
+    },
+    {
+      "id": 27,
+      "name": "P²ANet",
+      "tier_from_original_curation": "C",
+      "sport": "🏓 乒乓球",
+      "scale_note": "200视频 · 139K事件",
+      "paper_or_source_urls": [],
+      "access_urls": [],
+      "access_note": "⚠️ 需确认论文中的具体获取方式",
+      "source_review": "needs_review",
+      "source_review_date": null,
+      "download_tested": false
+    },
+    {
+      "id": 28,
+      "name": "Extended OpenTTGames",
+      "tier_from_original_curation": "C",
+      "sport": "🏓 乒乓球",
+      "scale_note": "1.5K击球",
+      "paper_or_source_urls": [],
+      "access_urls": [
+        "https://gitlab.compute.dtu.dk/emilh/table_tennis_data"
+      ],
+      "access_note": "❌ [GitLab](https://gitlab.compute.dtu.dk/emilh/table_tennis_data) · 空仓库",
+      "source_review": "needs_review",
+      "source_review_date": null,
+      "download_tested": false
+    },
+    {
+      "id": 29,
+      "name": "MultiSenseBadminton",
+      "tier_from_original_curation": "C",
+      "sport": "🏸 羽毛球",
+      "scale_note": "7.8K挥拍",
+      "paper_or_source_urls": [
+        "https://www.nature.com/articles/s41597-024-03271-5"
+      ],
+      "access_urls": [],
+      "access_note": "❌ 传感器数据为主，无视频下载入口",
+      "source_review": "needs_review",
+      "source_review_date": null,
+      "download_tested": false
+    },
+    {
+      "id": 30,
+      "name": "ALEX-GYM-1",
+      "tier_from_original_curation": "C",
+      "sport": "💪 健身",
+      "scale_note": "二分类",
+      "paper_or_source_urls": [],
+      "access_urls": [],
+      "access_note": "❌ 无可下载数据集",
+      "source_review": "needs_review",
+      "source_review_date": null,
+      "download_tested": false
+    },
+    {
+      "id": 31,
+      "name": "CalTennis",
+      "tier_from_original_curation": "C",
+      "sport": "🎾 网球",
+      "scale_note": "11M帧 · 51小时 · 40人 · 2-6视角",
+      "paper_or_source_urls": [
+        "https://arxiv.org/abs/2606.20542"
+      ],
+      "access_urls": [
+        "https://ilonadem.github.io/caltennis-website/",
+        "https://huggingface.co/datasets/demalenk/caltennis"
+      ],
+      "access_note": "[项目页](https://ilonadem.github.io/caltennis-website/) [HF](https://huggingface.co/datasets/demalenk/caltennis) · 需转 VLM 格式",
+      "source_review": "partial_primary_source_check",
+      "source_review_date": "2026-10-03",
+      "download_tested": false
+    },
+    {
+      "id": 32,
+      "name": "FLEX-VideoQA",
+      "tier_from_original_curation": null,
+      "sport": "健身",
+      "scale_note": "待核实",
+      "paper_or_source_urls": [
+        "https://openreview.net/forum?id=Fje6v8JnB0"
+      ],
+      "access_urls": [],
+      "access_note": "发布状态待核实",
+      "source_review": "needs_review",
+      "source_review_date": null,
+      "download_tested": false
+    },
+    {
+      "id": 33,
+      "name": "SportSkills",
+      "tier_from_original_curation": null,
+      "sport": "多运动",
+      "scale_note": "待核实",
+      "paper_or_source_urls": [
+        "https://arxiv.org/abs/2603.25163"
+      ],
+      "access_urls": [],
+      "access_note": "数据发布状态待核实",
+      "source_review": "paper_identity_only",
+      "source_review_date": "2026-10-03",
+      "download_tested": false
+    }
+  ]
+}
