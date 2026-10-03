@@ -12,9 +12,13 @@
 2. Follow the original paper and dataset access links in the catalog.
 3. Check the actual annotations, media access, usage terms, and official train/test split before training. An evaluation benchmark is not automatically SFT training data.
 
-The detailed catalog is in Chinese. The [JSON index](data/datasets.json) exposes names, source URLs, preparation tiers, and review notes for reuse.
+**33 resources · 31 main entries + 2 candidates · Partial source review**
 
-## Scope and evidence
+The detailed catalog is in Chinese. Reuse the [JSON index](data/datasets.json) or inspect a resource’s original source before training.
+
+
+<details>
+<summary><b>Scope, review status & preparation tiers</b></summary>
 
 | Coverage | Count |
 |----------|------:|
@@ -29,6 +33,9 @@ Counts describe catalog entries, including benchmarks and candidate resources; t
 The S/A/B/C tiers preserve the original maintainer's preparation-cost grouping; they are not a measured quality ranking. Availability and license restrictions are independent of tier. Paper identity checks do not establish that media are accessible or suitable for training.
 
 **Highlighted corrections:** [TennisVL / TennisExpert](https://arxiv.org/abs/2603.13397), [QEVD official source](https://www.qualcomm.com/developer/software/qevd-dataset), [FLAG3D](https://arxiv.org/abs/2212.04638), and [RepCount / TransRAC](https://arxiv.org/abs/2204.01018). [SportR](https://huggingface.co/datasets/haotianxia/SportR) now provides annotation and media entry points, with gated non-commercial media access. References still needing repair are explicitly marked in the catalog.
+
+
+</details>
 
 <a id="catalog"></a>
 
