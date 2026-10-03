@@ -21,6 +21,21 @@ These are source-backed entry points, not a best-dataset ranking. Check original
 Browse in [English](CATALOG.md) or [中文](README.zh-CN.md), or reuse the [JSON index](data/datasets.json).
 
 
+## Search and reuse locally
+
+Python **3.9+**, standard library only. No package installation, credentials, or media download required.
+
+```bash
+git clone https://github.com/hqa-shu/sport-vlm-datasets.git
+cd sport-vlm-datasets
+python3 catalog.py --sport tennis
+python3 catalog.py --query ExAct --format json
+python3 catalog.py --review needs_review --format csv > review_queue.csv
+python3 catalog.py --validate
+```
+
+[CLI usage and output →](USAGE.md) · [Catalog structure](data/datasets.json) · [Contribution checklist](CONTRIBUTING.md)
+
 <a id="scope-and-evidence"></a>
 
 <details>
