@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "Please cite this index and the original datasets used in your research."
+title: "Sport-VLM-Datasets: A Curated Index of Sports Vision-Language Datasets and Benchmarks"
+type: dataset
+authors:
+  - family-names: "Huang"
+    given-names: "Qian'an"
+repository-code: "https://github.com/hqa-shu/sport-vlm-datasets"
+url: "https://github.com/hqa-shu/sport-vlm-datasets"
+license: MIT
+abstract: "A research-resource index covering sports vision-language datasets and benchmarks, with source links, preparation notes, and explicit review limits. Linked datasets retain their own licenses."
+keywords:
+  - sports
+  - vision-language
+  - datasets
+  - video-question-answering
+  - multimodal
+
