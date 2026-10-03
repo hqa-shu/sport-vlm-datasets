@@ -109,7 +109,9 @@ class CatalogTests(unittest.TestCase):
         audit = json.loads(result.stdout)
         self.assertEqual(sum(audit['source_review_counts'].values()), audit['total_entries'])
         self.assertEqual(audit['download_tested_count'], 0)
-        self.assertIn('Fitness-AQA', audit['without_primary_source'])
+        self.assertIn('SpaceJam', audit['without_primary_source'])
+        self.assertEqual(audit['field_evidence_count'], 27)
+        self.assertEqual(len(audit['without_field_evidence']), 6)
 
     def test_required_nullable_fields_cannot_be_omitted(self):
         for field in ('tier_from_original_curation', 'source_review_date'):
@@ -120,7 +122,7 @@ class CatalogTests(unittest.TestCase):
     def test_bilingual_catalogs_cover_every_json_record(self):
         english = (ROOT / 'CATALOG.md').read_text(encoding='utf-8')
         chinese = (ROOT / 'README.zh-CN.md').read_text(encoding='utf-8')
-        english_rows = [line for line in english.splitlines() if line.startswith('| ')][1:]
+        english_rows = [line for line in english.splitlines() if re.match(r'\| \d+ \|', line)]
         self.assertEqual(len(english_rows), self.data['total_entries'])
         for entry in self.data['datasets']:
             display_name = 'ShuttleSet family' if entry['name'] == 'ShuttleSet系列' else entry['name']
@@ -140,6 +142,78 @@ class CatalogTests(unittest.TestCase):
         for args in (('--validate', '--audit'), ('--audit', '--sport', 'tennis')):
             result = self.run_cli(*args)
             self.assertEqual(result.returncode, 2)
+
+class EvidenceAndGenerationTests(unittest.TestCase):
+    def setUp(self):
+        self.data = json.loads((ROOT / 'data/datasets.json').read_text(encoding='utf-8'))
+
+    def test_new_filters_combine_and_unknowns_are_not_matches(self):
+        results = catalog.select_entries(self.data['datasets'], task='video_qa', resource_type='dataset', language='paired_text', access='public')
+        self.assertEqual([e['name'] for e in results], ['SoccerChat'])
+        self.assertEqual(catalog.select_entries(self.data['datasets'], task='video_qa', language='labels_only'), [])
+
+    def test_asserted_fields_require_evidence(self):
+        for field, value in [('resource_type','dataset'),('tasks',['video_qa']),('modalities',['video']),('language_status','paired_text'),('access_status','public'),('official_splits','train/test')]:
+            with self.subTest(field=field):
+                bad = copy.deepcopy(self.data)
+                bad['datasets'][21][field] = value
+                self.assertIn('asserted '+field+' needs', '\n'.join(catalog.validate_catalog(bad)))
+
+    def test_license_cannot_be_asserted_without_evidence(self):
+        bad = copy.deepcopy(self.data)
+        bad['datasets'][21]['license']={'status':'documented','name':'MIT','note':'Unsupported inference from code license.'}
+        self.assertIn('asserted license needs', '\n'.join(catalog.validate_catalog(bad)))
+
+    def test_evidence_bad_source_date_and_fields_rejected(self):
+        for field,value in [('url','https://unlisted.example/source'),('checked_on','2099-01-01'),('fields',['invented_field']),('method','download_assumed')]:
+            with self.subTest(field=field):
+                bad=copy.deepcopy(self.data);bad['datasets'][0]['evidence'][0][field]=value
+                self.assertTrue(catalog.validate_catalog(bad))
+
+    def test_malformed_new_fields_do_not_crash(self):
+        for field,value in [('tasks',[{}]),('modalities',None),('resource_type',[]),('license',None),('evidence',[None]),('official_splits',[]),('tier_from_original_curation',[]),('paper_or_source_urls',None)]:
+            with self.subTest(field=field):
+                bad=copy.deepcopy(self.data);bad['datasets'][0][field]=value
+                self.assertTrue(catalog.validate_catalog(bad))
+
+    def test_candidate_classification_stays_consistent(self):
+        bad=copy.deepcopy(self.data);bad['datasets'][-1]['resource_type']='unknown'
+        self.assertIn('candidate type must match', '\n'.join(catalog.validate_catalog(bad)))
+
+    def test_urls_cannot_contain_credentials_or_spaces(self):
+        for url in ('https://user:secret@example.com/data','https://example.com/a b'):
+            self.assertFalse(catalog.valid_url(url))
+
+    def test_csv_preserves_evidence_and_license_objects(self):
+        stream=io.StringIO(); entry=self.data['datasets'][24]
+        catalog.write_entries([entry],'csv',stream)
+        row=list(csv.DictReader(io.StringIO(stream.getvalue())))[0]
+        self.assertEqual(json.loads(row['license']),entry['license'])
+        self.assertEqual(json.loads(row['evidence']),entry['evidence'])
+
+    def test_generated_views_are_current(self):
+        result=subprocess.run([sys.executable,str(ROOT/'generate_catalogs.py'),'--check'],capture_output=True,text=True)
+        self.assertEqual(result.returncode,0,result.stderr)
+
+    def test_generator_detects_stale_output_in_isolated_checkout(self):
+        import shutil
+        with tempfile.TemporaryDirectory() as folder:
+            checkout=Path(folder)/'repo';shutil.copytree(ROOT,checkout,ignore=shutil.ignore_patterns('__pycache__'))
+            (checkout/'CATALOG.md').write_text('stale')
+            result=subprocess.run([sys.executable,str(checkout/'generate_catalogs.py'),'--check'],capture_output=True,text=True)
+        self.assertEqual(result.returncode,1)
+        self.assertIn('CATALOG.md',result.stderr)
+
+    def test_html_payload_escapes_closing_script_sequences(self):
+        spec=importlib.util.spec_from_file_location('generator',ROOT/'generate_catalogs.py')
+        generator=importlib.util.module_from_spec(spec);sys.path.insert(0,str(ROOT))
+        try:spec.loader.exec_module(generator)
+        finally:sys.path.pop(0)
+        modified=copy.deepcopy(self.data);modified['datasets'][0]['name']='</script><script>alert(1)</script>'
+        output=generator.outputs(modified)['index.html']
+        payload=re.search(r'<script id="catalog-data" type="application/json">(.*?)</script>',output,re.S).group(1)
+        self.assertNotIn('</script>',payload)
+        self.assertEqual(json.loads(payload)['datasets'][0]['name'],modified['datasets'][0]['name'])
 
 
 if __name__ == '__main__':
