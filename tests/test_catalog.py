@@ -152,6 +152,9 @@ class EvidenceAndGenerationTests(unittest.TestCase):
         self.assertEqual([e['name'] for e in results], ['SoccerChat'])
         self.assertEqual(catalog.select_entries(self.data['datasets'], task='video_qa', language='labels_only'), [])
 
+    def test_chinese_query_searches_localized_preparation_notes(self):
+        self.assertEqual([e['name'] for e in catalog.select_entries(self.data['datasets'], query='后续适配')], ['Fitness-AQA'])
+
     def test_asserted_fields_require_evidence(self):
         for field, value in [('resource_type','dataset'),('tasks',['video_qa']),('modalities',['video']),('language_status','paired_text'),('access_status','public'),('official_splits','train/test')]:
             with self.subTest(field=field):
@@ -171,7 +174,7 @@ class EvidenceAndGenerationTests(unittest.TestCase):
                 self.assertTrue(catalog.validate_catalog(bad))
 
     def test_malformed_new_fields_do_not_crash(self):
-        for field,value in [('tasks',[{}]),('modalities',None),('resource_type',[]),('license',None),('evidence',[None]),('official_splits',[]),('tier_from_original_curation',[]),('paper_or_source_urls',None)]:
+        for field,value in [('tasks',[{}]),('modalities',None),('resource_type',[]),('license',None),('evidence',[None]),('official_splits',[]),('tier_from_original_curation',[]),('paper_or_source_urls',None),('notes_zh',[])]:
             with self.subTest(field=field):
                 bad=copy.deepcopy(self.data);bad['datasets'][0][field]=value
                 self.assertTrue(catalog.validate_catalog(bad))
