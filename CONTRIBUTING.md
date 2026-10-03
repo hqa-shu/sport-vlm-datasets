@@ -19,13 +19,26 @@ Do not attach restricted media, credentials, or private access URLs.
 
 Use the correction form. Identify the row, explain the incorrect claim, provide the primary source, and state what you actually checked. A page loading is different from downloading the dataset or running training.
 
-For a pull request, update both `README.md` and `data/datasets.json`. Preserve the same spelling and resource count, and add a short dated changelog entry. Candidates already in the main catalog must not be counted again.
+## Submit a pull request
+
+1. Update `data/datasets.json` and both `CATALOG.md` (English) and `README.zh-CN.md` (Chinese). Keep resource names and counts consistent; use `README.md` for concise landing-page updates.
+2. Preserve the main/candidate distinction and preparation tiers. Record a source URL, verification date, and scope for changed claims. Do not count aliases or main entries again as candidates.
+3. Run the offline checks from the repository root:
+
+```bash
+python3 catalog.py --validate
+python3 -m unittest discover -s tests -v
+```
+
+4. Include those results and the evidence in your PR. For access changes, state whether you only read the page, obtained approval, downloaded annotations/media, or tested a format.
+
+For a smaller contribution, open a [dataset suggestion](https://github.com/hqa-shu/sport-vlm-datasets/issues/new?template=dataset.yml) or [correction](https://github.com/hqa-shu/sport-vlm-datasets/issues/new?template=correction.yml). You do not need to clone the repository.
 
 ## JSON schema
 
 `data/datasets.json` is an export of the catalog, not a dataset loader.
 
-- `id`, `name`, `sport`: catalog identifier, display name, and scope.
+- `id`, `name`, `sport`, optional `sport_en`: catalog identifier, display name, and scope.
 - `tier_from_original_curation`: inherited S/A/B/C grouping, or null for additional candidates.
 - `scale_note`: a source-backed scale or an explicit uncertainty note.
 - `paper_or_source_urls`, `access_urls`: original source and access entry points.
@@ -36,24 +49,15 @@ For a pull request, update both `README.md` and `data/datasets.json`. Preserve t
 
 A partial source check does not verify every field. Record evidence for changed claims in the pull request, and use null/unknown rather than inventing values.
 
-## Local consistency check
-
-Run this from the repository root:
+## Review queue
 
 ```bash
-python3 - <<'PY'
-import json
-from pathlib import Path
-
-catalog = json.loads(Path("data/datasets.json").read_text())
-entries = catalog["datasets"]
-assert len(entries) == catalog["total_entries"]
-assert catalog["main_entries"] + catalog["additional_candidates"] == len(entries)
-assert len({entry["name"] for entry in entries}) == len(entries)
-assert [entry["id"] for entry in entries] == list(range(1, len(entries) + 1))
-print("Catalog counts, names, and IDs are consistent.")
-PY
+python3 catalog.py --audit
+python3 catalog.py --review needs_review --format csv > review_queue.csv
 ```
 
-This checks index structure. It does not validate source claims or network accessibility.
+A `needs_review` record can be useful without pretending it is verified. Confirm fields against original authors’ resources and retain unknown values when evidence is missing. The checks validate catalog structure; they do not validate licenses, live network access, or training suitability.
 
+## 中文贡献说明
+
+小修正可直接提交 Issue，写明条目、原文问题、原始来源以及核查日期。提交 PR 时请同步 JSON、英文目录与中文详表，并运行上面的结构检查和测试。仅浏览网页、实际下载和训练验证是不同证据，请分别说明。
