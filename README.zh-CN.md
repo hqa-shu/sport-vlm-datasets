@@ -45,14 +45,14 @@ S/A/B/C 是原整理的准备成本分组，并非质量排名。请核查原作
 | # | **名称** | **运动类型** | **规模** | **论文** | **获取方式** |
 |:---:|----------|--------------|----------|:--------:|--------------|
 | 13 | **FineBadminton** | 🏸 羽毛球 | 3.2K回合 · 120场 | [arXiv](https://arxiv.org/abs/2508.07554) | [项目页](https://finebadminton.github.io/FineBadminton/) · 需联系作者 |
-| 14 | **BFMD** | 🏸 羽毛球 | 1.7K回合 · 16K击球 | 待核实（移除错配论文） | [GitHub](https://github.com/Ning-D/BFMD) |
+| 14 | **BFMD** | 🏸 羽毛球 | 论文：1,687 回合 / 16,751 击球；发布包：1,058 / 11,301 | [arXiv](https://arxiv.org/abs/2603.25533) | [GitHub](https://github.com/Ning-D/BFMD) · 标注包与视频分开；[项目页](https://ning-d.github.io/BFMD-Dataset/) 限非商业学术使用（2026-10-04 核查） |
 | 15 | **Shot2Tactic-Caption** | 🏸 羽毛球 | 5.5K标注 | [arXiv](https://arxiv.org/abs/2510.14617) | ⚠️ [arXiv](https://arxiv.org/abs/2510.14617) · ACM MMSports 2025 · 需联系作者 |
 | 16 | **MotionMillion** | 💪🥋 健身 | 1M+样本 · 2000小时 | 待核实（移除错配论文） | [HF](https://huggingface.co/datasets/InternRobotics/MotionMillion) · 需同意条款 |
-| 17 | **TaiChi-AQA** | 🥋 太极 | 1.3K视频 | 待核实（移除错配论文） | [GitHub](https://github.com/mlxger/TaiChi-AQA) · 需填申请表 |
+| 17 | **TaiChi-AQA** | 🥋 太极 | 1,313 视频 · 24 类 | [论文 DOI](https://doi.org/10.1049/cvi2.70053) | [GitHub](https://github.com/mlxger/TaiChi-AQA) · 需填写申请表并提交作者（2026-10-04 核查） |
 | 18 | **FLAG3D** | 💪 健身 | 180K视频 · 60类 | [arXiv](https://arxiv.org/abs/2212.04638) | [项目页](https://andytang15.github.io/FLAG3D/) [GitHub](https://github.com/AndyTang15/FLAG3D) · ⚠️ 按官网提交签署的许可协议申请（2026-10-03 核查） |
 | 19 | **EgoExo-Fitness** | 💪 健身 | 1.3K视频 · 32小时 | [ECCV 2024](https://arxiv.org/abs/2406.08877) | [GitHub](https://github.com/iSEE-Laboratory/EgoExo-Fitness) [HF](https://huggingface.co/datasets/Lymann/EgoExo-Fitness) |
 | 20 | **RepCount** | 💪 健身 | 1.4K视频 · 20K标注 | [arXiv](https://arxiv.org/abs/2204.01018) | [官网](https://svip-lab.github.io/dataset/RepCount_dataset.html) [OneDrive](https://shanghaitecheducn-my.sharepoint.com/:f:/g/personal/dongsx_shanghaitech_edu_cn/EqveZdlGsPxPrfBLQcO_IrgBs6bz7KX1zGGSz_GtLDIfAg) [GitHub](https://github.com/SvipRepetitionCounting/TransRAC) |
-| 21 | **Fit3D / AIFit** | 💪 健身 | 611序列 · 2.96M帧3D | 待核实（移除错配论文） | [官网](https://fit3d.imar.ro/) [训练集](https://fit3d.imar.ro/data/fit3d_train.tar.gz) [测试集](https://fit3d.imar.ro/data/fit3d_test.tar.gz) |
+| 21 | **Fit3D / AIFit** | 💪 健身 | 611 多视角序列 · 2,964,236 3D 骨架 | [AIFit paper](https://fit3d.imar.ro/sites/default/files/public/pdf/Fieraru_2021_CVPR.pdf) | [官网](https://fit3d.imar.ro/home) · [下载页](https://fit3d.imar.ro/download) 要求有效账户登录（2026-10-04 核查） |
 | 22 | **SpaceJam** | 🏀 篮球 | 32.5K标注 | 待核实（移除错配论文） | ⚠️ [GitCode](https://gitcode.com/gh_mirrors/sp/SpaceJam) · 可用性存疑 |
 | 23 | **SVHighlights** | 🌐 多运动(8种) | 320视频 · 640h · 2.0h avg | [arXiv](https://arxiv.org/abs/2606.06926) | [HF](https://huggingface.co/datasets/ming9710/SVHighlights) · KDD 2026 · 需转 VLM 格式 |
 
@@ -117,8 +117,8 @@ SportR 与 BioCoach 已在主表计数，不在此重复计算。SportR 已提�
 - **Fit3D/AIFit** — 3M+帧3D标注，[官网](https://fit3d.imar.ro/)
 
 ### 3D姿态+语言
-- **Fit3D** — 官网18GB直接下载
-- **FLAG3D** — 部分下载，[项目页](https://andytang15.github.io/FLAG3D/#data)，Raw Data需邮件
+- **Fit3D** — 官网下载页列出 18GB 训练包，要求有效账户登录；未测试下载
+- **FLAG3D** — 需按官网提交签署的许可协议申请，详见，[项目页](https://andytang15.github.io/FLAG3D/#data)；未测试下载
 
 <div align="right">
   <b><a href="#体育多模态数据集目录">↥ back to top</a></b>
@@ -133,6 +133,8 @@ SportR 与 BioCoach 已在主表计数，不在此重复计算。SportR 已提�
 | 🏓 乒乓球instruction | 本索引尚未确认直接可用的指令数据；合成 QA 需人工验证与来源记录 |
 
 ## 📝 更新记录
+
+- **2026-10-04**：修复 BFMD、TaiChi-AQA、Fit3D / AIFit 的原始来源；区分 BFMD 论文与发布包规模，更新 Fit3D 登录要求。增加完整英文目录。
 
 - **2026-10-03**：补充英文入口与 JSON 索引；按实际条目重算为 31 条主表 + 2 条额外候选；修正编号、TennisVL / QEVD / FLAG3D / RepCount 的来源；移除 10 条已错配的论文链接并标注待核实；更新 SportR 与 FLAG3D 访问说明。此轮为部分来源核查，未下载全部数据，也未验证所有训练格式。
 - **历史说明**：以下日志保留原维护记录；当时的数量和“全部验证”表述不作为当前核查结果。

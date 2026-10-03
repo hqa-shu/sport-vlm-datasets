@@ -34,7 +34,7 @@ Browse in [English](CATALOG.md) or [中文](README.zh-CN.md), or reuse the [JSON
 
 Counts describe catalog entries, including benchmarks and candidate resources; they do not imply 33 downloadable training datasets. Aliases grouped in one row count as one resource.
 
-**Review: 2026-10-03, partial.** This revision checked selected original papers and project pages, corrected mismatched references, and updated two access notes. Other sizes and access notes are inherited from the earlier curation and may be outdated. No full dataset download or end-to-end fine-tuning validation was performed. Old availability totals were removed because they could not be reconciled with the rows.
+**Review: 2026-10-04, partial.** This revision checked selected original papers and project pages, corrected mismatched references, and updated selected access notes. Other sizes and access notes are inherited from the earlier curation and may be outdated. No full dataset download or end-to-end fine-tuning validation was performed. Old availability totals were removed because they could not be reconciled with the rows.
 
 The S/A/B/C tiers preserve the original maintainer's preparation-cost grouping; they are not a measured quality ranking. Availability and license restrictions are independent of tier. Paper identity checks do not establish that media are accessible or suitable for training.
 
@@ -50,6 +50,10 @@ The S/A/B/C tiers preserve the original maintainer's preparation-cost grouping; 
 - **[English catalog →](CATALOG.md)** — 33 resources with sports, preparation tiers, and source-review status.
 - **[中文详表 →](README.zh-CN.md)** — 规模、论文、访问说明和原整理的运动方向速查。
 - **[Structured JSON →](data/datasets.json)** — reusable names, source URLs, access notes, and provenance fields.
+
+## Latest update
+
+**2026-10-04:** Added an English catalog; repaired BFMD, TaiChi-AQA, and Fit3D / AIFit source references. BFMD paper and released-package sizes differ; Fit3D requires account login. Details and dated limits are in the [Chinese catalog](README.zh-CN.md) and [JSON](data/datasets.json).
 
 ## Citation
 

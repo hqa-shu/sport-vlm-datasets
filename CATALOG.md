@@ -21,17 +21,17 @@ The preparation tiers preserve the original curation and are not quality scores.
 | [BioCoach](https://arxiv.org/abs/2603.26938) | Fitness | A | Partial check |
 | [Domain Adaptation](https://arxiv.org/abs/2505.13860) | Soccer | A | Partial check |
 | [FineBadminton](https://arxiv.org/abs/2508.07554) | Badminton | B | Partial check |
-| BFMD | Badminton | B | Needs review |
+| [BFMD](https://arxiv.org/abs/2603.25533) | Badminton | B | Partial check |
 | [Shot2Tactic-Caption](https://arxiv.org/abs/2510.14617) | Badminton | B | Partial check |
 | MotionMillion | Fitness / martial arts | B | Needs review |
-| TaiChi-AQA | Tai chi | B | Needs review |
+| [TaiChi-AQA](https://doi.org/10.1049/cvi2.70053) | Tai chi | B | Partial check |
 | [FLAG3D](https://arxiv.org/abs/2212.04638) | Fitness | B | Partial check |
 | [EgoExo-Fitness](https://arxiv.org/abs/2406.08877) | Fitness | B | Partial check |
 | [RepCount](https://arxiv.org/abs/2204.01018) | Fitness | B | Partial check |
-| Fit3D / AIFit | Fitness | B | Needs review |
+| [Fit3D / AIFit](https://fit3d.imar.ro/home) | Fitness | B | Partial check |
 | SpaceJam | Basketball | B | Needs review |
 | [SVHighlights](https://arxiv.org/abs/2606.06926) | 8 sports | B | Partial check |
-| ShuttleSet系列 | Badminton | C | Needs review |
+| ShuttleSet family | Badminton | C | Needs review |
 | OpenTTGames | Table tennis | C | Needs review |
 | Free Exercise DB | Fitness | C | Needs review |
 | P²ANet | Table tennis | C | Needs review |
