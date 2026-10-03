@@ -1,7 +1,7 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "catalog_revision_date": "2026-10-04",
-  "review_scope": "partial primary-source checks; no dataset download or training validation",
+  "review_scope": "Field-level primary-source notes; page reading only, no media download or training validation.",
   "main_entries": 31,
   "additional_candidates": 2,
   "total_entries": 33,
@@ -11,44 +11,123 @@
       "name": "SoccerChat",
       "tier_from_original_curation": "S",
       "sport": "⚽ 足球",
-      "scale_note": "90K QA · 85K训练",
+      "scale_note": "Official README: 85,220 training and 4,625 validation QA pairs.",
       "paper_or_source_urls": [
-        "https://arxiv.org/abs/2505.16630"
+        "https://arxiv.org/abs/2505.16630",
+        "https://github.com/simula/SoccerChat"
       ],
       "access_urls": [
         "https://huggingface.co/datasets/SimulaMet/SoccerChat",
         "https://github.com/simula/SoccerChat"
       ],
-      "access_note": "[HF](https://huggingface.co/datasets/SimulaMet/SoccerChat) [GitHub](https://github.com/simula/SoccerChat)",
+      "access_note": "Public repository and Hugging Face entry points; media download has not been tested.",
       "source_review": "partial_primary_source_check",
-      "source_review_date": "2026-10-03",
+      "source_review_date": "2026-10-04",
       "download_tested": false,
-      "sport_en": "Soccer"
+      "sport_en": "Soccer",
+      "legacy_scale_note": "90K QA · 85K训练",
+      "legacy_access_note": "[HF](https://huggingface.co/datasets/SimulaMet/SoccerChat) [GitHub](https://github.com/simula/SoccerChat)",
+      "resource_type": "dataset",
+      "tasks": [
+        "video_qa"
+      ],
+      "modalities": [
+        "video",
+        "text"
+      ],
+      "access_status": "public",
+      "language_status": "paired_text",
+      "license": {
+        "status": "unknown",
+        "name": null,
+        "note": "Dataset/media terms have not been checked for this record."
+      },
+      "official_splits": "Official train and validation annotation files; preserve source-video grouping.",
+      "preparation_note": "Map query/response to conversations, resolve video paths and retain the official validation set.",
+      "evidence": [
+        {
+          "url": "https://github.com/simula/SoccerChat",
+          "checked_on": "2026-10-04",
+          "method": "page_read",
+          "fields": [
+            "resource_type",
+            "tasks",
+            "modalities",
+            "language_status",
+            "access_status",
+            "official_splits",
+            "scale_note",
+            "access_note",
+            "preparation_note"
+          ],
+          "summary": "Official README documents video/query/response fields and separate training and validation files."
+        }
+      ]
     },
     {
       "id": 2,
       "name": "VideoNet",
       "tier_from_original_curation": "S",
       "sport": "🌐 37域",
-      "scale_note": "160K clips · 500K QA",
+      "scale_note": "Historical scale below has not been rechecked in this revision.",
       "paper_or_source_urls": [
-        "https://arxiv.org/abs/2605.02834"
+        "https://arxiv.org/abs/2605.02834",
+        "https://huggingface.co/datasets/raivn/VideoNet"
       ],
       "access_urls": [
         "https://huggingface.co/datasets/raivn/VideoNet"
       ],
-      "access_note": "[HF](https://huggingface.co/datasets/raivn/VideoNet)",
+      "access_note": "Hugging Face requires agreement to terms before accessing files.",
       "source_review": "partial_primary_source_check",
-      "source_review_date": "2026-10-03",
+      "source_review_date": "2026-10-04",
       "download_tested": false,
-      "sport_en": "37 domains"
+      "sport_en": "37 domains",
+      "legacy_scale_note": "160K clips · 500K QA",
+      "legacy_access_note": "[HF](https://huggingface.co/datasets/raivn/VideoNet)",
+      "resource_type": "dataset_and_benchmark",
+      "tasks": [
+        "action_recognition",
+        "video_qa"
+      ],
+      "modalities": [
+        "video",
+        "text"
+      ],
+      "access_status": "gated",
+      "language_status": "paired_text",
+      "license": {
+        "status": "restricted",
+        "name": null,
+        "note": "Benchmark clips: research/educational use. Training data has separate source-video and model-provider terms; no blanket commercial permission."
+      },
+      "official_splits": "benchmarks/ is evaluation material; training-data/ has domain Parquets and withheld val.parquet files.",
+      "preparation_note": "Select training-data/ for training experiments; keep benchmarks/ held out and group related clips by source-video ID.",
+      "evidence": [
+        {
+          "url": "https://huggingface.co/datasets/raivn/VideoNet",
+          "checked_on": "2026-10-04",
+          "method": "page_read",
+          "fields": [
+            "resource_type",
+            "tasks",
+            "modalities",
+            "language_status",
+            "access_status",
+            "official_splits",
+            "access_note",
+            "license",
+            "preparation_note"
+          ],
+          "summary": "The dataset card separates benchmark JSONL/MP4 files from domain-level training Parquets and validation files."
+        }
+      ]
     },
     {
       "id": 3,
       "name": "TennisVL",
       "tier_from_original_curation": "S",
       "sport": "🎾 网球",
-      "scale_note": "202场 · 471小时",
+      "scale_note": "Paper: 200+ professional matches, 471.9 hours and 40,000+ rally clips.",
       "paper_or_source_urls": [
         "https://arxiv.org/abs/2603.13397"
       ],
@@ -56,72 +135,222 @@
         "https://github.com/LZYAndy/TennisExpert",
         "https://drive.google.com/drive/folders/1GkLHT6tyFb874HcEEmIu0S47wYzzbhkN"
       ],
-      "access_note": "[GitHub](https://github.com/LZYAndy/TennisExpert) [GD](https://drive.google.com/drive/folders/1GkLHT6tyFb874HcEEmIu0S47wYzzbhkN)",
+      "access_note": "Access URLs are entry points; current file access has not been verified.",
       "source_review": "partial_primary_source_check",
-      "source_review_date": "2026-10-03",
+      "source_review_date": "2026-10-04",
       "download_tested": false,
-      "sport_en": "Tennis"
+      "sport_en": "Tennis",
+      "legacy_scale_note": "202场 · 471小时",
+      "legacy_access_note": "[GitHub](https://github.com/LZYAndy/TennisExpert) [GD](https://drive.google.com/drive/folders/1GkLHT6tyFb874HcEEmIu0S47wYzzbhkN)",
+      "resource_type": "benchmark",
+      "tasks": [
+        "video_captioning",
+        "tactical_analysis"
+      ],
+      "modalities": [
+        "video",
+        "text"
+      ],
+      "access_status": "unknown",
+      "language_status": "paired_text",
+      "license": {
+        "status": "unknown",
+        "name": null,
+        "note": "Dataset/media terms have not been checked for this record."
+      },
+      "official_splits": "Unknown; inspect the original source.",
+      "preparation_note": "Distinguish TennisVL data from the TennisExpert model; inspect commentary format and split protocol before conversion.",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2603.13397",
+          "checked_on": "2026-10-04",
+          "method": "page_read",
+          "fields": [
+            "resource_type",
+            "tasks",
+            "modalities",
+            "language_status",
+            "scale_note",
+            "preparation_note"
+          ],
+          "summary": "TennisExpert paper introduces TennisVL with rally-level analytical commentary and tactical context."
+        }
+      ]
     },
     {
       "id": 4,
       "name": "Fitness-AQA",
       "tier_from_original_curation": "S",
       "sport": "💪 健身",
-      "scale_note": "小规模",
-      "paper_or_source_urls": [],
+      "scale_note": "Original project covers BackSquat, OverheadPress and BarbellRow; sample counts not rechecked.",
+      "paper_or_source_urls": [
+        "https://github.com/ParitoshParmar/Fitness-AQA"
+      ],
       "access_urls": [
         "https://forms.gle/PbPTX1eVxGpa3QG88",
+        "https://github.com/ParitoshParmar/Fitness-AQA",
         "https://github.com/GaetanoDibenedetto/UMAP25"
       ],
-      "access_note": "⚠️ [申请表](https://forms.gle/PbPTX1eVxGpa3QG88) [GitHub](https://github.com/GaetanoDibenedetto/UMAP25)",
-      "source_review": "needs_review",
-      "source_review_date": null,
+      "access_note": "Apply using the original authors’ form; no request was submitted.",
+      "source_review": "partial_primary_source_check",
+      "source_review_date": "2026-10-04",
       "download_tested": false,
-      "sport_en": "Fitness"
+      "sport_en": "Fitness",
+      "legacy_scale_note": "小规模",
+      "legacy_access_note": "⚠️ [申请表](https://forms.gle/PbPTX1eVxGpa3QG88) [GitHub](https://github.com/GaetanoDibenedetto/UMAP25)",
+      "resource_type": "dataset",
+      "tasks": [
+        "action_quality_assessment"
+      ],
+      "modalities": [
+        "video"
+      ],
+      "access_status": "request",
+      "language_status": "labels_only",
+      "license": {
+        "status": "restricted",
+        "name": null,
+        "note": "Non-commercial use; authors provide a separate dataset usage agreement."
+      },
+      "official_splits": "Unknown; inspect the original source.",
+      "preparation_note": "Original workout-form labels are not conversational supervision. The UMAP25 work is a downstream adaptation, not the original dataset release.",
+      "evidence": [
+        {
+          "url": "https://github.com/ParitoshParmar/Fitness-AQA",
+          "checked_on": "2026-10-04",
+          "method": "page_read",
+          "fields": [
+            "resource_type",
+            "tasks",
+            "modalities",
+            "language_status",
+            "access_status",
+            "scale_note",
+            "access_note",
+            "license",
+            "preparation_note"
+          ],
+          "summary": "Original ECCV 2022 project covers three exercises and requests access via a form for non-commercial use."
+        }
+      ]
     },
     {
       "id": 5,
       "name": "SportR",
       "tier_from_original_curation": "S",
       "sport": "🌐 多运动",
-      "scale_note": "20K+ QA · 6.8K CoT",
+      "scale_note": "Historical scale below has not been rechecked in this revision.",
       "paper_or_source_urls": [
-        "https://arxiv.org/abs/2511.06499"
+        "https://arxiv.org/abs/2511.06499",
+        "https://huggingface.co/datasets/haotianxia/SportR"
       ],
       "access_urls": [
         "https://github.com/chili-lab/SportR/tree/main/annotations",
         "https://huggingface.co/datasets/haotianxia/SportR"
       ],
-      "access_note": "[GitHub annotations](https://github.com/chili-lab/SportR/tree/main/annotations) · [HF media](https://huggingface.co/datasets/haotianxia/SportR) · ⚠️ 媒体需申请，仅限非商业研究（2026-10-03 核查）",
+      "access_note": "Annotation repository and gated Hugging Face media have separate entry points.",
       "source_review": "partial_primary_source_check",
-      "source_review_date": "2026-10-03",
+      "source_review_date": "2026-10-04",
       "download_tested": false,
-      "sport_en": "Multiple sports"
+      "sport_en": "Multiple sports",
+      "legacy_scale_note": "20K+ QA · 6.8K CoT",
+      "legacy_access_note": "[GitHub annotations](https://github.com/chili-lab/SportR/tree/main/annotations) · [HF media](https://huggingface.co/datasets/haotianxia/SportR) · ⚠️ 媒体需申请，仅限非商业研究（2026-10-03 核查）",
+      "resource_type": "benchmark",
+      "tasks": [
+        "video_qa",
+        "tactical_analysis"
+      ],
+      "modalities": [
+        "image",
+        "video",
+        "text"
+      ],
+      "access_status": "mixed",
+      "language_status": "paired_text",
+      "license": {
+        "status": "documented",
+        "name": "CC-BY-NC-4.0",
+        "note": "Dataset/media card states non-commercial terms; inspect all components before reuse."
+      },
+      "official_splits": "Unknown; inspect the original source.",
+      "preparation_note": "Inspect the original annotation schema and media terms before selecting a training pipeline.",
+      "evidence": [
+        {
+          "url": "https://huggingface.co/datasets/haotianxia/SportR",
+          "checked_on": "2026-10-04",
+          "method": "page_read",
+          "fields": [
+            "access_status",
+            "access_note",
+            "license",
+            "resource_type",
+            "tasks",
+            "modalities",
+            "language_status"
+          ],
+          "summary": "Official card describes a multi-sport reasoning benchmark with image/video QA and rationales; media access is gated with non-commercial terms."
+        }
+      ]
     },
     {
       "id": 6,
       "name": "SoccerNet-XFoul",
       "tier_from_original_curation": "A",
       "sport": "⚽ 足球",
-      "scale_note": "22K+ video-QA",
+      "scale_note": "Paper reports 22,000+ video-QA triplets annotated by 70+ referees.",
       "paper_or_source_urls": [
         "https://arxiv.org/abs/2404.06332"
       ],
       "access_urls": [
         "https://www.soccer-net.org/"
       ],
-      "access_note": "[官网](https://www.soccer-net.org/)",
+      "access_note": "Access URLs are entry points; current file access has not been verified.",
       "source_review": "partial_primary_source_check",
-      "source_review_date": "2026-10-03",
+      "source_review_date": "2026-10-04",
       "download_tested": false,
-      "sport_en": "Soccer"
+      "sport_en": "Soccer",
+      "legacy_scale_note": "22K+ video-QA",
+      "legacy_access_note": "[官网](https://www.soccer-net.org/)",
+      "resource_type": "dataset",
+      "tasks": [
+        "video_qa",
+        "action_understanding"
+      ],
+      "modalities": [
+        "video",
+        "text"
+      ],
+      "access_status": "unknown",
+      "language_status": "paired_text",
+      "license": {
+        "status": "unknown",
+        "name": null,
+        "note": "Dataset/media terms have not been checked for this record."
+      },
+      "official_splits": "Unknown; inspect the original source.",
+      "preparation_note": "Inspect the original annotation schema and media terms before selecting a training pipeline.",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2404.06332",
+          "checked_on": "2026-10-04",
+          "method": "page_read",
+          "fields": [
+            "resource_type",
+            "tasks",
+            "modalities",
+            "language_status",
+            "scale_note"
+          ],
+          "summary": "Original X-VARS paper identifies SoccerNet-XFoul as referee-annotated video/question/answer triplets."
+        }
+      ]
     },
     {
       "id": 7,
       "name": "QEVD",
       "tier_from_original_curation": "A",
       "sport": "💪 健身",
-      "scale_note": "1M+ QA · 474小时",
+      "scale_note": "Official page: 474+ hours, 1M+ QA pairs and 650k+ feedback annotations across different subsets.",
       "paper_or_source_urls": [
         "https://www.qualcomm.com/developer/software/qevd-dataset"
       ],
@@ -129,37 +358,111 @@
         "https://www.qualcomm.com/developer/software/qevd-dataset/downloads",
         "https://huggingface.co/datasets/Voxel51/qualcomm-exercise-video-dataset-benchmark"
       ],
-      "access_note": "[Qualcomm官网](https://www.qualcomm.com/developer/software/qevd-dataset/downloads) [HF Benchmark](https://huggingface.co/datasets/Voxel51/qualcomm-exercise-video-dataset-benchmark)",
+      "access_note": "Access URLs are entry points; current file access has not been verified.",
       "source_review": "partial_primary_source_check",
-      "source_review_date": "2026-10-03",
+      "source_review_date": "2026-10-04",
       "download_tested": false,
-      "sport_en": "Fitness"
+      "sport_en": "Fitness",
+      "legacy_scale_note": "1M+ QA · 474小时",
+      "legacy_access_note": "[Qualcomm官网](https://www.qualcomm.com/developer/software/qevd-dataset/downloads) [HF Benchmark](https://huggingface.co/datasets/Voxel51/qualcomm-exercise-video-dataset-benchmark)",
+      "resource_type": "dataset",
+      "tasks": [
+        "video_qa",
+        "instructional_feedback"
+      ],
+      "modalities": [
+        "video",
+        "text"
+      ],
+      "access_status": "unknown",
+      "language_status": "paired_text",
+      "license": {
+        "status": "restricted",
+        "name": null,
+        "note": "Official page links a Research Use data agreement. Inspect the agreement and each subset; code licensing does not establish media rights."
+      },
+      "official_splits": "Unknown; inspect the original source.",
+      "preparation_note": "Choose the relevant QEVD subset and annotation schema; preserve participant and workout groupings.",
+      "evidence": [
+        {
+          "url": "https://www.qualcomm.com/developer/software/qevd-dataset",
+          "checked_on": "2026-10-04",
+          "method": "page_read",
+          "fields": [
+            "resource_type",
+            "tasks",
+            "modalities",
+            "language_status",
+            "scale_note",
+            "license",
+            "preparation_note"
+          ],
+          "summary": "Official QEVD page distinguishes fitness-understanding and live-coaching subsets with QA and feedback annotations."
+        }
+      ]
     },
     {
       "id": 8,
       "name": "ExAct",
       "tier_from_original_curation": "A",
       "sport": "🌐 多领域（含体育）",
-      "scale_note": "3,521 视频 / QA（主要为 MCQ 评估）",
+      "scale_note": "Official project describes 3,521 video multiple-choice samples across six domains.",
       "paper_or_source_urls": [
-        "https://arxiv.org/abs/2506.06277"
+        "https://arxiv.org/abs/2506.06277",
+        "https://github.com/Texaser/Exact"
       ],
       "access_urls": [
         "https://huggingface.co/datasets/Alexhimself/ExAct",
         "https://github.com/Texaser/Exact"
       ],
-      "access_note": "[HF](https://huggingface.co/datasets/Alexhimself/ExAct) [GitHub](https://github.com/Texaser/Exact)",
+      "access_note": "Access URLs are entry points; current file access has not been verified.",
       "source_review": "partial_primary_source_check",
-      "source_review_date": "2026-10-03",
+      "source_review_date": "2026-10-04",
       "download_tested": false,
-      "sport_en": "Multiple domains, including sports"
+      "sport_en": "Multiple domains, including sports",
+      "legacy_scale_note": "3,521 视频 / QA（主要为 MCQ 评估）",
+      "legacy_access_note": "[HF](https://huggingface.co/datasets/Alexhimself/ExAct) [GitHub](https://github.com/Texaser/Exact)",
+      "resource_type": "benchmark",
+      "tasks": [
+        "video_qa",
+        "action_understanding"
+      ],
+      "modalities": [
+        "video",
+        "text"
+      ],
+      "access_status": "unknown",
+      "language_status": "paired_text",
+      "license": {
+        "status": "unknown",
+        "name": null,
+        "note": "Dataset/media terms have not been checked for this record."
+      },
+      "official_splits": "Unknown; inspect the original source.",
+      "preparation_note": "Treat benchmark questions as evaluation material. A host split named train does not establish a training protocol.",
+      "evidence": [
+        {
+          "url": "https://github.com/Texaser/Exact",
+          "checked_on": "2026-10-04",
+          "method": "page_read",
+          "fields": [
+            "resource_type",
+            "tasks",
+            "modalities",
+            "language_status",
+            "preparation_note",
+            "scale_note"
+          ],
+          "summary": "Official project describes a video-language multiple-choice benchmark for expert action analysis."
+        }
+      ]
     },
     {
       "id": 9,
       "name": "SPORTU",
       "tier_from_original_curation": "A",
       "sport": "🌐 7种",
-      "scale_note": "1.7K视频 · 12K QA",
+      "scale_note": "Paper: 900 text-only questions; 1,701 video clips and 12,048 video-QA pairs.",
       "paper_or_source_urls": [
         "https://arxiv.org/abs/2410.08474"
       ],
@@ -167,18 +470,54 @@
         "https://github.com/chili-lab/SPORTU",
         "https://drive.google.com/drive/folders/1nvA8gqF32lrhqzhbJ2r39-TwwW5tEvsu"
       ],
-      "access_note": "[GitHub](https://github.com/chili-lab/SPORTU) [GD](https://drive.google.com/drive/folders/1nvA8gqF32lrhqzhbJ2r39-TwwW5tEvsu)",
+      "access_note": "Access URLs are entry points; current file access has not been verified.",
       "source_review": "partial_primary_source_check",
-      "source_review_date": "2026-10-03",
+      "source_review_date": "2026-10-04",
       "download_tested": false,
-      "sport_en": "7 sports"
+      "sport_en": "7 sports",
+      "legacy_scale_note": "1.7K视频 · 12K QA",
+      "legacy_access_note": "[GitHub](https://github.com/chili-lab/SPORTU) [GD](https://drive.google.com/drive/folders/1nvA8gqF32lrhqzhbJ2r39-TwwW5tEvsu)",
+      "resource_type": "benchmark",
+      "tasks": [
+        "video_qa",
+        "tactical_analysis"
+      ],
+      "modalities": [
+        "video",
+        "text"
+      ],
+      "access_status": "unknown",
+      "language_status": "paired_text",
+      "license": {
+        "status": "unknown",
+        "name": null,
+        "note": "Dataset/media terms have not been checked for this record."
+      },
+      "official_splits": "Unknown; inspect the original source.",
+      "preparation_note": "Keep SPORTU-text and SPORTU-video distinct, and treat evaluation answers as held out.",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2410.08474",
+          "checked_on": "2026-10-04",
+          "method": "page_read",
+          "fields": [
+            "resource_type",
+            "tasks",
+            "modalities",
+            "language_status",
+            "scale_note",
+            "preparation_note"
+          ],
+          "summary": "SPORTU paper separates text-only rule/strategy QA from a sports-video reasoning component."
+        }
+      ]
     },
     {
       "id": 10,
       "name": "Sports-QA",
       "tier_from_original_curation": "A",
       "sport": "🌐 8种",
-      "scale_note": "94K QA",
+      "scale_note": "Historical scale below has not been rechecked in this revision.",
       "paper_or_source_urls": [
         "https://arxiv.org/abs/2401.01505"
       ],
@@ -186,72 +525,210 @@
         "https://github.com/HopLee6/Sports-QA",
         "https://huggingface.co/datasets/HopLeeTop/Sports-QA"
       ],
-      "access_note": "[GitHub](https://github.com/HopLee6/Sports-QA) [HF](https://huggingface.co/datasets/HopLeeTop/Sports-QA)",
+      "access_note": "Access URLs are entry points; current file access has not been verified.",
       "source_review": "partial_primary_source_check",
-      "source_review_date": "2026-10-03",
+      "source_review_date": "2026-10-04",
       "download_tested": false,
-      "sport_en": "8 sports"
+      "sport_en": "8 sports",
+      "legacy_scale_note": "94K QA",
+      "legacy_access_note": "[GitHub](https://github.com/HopLee6/Sports-QA) [HF](https://huggingface.co/datasets/HopLeeTop/Sports-QA)",
+      "resource_type": "dataset_and_benchmark",
+      "tasks": [
+        "video_qa"
+      ],
+      "modalities": [
+        "video",
+        "text"
+      ],
+      "access_status": "unknown",
+      "language_status": "paired_text",
+      "license": {
+        "status": "unknown",
+        "name": null,
+        "note": "Dataset/media terms have not been checked for this record."
+      },
+      "official_splits": "Unknown; inspect the original source.",
+      "preparation_note": "Preserve the original QA task and official evaluation protocol; inspect release-specific splits.",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2401.01505",
+          "checked_on": "2026-10-04",
+          "method": "page_read",
+          "fields": [
+            "resource_type",
+            "tasks",
+            "modalities",
+            "language_status",
+            "preparation_note"
+          ],
+          "summary": "Sports-QA paper introduces video QA with descriptive, chronological, causal and counterfactual questions."
+        }
+      ]
     },
     {
       "id": 11,
       "name": "BioCoach",
       "tier_from_original_curation": "A",
       "sport": "💪 健身",
-      "scale_note": "规模待核实（原记录可能混用 QEVD 划分）",
+      "scale_note": "Historical scale below has not been rechecked in this revision.",
       "paper_or_source_urls": [
         "https://arxiv.org/abs/2603.26938"
       ],
       "access_urls": [
         "https://arxiv.org/abs/2603.26938"
       ],
-      "access_note": "❌ [arXiv](https://arxiv.org/abs/2603.26938) · 需联系作者",
+      "access_note": "Access URLs are entry points; current file access has not been verified.",
       "source_review": "partial_primary_source_check",
-      "source_review_date": "2026-10-03",
+      "source_review_date": "2026-10-04",
       "download_tested": false,
-      "sport_en": "Fitness"
+      "sport_en": "Fitness",
+      "legacy_scale_note": "规模待核实（原记录可能混用 QEVD 划分）",
+      "legacy_access_note": "❌ [arXiv](https://arxiv.org/abs/2603.26938) · 需联系作者",
+      "resource_type": "research_work",
+      "tasks": [
+        "instructional_feedback"
+      ],
+      "modalities": [
+        "video",
+        "pose_3d",
+        "text"
+      ],
+      "access_status": "unknown",
+      "language_status": "paired_text",
+      "license": {
+        "status": "unknown",
+        "name": null,
+        "note": "Dataset/media terms have not been checked for this record."
+      },
+      "official_splits": "Unknown; inspect the original source.",
+      "preparation_note": "The resource name denotes a framework. Locate QEVD-bio-fit-coach annotations and upstream terms before treating it as a standalone release.",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2603.26938",
+          "checked_on": "2026-10-04",
+          "method": "page_read",
+          "fields": [
+            "resource_type",
+            "tasks",
+            "modalities",
+            "language_status",
+            "preparation_note"
+          ],
+          "summary": "BioCoach is a coaching framework; its paper describes a QEVD-derived biomechanics-feedback dataset."
+        }
+      ]
     },
     {
       "id": 12,
       "name": "Domain Adaptation",
       "tier_from_original_curation": "A",
       "sport": "⚽ 足球",
-      "scale_note": "20K instruction",
+      "scale_note": "Paper reports experiments using a curated set of 20,000 video clips.",
       "paper_or_source_urls": [
         "https://arxiv.org/abs/2505.13860"
       ],
       "access_urls": [
         "https://arxiv.org/abs/2505.13860"
       ],
-      "access_note": "⚠️ [arXiv](https://arxiv.org/abs/2505.13860) · CVPR 2025 · 数据未公开发布",
+      "access_note": "Access URLs are entry points; current file access has not been verified.",
       "source_review": "partial_primary_source_check",
-      "source_review_date": "2026-10-03",
+      "source_review_date": "2026-10-04",
       "download_tested": false,
-      "sport_en": "Soccer"
+      "sport_en": "Soccer",
+      "legacy_scale_note": "20K instruction",
+      "legacy_access_note": "⚠️ [arXiv](https://arxiv.org/abs/2505.13860) · CVPR 2025 · 数据未公开发布",
+      "resource_type": "research_work",
+      "tasks": [
+        "video_qa",
+        "action_recognition"
+      ],
+      "modalities": [
+        "video",
+        "text"
+      ],
+      "access_status": "unknown",
+      "language_status": "paired_text",
+      "license": {
+        "status": "unknown",
+        "name": null,
+        "note": "Dataset/media terms have not been checked for this record."
+      },
+      "official_splits": "Unknown; inspect the original source.",
+      "preparation_note": "This row indexes a research study; a paper description does not verify a separately downloadable dataset.",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2505.13860",
+          "checked_on": "2026-10-04",
+          "method": "page_read",
+          "fields": [
+            "resource_type",
+            "tasks",
+            "modalities",
+            "language_status",
+            "scale_note",
+            "preparation_note"
+          ],
+          "summary": "This domain-adaptation study constructs soccer instruction data and studies video QA/action classification."
+        }
+      ]
     },
     {
       "id": 13,
       "name": "FineBadminton",
       "tier_from_original_curation": "B",
       "sport": "🏸 羽毛球",
-      "scale_note": "3.2K回合 · 120场",
+      "scale_note": "Historical scale below has not been rechecked in this revision.",
       "paper_or_source_urls": [
         "https://arxiv.org/abs/2508.07554"
       ],
       "access_urls": [
         "https://finebadminton.github.io/FineBadminton/"
       ],
-      "access_note": "[项目页](https://finebadminton.github.io/FineBadminton/) · 需联系作者",
+      "access_note": "Access URLs are entry points; current file access has not been verified.",
       "source_review": "partial_primary_source_check",
-      "source_review_date": "2026-10-03",
+      "source_review_date": "2026-10-04",
       "download_tested": false,
-      "sport_en": "Badminton"
+      "sport_en": "Badminton",
+      "legacy_scale_note": "3.2K回合 · 120场",
+      "legacy_access_note": "[项目页](https://finebadminton.github.io/FineBadminton/) · 需联系作者",
+      "resource_type": "dataset_and_benchmark",
+      "tasks": [
+        "action_understanding",
+        "tactical_analysis"
+      ],
+      "modalities": [
+        "video"
+      ],
+      "access_status": "unknown",
+      "language_status": "unknown",
+      "license": {
+        "status": "unknown",
+        "name": null,
+        "note": "Dataset/media terms have not been checked for this record."
+      },
+      "official_splits": "Unknown; inspect the original source.",
+      "preparation_note": "Keep FineBadminton training material and FBBench evaluation roles distinct; inspect actual annotation fields rather than assuming QA formatting.",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2508.07554",
+          "checked_on": "2026-10-04",
+          "method": "page_read",
+          "fields": [
+            "resource_type",
+            "tasks",
+            "modalities",
+            "preparation_note"
+          ],
+          "summary": "FineBadminton paper introduces a multi-level annotation dataset and the derived FBBench benchmark."
+        }
+      ]
     },
     {
       "id": 14,
       "name": "BFMD",
       "tier_from_original_curation": "B",
       "sport": "🏸 羽毛球",
-      "scale_note": "论文：19 场、1,687 回合、16,751 击球；仓库发布包：1,058 回合、11,301 击球（规模口径不同）",
+      "scale_note": "Paper: 1,687 rallies / 16,751 hits; released-package README: 1,058 rallies / 11,301 shots across 19 matches. Keep scopes separate.",
       "paper_or_source_urls": [
         "https://arxiv.org/abs/2603.25533",
         "https://github.com/Ning-D/BFMD"
@@ -260,89 +737,281 @@
         "https://github.com/Ning-D/BFMD",
         "https://ning-d.github.io/BFMD-Dataset/"
       ],
-      "access_note": "Official repository links annotations and helper scripts; source videos are not redistributed. The authors report different paper/package counts. Dataset page restricts use to non-commercial academic research; no download tested.",
+      "access_note": "Annotations/index/helper scripts are linked on Drive; source videos are not redistributed. Download not tested.",
       "source_review": "partial_primary_source_check",
       "source_review_date": "2026-10-04",
       "download_tested": false,
-      "sport_en": "Badminton"
+      "sport_en": "Badminton",
+      "legacy_scale_note": "论文：19 场、1,687 回合、16,751 击球；仓库发布包：1,058 回合、11,301 击球（规模口径不同）",
+      "legacy_access_note": "Official repository links annotations and helper scripts; source videos are not redistributed. The authors report different paper/package counts. Dataset page restricts use to non-commercial academic research; no download tested.",
+      "resource_type": "dataset",
+      "tasks": [
+        "video_captioning",
+        "tactical_analysis"
+      ],
+      "modalities": [
+        "video",
+        "text",
+        "spatial_annotations"
+      ],
+      "access_status": "unknown",
+      "language_status": "paired_text",
+      "license": {
+        "status": "unknown",
+        "name": null,
+        "note": "Dataset/media terms have not been checked for this record."
+      },
+      "official_splits": "Unknown; inspect the original source.",
+      "preparation_note": "Resolve original video references, frame indexing and per-field coordinate units; inspect released caption coverage before constructing QA.",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2603.25533",
+          "checked_on": "2026-10-04",
+          "method": "page_read",
+          "fields": [
+            "resource_type",
+            "tasks",
+            "modalities",
+            "language_status",
+            "scale_note"
+          ],
+          "summary": "BFMD paper describes full-match badminton videos with shot captions and hierarchical annotations."
+        },
+        {
+          "url": "https://github.com/Ning-D/BFMD",
+          "checked_on": "2026-10-04",
+          "method": "page_read",
+          "fields": [
+            "access_note",
+            "scale_note",
+            "preparation_note"
+          ],
+          "summary": "Official repository lists the released package separately from paper-wide totals and does not redistribute videos."
+        }
+      ]
     },
     {
       "id": 15,
       "name": "Shot2Tactic-Caption",
       "tier_from_original_curation": "B",
       "sport": "🏸 羽毛球",
-      "scale_note": "5.5K标注",
+      "scale_note": "Paper: 5,494 shot captions and 544 tactic captions; these are annotation counts, not interchangeable video counts.",
       "paper_or_source_urls": [
         "https://arxiv.org/abs/2510.14617"
       ],
       "access_urls": [
         "https://arxiv.org/abs/2510.14617"
       ],
-      "access_note": "⚠️ [arXiv](https://arxiv.org/abs/2510.14617) · ACM MMSports 2025 · 需联系作者",
+      "access_note": "Access URLs are entry points; current file access has not been verified.",
       "source_review": "partial_primary_source_check",
-      "source_review_date": "2026-10-03",
+      "source_review_date": "2026-10-04",
       "download_tested": false,
-      "sport_en": "Badminton"
+      "sport_en": "Badminton",
+      "legacy_scale_note": "5.5K标注",
+      "legacy_access_note": "⚠️ [arXiv](https://arxiv.org/abs/2510.14617) · ACM MMSports 2025 · 需联系作者",
+      "resource_type": "dataset",
+      "tasks": [
+        "video_captioning",
+        "tactical_analysis"
+      ],
+      "modalities": [
+        "video",
+        "text"
+      ],
+      "access_status": "unknown",
+      "language_status": "paired_text",
+      "license": {
+        "status": "unknown",
+        "name": null,
+        "note": "Dataset/media terms have not been checked for this record."
+      },
+      "official_splits": "Unknown; inspect the original source.",
+      "preparation_note": "Inspect the original annotation schema and media terms before selecting a training pipeline.",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2510.14617",
+          "checked_on": "2026-10-04",
+          "method": "page_read",
+          "fields": [
+            "resource_type",
+            "tasks",
+            "modalities",
+            "language_status",
+            "scale_note"
+          ],
+          "summary": "Original paper introduces shot- and tactic-level captioning data for badminton videos."
+        }
+      ]
     },
     {
       "id": 16,
       "name": "MotionMillion",
       "tier_from_original_curation": "B",
       "sport": "💪🥋 健身",
-      "scale_note": "1M+样本 · 2000小时",
-      "paper_or_source_urls": [],
+      "scale_note": "Card reports over 2,000 hours of motion; component datasets and representations differ.",
+      "paper_or_source_urls": [
+        "https://huggingface.co/datasets/InternRobotics/MotionMillion"
+      ],
       "access_urls": [
         "https://huggingface.co/datasets/InternRobotics/MotionMillion"
       ],
-      "access_note": "[HF](https://huggingface.co/datasets/InternRobotics/MotionMillion) · 需同意条款",
-      "source_review": "needs_review",
-      "source_review_date": null,
+      "access_note": "Access requires agreement and sharing contact information. No agreement or application was submitted.",
+      "source_review": "partial_primary_source_check",
+      "source_review_date": "2026-10-04",
       "download_tested": false,
-      "sport_en": "Fitness / martial arts"
+      "sport_en": "Fitness / martial arts",
+      "legacy_scale_note": "1M+样本 · 2000小时",
+      "legacy_access_note": "[HF](https://huggingface.co/datasets/InternRobotics/MotionMillion) · 需同意条款",
+      "resource_type": "dataset",
+      "tasks": [
+        "motion_generation"
+      ],
+      "modalities": [
+        "motion_3d",
+        "text"
+      ],
+      "access_status": "gated",
+      "language_status": "motion_text",
+      "license": {
+        "status": "documented",
+        "name": "CC-BY-NC-SA-4.0",
+        "note": "Card states this license; merged components retain provenance and may have additional restrictions."
+      },
+      "official_splits": "Unknown; inspect the original source.",
+      "preparation_note": "Use the documented motion representation and component provenance; do not assume source RGB videos are supplied.",
+      "evidence": [
+        {
+          "url": "https://huggingface.co/datasets/InternRobotics/MotionMillion",
+          "checked_on": "2026-10-04",
+          "method": "page_read",
+          "fields": [
+            "resource_type",
+            "tasks",
+            "modalities",
+            "language_status",
+            "access_status",
+            "scale_note",
+            "access_note",
+            "license",
+            "preparation_note"
+          ],
+          "summary": "The gated card describes processed human motion representations with text annotations and a community license."
+        }
+      ]
     },
     {
       "id": 17,
       "name": "TaiChi-AQA",
       "tier_from_original_curation": "B",
       "sport": "🥋 太极",
-      "scale_note": "1,313 视频 · 24 类动作（论文）",
+      "scale_note": "Historical scale below has not been rechecked in this revision.",
       "paper_or_source_urls": [
-        "https://doi.org/10.1049/cvi2.70053"
+        "https://doi.org/10.1049/cvi2.70053",
+        "https://github.com/mlxger/TaiChi-AQA"
       ],
       "access_urls": [
         "https://github.com/mlxger/TaiChi-AQA"
       ],
-      "access_note": "Official repository requires the request form to be completed and sent to the author; no application or download tested.",
+      "access_note": "Author request form required; no application or email was submitted.",
       "source_review": "partial_primary_source_check",
       "source_review_date": "2026-10-04",
       "download_tested": false,
-      "sport_en": "Tai chi"
+      "sport_en": "Tai chi",
+      "legacy_scale_note": "1,313 视频 · 24 类动作（论文）",
+      "legacy_access_note": "Official repository requires the request form to be completed and sent to the author; no application or download tested.",
+      "resource_type": "dataset",
+      "tasks": [
+        "action_quality_assessment"
+      ],
+      "modalities": [],
+      "access_status": "request",
+      "language_status": "unknown",
+      "license": {
+        "status": "unknown",
+        "name": null,
+        "note": "Dataset/media terms have not been checked for this record."
+      },
+      "official_splits": "Unknown; inspect the original source.",
+      "preparation_note": "Obtain and inspect the annotation schema after authorized access; project README alone does not establish a released language-supervision format.",
+      "evidence": [
+        {
+          "url": "https://github.com/mlxger/TaiChi-AQA",
+          "checked_on": "2026-10-04",
+          "method": "page_read",
+          "fields": [
+            "resource_type",
+            "tasks",
+            "access_status",
+            "access_note",
+            "preparation_note"
+          ],
+          "summary": "Author project identifies a 24-form Tai Chi AQA dataset and asks applicants to email a completed form."
+        }
+      ]
     },
     {
       "id": 18,
       "name": "FLAG3D",
       "tier_from_original_curation": "B",
       "sport": "💪 健身",
-      "scale_note": "180K视频 · 60类",
+      "scale_note": "Historical scale below has not been rechecked in this revision.",
       "paper_or_source_urls": [
-        "https://arxiv.org/abs/2212.04638"
+        "https://arxiv.org/abs/2212.04638",
+        "https://andytang15.github.io/FLAG3D/"
       ],
       "access_urls": [
         "https://andytang15.github.io/FLAG3D/",
         "https://github.com/AndyTang15/FLAG3D"
       ],
-      "access_note": "[项目页](https://andytang15.github.io/FLAG3D/) [GitHub](https://github.com/AndyTang15/FLAG3D) · ⚠️ 按官网提交签署的许可协议申请（2026-10-03 核查）",
+      "access_note": "Signed dataset agreement/application required; access has not been requested.",
       "source_review": "partial_primary_source_check",
-      "source_review_date": "2026-10-03",
+      "source_review_date": "2026-10-04",
       "download_tested": false,
-      "sport_en": "Fitness"
+      "sport_en": "Fitness",
+      "legacy_scale_note": "180K视频 · 60类",
+      "legacy_access_note": "[项目页](https://andytang15.github.io/FLAG3D/) [GitHub](https://github.com/AndyTang15/FLAG3D) · ⚠️ 按官网提交签署的许可协议申请（2026-10-03 核查）",
+      "resource_type": "dataset",
+      "tasks": [
+        "action_recognition"
+      ],
+      "modalities": [
+        "video",
+        "pose_3d",
+        "text"
+      ],
+      "access_status": "request",
+      "language_status": "paired_text",
+      "license": {
+        "status": "unknown",
+        "name": null,
+        "note": "Dataset/media terms have not been checked for this record."
+      },
+      "official_splits": "Unknown; inspect the original source.",
+      "preparation_note": "Inspect annotation granularity and paired-text fields; do not infer conversational QA from action descriptions.",
+      "evidence": [
+        {
+          "url": "https://andytang15.github.io/FLAG3D/",
+          "checked_on": "2026-10-04",
+          "method": "page_read",
+          "fields": [
+            "resource_type",
+            "tasks",
+            "modalities",
+            "access_status",
+            "access_note",
+            "preparation_note",
+            "language_status"
+          ],
+          "summary": "Original project documents fitness videos and an application process using a signed agreement."
+        }
+      ]
     },
     {
       "id": 19,
       "name": "EgoExo-Fitness",
       "tier_from_original_curation": "B",
       "sport": "💪 健身",
-      "scale_note": "1.3K视频 · 32小时",
+      "scale_note": "Historical scale below has not been rechecked in this revision.",
       "paper_or_source_urls": [
         "https://arxiv.org/abs/2406.08877"
       ],
@@ -350,199 +1019,547 @@
         "https://github.com/iSEE-Laboratory/EgoExo-Fitness",
         "https://huggingface.co/datasets/Lymann/EgoExo-Fitness"
       ],
-      "access_note": "[GitHub](https://github.com/iSEE-Laboratory/EgoExo-Fitness) [HF](https://huggingface.co/datasets/Lymann/EgoExo-Fitness)",
+      "access_note": "Access URLs are entry points; current file access has not been verified.",
       "source_review": "partial_primary_source_check",
-      "source_review_date": "2026-10-03",
+      "source_review_date": "2026-10-04",
       "download_tested": false,
-      "sport_en": "Fitness"
+      "sport_en": "Fitness",
+      "legacy_scale_note": "1.3K视频 · 32小时",
+      "legacy_access_note": "[GitHub](https://github.com/iSEE-Laboratory/EgoExo-Fitness) [HF](https://huggingface.co/datasets/Lymann/EgoExo-Fitness)",
+      "resource_type": "dataset_and_benchmark",
+      "tasks": [
+        "action_recognition",
+        "action_localization",
+        "action_quality_assessment"
+      ],
+      "modalities": [
+        "video",
+        "text"
+      ],
+      "access_status": "unknown",
+      "language_status": "paired_text",
+      "license": {
+        "status": "unknown",
+        "name": null,
+        "note": "Dataset/media terms have not been checked for this record."
+      },
+      "official_splits": "Unknown; inspect the original source.",
+      "preparation_note": "Keep synchronized egocentric/exocentric views and related subject/session clips in the same split.",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2406.08877",
+          "checked_on": "2026-10-04",
+          "method": "page_read",
+          "fields": [
+            "resource_type",
+            "tasks",
+            "modalities",
+            "language_status",
+            "preparation_note"
+          ],
+          "summary": "EgoExo-Fitness paper describes synchronized viewpoints, temporal labels, quality scores and natural-language comments."
+        }
+      ]
     },
     {
       "id": 20,
       "name": "RepCount",
       "tier_from_original_curation": "B",
       "sport": "💪 健身",
-      "scale_note": "1.4K视频 · 20K标注",
+      "scale_note": "Historical scale below has not been rechecked in this revision.",
       "paper_or_source_urls": [
-        "https://arxiv.org/abs/2204.01018"
+        "https://arxiv.org/abs/2204.01018",
+        "https://github.com/SvipRepetitionCounting/TransRAC"
       ],
       "access_urls": [
         "https://svip-lab.github.io/dataset/RepCount_dataset.html",
         "https://shanghaitecheducn-my.sharepoint.com/:f:/g/personal/dongsx_shanghaitech_edu_cn/EqveZdlGsPxPrfBLQcO_IrgBs6bz7KX1zGGSz_GtLDIfAg",
         "https://github.com/SvipRepetitionCounting/TransRAC"
       ],
-      "access_note": "[官网](https://svip-lab.github.io/dataset/RepCount_dataset.html) [OneDrive](https://shanghaitecheducn-my.sharepoint.com/:f:/g/personal/dongsx_shanghaitech_edu_cn/EqveZdlGsPxPrfBLQcO_IrgBs6bz7KX1zGGSz_GtLDIfAg) [GitHub](https://github.com/SvipRepetitionCounting/TransRAC)",
+      "access_note": "Official project links RepCount access, but explicitly says original Part-B videos cannot be released. No downloads tested.",
       "source_review": "partial_primary_source_check",
-      "source_review_date": "2026-10-03",
+      "source_review_date": "2026-10-04",
       "download_tested": false,
-      "sport_en": "Fitness"
+      "sport_en": "Fitness",
+      "legacy_scale_note": "1.4K视频 · 20K标注",
+      "legacy_access_note": "[官网](https://svip-lab.github.io/dataset/RepCount_dataset.html) [OneDrive](https://shanghaitecheducn-my.sharepoint.com/:f:/g/personal/dongsx_shanghaitech_edu_cn/EqveZdlGsPxPrfBLQcO_IrgBs6bz7KX1zGGSz_GtLDIfAg) [GitHub](https://github.com/SvipRepetitionCounting/TransRAC)",
+      "resource_type": "dataset",
+      "tasks": [
+        "repetition_counting"
+      ],
+      "modalities": [
+        "video"
+      ],
+      "access_status": "unknown",
+      "language_status": "labels_only",
+      "license": {
+        "status": "unknown",
+        "name": null,
+        "note": "Dataset/media terms have not been checked for this record."
+      },
+      "official_splits": "Unknown; inspect the original source.",
+      "preparation_note": "Use repetition/count annotations for the counting task. Generating QA requires a separate, explicitly documented conversion.",
+      "evidence": [
+        {
+          "url": "https://github.com/SvipRepetitionCounting/TransRAC",
+          "checked_on": "2026-10-04",
+          "method": "page_read",
+          "fields": [
+            "resource_type",
+            "tasks",
+            "modalities",
+            "language_status",
+            "preparation_note",
+            "access_note"
+          ],
+          "summary": "Official repository provides the RepCount dataset entry point and a repetition-counting method."
+        }
+      ]
     },
     {
       "id": 21,
       "name": "Fit3D / AIFit",
       "tier_from_original_curation": "B",
       "sport": "💪 健身",
-      "scale_note": "611 多视角序列 · 2,964,236 3D 骨架（官网）",
+      "scale_note": "Project page: 611 multiview sequences, 2,964,236 skeletons, 37 exercises.",
       "paper_or_source_urls": [
         "https://fit3d.imar.ro/sites/default/files/public/pdf/Fieraru_2021_CVPR.pdf",
-        "https://fit3d.imar.ro/home"
+        "https://fit3d.imar.ro/home",
+        "https://fit3d.imar.ro/download"
       ],
       "access_urls": [
         "https://fit3d.imar.ro/download"
       ],
-      "access_note": "Official download page requires a valid logged-in account and lists 18 GB training / 1.4 GB test packages; this index has not tested authentication or downloads.",
+      "access_note": "Valid account required on the official download page; no account was created.",
       "source_review": "partial_primary_source_check",
       "source_review_date": "2026-10-04",
       "download_tested": false,
-      "sport_en": "Fitness"
+      "sport_en": "Fitness",
+      "legacy_scale_note": "611 多视角序列 · 2,964,236 3D 骨架（官网）",
+      "legacy_access_note": "Official download page requires a valid logged-in account and lists 18 GB training / 1.4 GB test packages; this index has not tested authentication or downloads.",
+      "resource_type": "dataset",
+      "tasks": [
+        "action_quality_assessment",
+        "pose_estimation"
+      ],
+      "modalities": [
+        "video",
+        "pose_3d"
+      ],
+      "access_status": "gated",
+      "language_status": "labels_only",
+      "license": {
+        "status": "unknown",
+        "name": null,
+        "note": "Dataset/media terms have not been checked for this record."
+      },
+      "official_splits": "Official training and test packages; verify subject allocation in the original protocol.",
+      "preparation_note": "Account access and subject-level split checks are needed before experiments; pose labels alone do not supply language supervision.",
+      "evidence": [
+        {
+          "url": "https://fit3d.imar.ro/home",
+          "checked_on": "2026-10-04",
+          "method": "page_read",
+          "fields": [
+            "resource_type",
+            "tasks",
+            "modalities",
+            "language_status",
+            "scale_note",
+            "preparation_note"
+          ],
+          "summary": "Original Fit3D page documents multiview fitness recordings, skeletons and exercise coverage."
+        },
+        {
+          "url": "https://fit3d.imar.ro/download",
+          "checked_on": "2026-10-04",
+          "method": "page_read",
+          "fields": [
+            "access_status",
+            "access_note",
+            "official_splits"
+          ],
+          "summary": "The download page requires an account and distinguishes training and test packages."
+        }
+      ]
     },
     {
       "id": 22,
       "name": "SpaceJam",
       "tier_from_original_curation": "B",
       "sport": "🏀 篮球",
-      "scale_note": "32.5K标注",
+      "scale_note": "Historical scale below has not been rechecked in this revision.",
       "paper_or_source_urls": [],
       "access_urls": [
         "https://gitcode.com/gh_mirrors/sp/SpaceJam"
       ],
-      "access_note": "⚠️ [GitCode](https://gitcode.com/gh_mirrors/sp/SpaceJam) · 可用性存疑",
+      "access_note": "Access URLs are entry points; current file access has not been verified.",
       "source_review": "needs_review",
       "source_review_date": null,
       "download_tested": false,
-      "sport_en": "Basketball"
+      "sport_en": "Basketball",
+      "legacy_scale_note": "32.5K标注",
+      "legacy_access_note": "⚠️ [GitCode](https://gitcode.com/gh_mirrors/sp/SpaceJam) · 可用性存疑",
+      "resource_type": "unknown",
+      "tasks": [],
+      "modalities": [],
+      "access_status": "unknown",
+      "language_status": "unknown",
+      "license": {
+        "status": "unknown",
+        "name": null,
+        "note": "Dataset/media terms have not been checked for this record."
+      },
+      "official_splits": "Unknown; inspect the original source.",
+      "preparation_note": "Inspect the original annotation schema and media terms before selecting a training pipeline.",
+      "evidence": []
     },
     {
       "id": 23,
       "name": "SVHighlights",
       "tier_from_original_curation": "B",
       "sport": "🌐 多运动(8种)",
-      "scale_note": "320视频 · 640h · 2.0h avg",
+      "scale_note": "Paper: 320 videos, 640.18 hours total and a mean duration of two hours.",
       "paper_or_source_urls": [
         "https://arxiv.org/abs/2606.06926"
       ],
       "access_urls": [
         "https://huggingface.co/datasets/ming9710/SVHighlights"
       ],
-      "access_note": "[HF](https://huggingface.co/datasets/ming9710/SVHighlights) · KDD 2026 · 需转 VLM 格式",
+      "access_note": "Access URLs are entry points; current file access has not been verified.",
       "source_review": "partial_primary_source_check",
-      "source_review_date": "2026-10-03",
+      "source_review_date": "2026-10-04",
       "download_tested": false,
-      "sport_en": "8 sports"
+      "sport_en": "8 sports",
+      "legacy_scale_note": "320视频 · 640h · 2.0h avg",
+      "legacy_access_note": "[HF](https://huggingface.co/datasets/ming9710/SVHighlights) · KDD 2026 · 需转 VLM 格式",
+      "resource_type": "benchmark",
+      "tasks": [
+        "highlight_detection"
+      ],
+      "modalities": [
+        "video"
+      ],
+      "access_status": "unknown",
+      "language_status": "unknown",
+      "license": {
+        "status": "unknown",
+        "name": null,
+        "note": "Dataset/media terms have not been checked for this record."
+      },
+      "official_splits": "Unknown; inspect the original source.",
+      "preparation_note": "Evaluate highlight localization on full-length videos; model-generated captions are not automatically dataset-provided language ground truth.",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2606.06926",
+          "checked_on": "2026-10-04",
+          "method": "page_read",
+          "fields": [
+            "resource_type",
+            "tasks",
+            "modalities",
+            "scale_note",
+            "preparation_note"
+          ],
+          "summary": "SVHighlights paper introduces an extremely long sports-video highlight-detection benchmark."
+        }
+      ]
     },
     {
       "id": 24,
       "name": "ShuttleSet系列",
       "tier_from_original_curation": "C",
       "sport": "🏸 羽毛球",
-      "scale_note": "33K-43K击球",
-      "paper_or_source_urls": [],
+      "scale_note": "Original ShuttleSet: 44 matches, 104 sets, 3,685 rallies and 36,492 strokes. Extensions are separate versions.",
+      "paper_or_source_urls": [
+        "https://arxiv.org/abs/2306.04948"
+      ],
       "access_urls": [
         "https://github.com/wywyWang/CoachAI-Projects"
       ],
-      "access_note": "[GitHub](https://github.com/wywyWang/CoachAI-Projects)",
-      "source_review": "needs_review",
-      "source_review_date": null,
+      "access_note": "Access URLs are entry points; current file access has not been verified.",
+      "source_review": "partial_primary_source_check",
+      "source_review_date": "2026-10-04",
       "download_tested": false,
-      "sport_en": "Badminton"
+      "sport_en": "Badminton",
+      "legacy_scale_note": "33K-43K击球",
+      "legacy_access_note": "[GitHub](https://github.com/wywyWang/CoachAI-Projects)",
+      "resource_type": "dataset_and_benchmark",
+      "tasks": [
+        "stroke_forecasting",
+        "tactical_analysis"
+      ],
+      "modalities": [
+        "structured_events"
+      ],
+      "access_status": "unknown",
+      "language_status": "labels_only",
+      "license": {
+        "status": "unknown",
+        "name": null,
+        "note": "Dataset/media terms have not been checked for this record."
+      },
+      "official_splits": "Unknown; inspect the original source.",
+      "preparation_note": "Select an explicit ShuttleSet version and preserve match/rally grouping; stroke tables are not video-text QA.",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2306.04948",
+          "checked_on": "2026-10-04",
+          "method": "page_read",
+          "fields": [
+            "resource_type",
+            "tasks",
+            "modalities",
+            "language_status",
+            "scale_note",
+            "preparation_note"
+          ],
+          "summary": "Original ShuttleSet paper describes stroke-level badminton records and forecasting/tactical-analysis tasks."
+        }
+      ]
     },
     {
       "id": 25,
       "name": "OpenTTGames",
       "tier_from_original_curation": "C",
       "sport": "🏓 乒乓球",
-      "scale_note": "12视频 · 4.3K事件",
-      "paper_or_source_urls": [],
+      "scale_note": "Official page: five training videos and seven test videos; 4,271 annotated events.",
+      "paper_or_source_urls": [
+        "https://lab.osai.ai/"
+      ],
       "access_urls": [
         "https://lab.osai.ai/"
       ],
-      "access_note": "[官网](https://lab.osai.ai/) · CC BY-NC-SA 4.0",
-      "source_review": "needs_review",
-      "source_review_date": null,
+      "access_note": "Official page lists direct video and markup links; download not tested.",
+      "source_review": "partial_primary_source_check",
+      "source_review_date": "2026-10-04",
       "download_tested": false,
-      "sport_en": "Table tennis"
+      "sport_en": "Table tennis",
+      "legacy_scale_note": "12视频 · 4.3K事件",
+      "legacy_access_note": "[官网](https://lab.osai.ai/) · CC BY-NC-SA 4.0",
+      "resource_type": "dataset",
+      "tasks": [
+        "ball_detection",
+        "event_spotting",
+        "segmentation"
+      ],
+      "modalities": [
+        "video",
+        "spatial_annotations"
+      ],
+      "access_status": "public",
+      "language_status": "labels_only",
+      "license": {
+        "status": "documented",
+        "name": "CC-BY-NC-SA-4.0",
+        "note": "Official dataset page states Attribution-NonCommercial-ShareAlike 4.0."
+      },
+      "official_splits": "Five training videos and seven test videos are explicitly separated.",
+      "preparation_note": "Use spatial/event targets for computer vision. Do not describe this resource as an existing language-instruction dataset.",
+      "evidence": [
+        {
+          "url": "https://lab.osai.ai/",
+          "checked_on": "2026-10-04",
+          "method": "page_read",
+          "fields": [
+            "resource_type",
+            "tasks",
+            "modalities",
+            "language_status",
+            "access_status",
+            "scale_note",
+            "access_note",
+            "official_splits",
+            "license",
+            "preparation_note"
+          ],
+          "summary": "Original dataset page documents ball/event/segmentation annotations, train/test videos and license."
+        }
+      ]
     },
     {
       "id": 26,
       "name": "Free Exercise DB",
       "tier_from_original_curation": "C",
       "sport": "💪 健身",
-      "scale_note": "800+动作",
-      "paper_or_source_urls": [],
+      "scale_note": "Project describes 800+ exercises; this is an exercise reference database.",
+      "paper_or_source_urls": [
+        "https://github.com/yuhonas/free-exercise-db"
+      ],
       "access_urls": [
+        "https://github.com/yuhonas/free-exercise-db",
         "https://github.com/wrkout/exercises.json"
       ],
-      "access_note": "[GitHub](https://github.com/wrkout/exercises.json) · Unlicense",
-      "source_review": "needs_review",
-      "source_review_date": null,
+      "access_note": "Public JSON and images in the named project; the earlier URL pointed to its upstream exercises.json.",
+      "source_review": "partial_primary_source_check",
+      "source_review_date": "2026-10-04",
       "download_tested": false,
-      "sport_en": "Fitness"
+      "sport_en": "Fitness",
+      "legacy_scale_note": "800+动作",
+      "legacy_access_note": "[GitHub](https://github.com/wrkout/exercises.json) · Unlicense",
+      "resource_type": "reference",
+      "tasks": [
+        "exercise_reference"
+      ],
+      "modalities": [
+        "image",
+        "text"
+      ],
+      "access_status": "public",
+      "language_status": "instructions",
+      "license": {
+        "status": "documented",
+        "name": "Unlicense",
+        "note": "Repository labels the collection public domain/Unlicense; inspect any separate assets before reuse."
+      },
+      "official_splits": "Unknown; inspect the original source.",
+      "preparation_note": "Useful for exercise instructions and image-text prototyping; no exercise-video QA is claimed.",
+      "evidence": [
+        {
+          "url": "https://github.com/yuhonas/free-exercise-db",
+          "checked_on": "2026-10-04",
+          "method": "page_read",
+          "fields": [
+            "resource_type",
+            "tasks",
+            "modalities",
+            "language_status",
+            "access_status",
+            "scale_note",
+            "access_note",
+            "license",
+            "preparation_note"
+          ],
+          "summary": "Free Exercise DB describes public-domain exercise JSON, instructions and image paths; it credits exercises.json as its upstream."
+        }
+      ]
     },
     {
       "id": 27,
       "name": "P²ANet",
       "tier_from_original_curation": "C",
       "sport": "🏓 乒乓球",
-      "scale_note": "200视频 · 139K事件",
+      "scale_note": "Historical scale below has not been rechecked in this revision.",
       "paper_or_source_urls": [],
       "access_urls": [],
-      "access_note": "⚠️ 需确认论文中的具体获取方式",
+      "access_note": "Access URLs are entry points; current file access has not been verified.",
       "source_review": "needs_review",
       "source_review_date": null,
       "download_tested": false,
-      "sport_en": "Table tennis"
+      "sport_en": "Table tennis",
+      "legacy_scale_note": "200视频 · 139K事件",
+      "legacy_access_note": "⚠️ 需确认论文中的具体获取方式",
+      "resource_type": "unknown",
+      "tasks": [],
+      "modalities": [],
+      "access_status": "unknown",
+      "language_status": "unknown",
+      "license": {
+        "status": "unknown",
+        "name": null,
+        "note": "Dataset/media terms have not been checked for this record."
+      },
+      "official_splits": "Unknown; inspect the original source.",
+      "preparation_note": "Inspect the original annotation schema and media terms before selecting a training pipeline.",
+      "evidence": []
     },
     {
       "id": 28,
       "name": "Extended OpenTTGames",
       "tier_from_original_curation": "C",
       "sport": "🏓 乒乓球",
-      "scale_note": "1.5K击球",
+      "scale_note": "Historical scale below has not been rechecked in this revision.",
       "paper_or_source_urls": [],
       "access_urls": [
         "https://gitlab.compute.dtu.dk/emilh/table_tennis_data"
       ],
-      "access_note": "❌ [GitLab](https://gitlab.compute.dtu.dk/emilh/table_tennis_data) · 空仓库",
+      "access_note": "Access URLs are entry points; current file access has not been verified.",
       "source_review": "needs_review",
       "source_review_date": null,
       "download_tested": false,
-      "sport_en": "Table tennis"
+      "sport_en": "Table tennis",
+      "legacy_scale_note": "1.5K击球",
+      "legacy_access_note": "❌ [GitLab](https://gitlab.compute.dtu.dk/emilh/table_tennis_data) · 空仓库",
+      "resource_type": "unknown",
+      "tasks": [],
+      "modalities": [],
+      "access_status": "unknown",
+      "language_status": "unknown",
+      "license": {
+        "status": "unknown",
+        "name": null,
+        "note": "Dataset/media terms have not been checked for this record."
+      },
+      "official_splits": "Unknown; inspect the original source.",
+      "preparation_note": "Inspect the original annotation schema and media terms before selecting a training pipeline.",
+      "evidence": []
     },
     {
       "id": 29,
       "name": "MultiSenseBadminton",
       "tier_from_original_curation": "C",
       "sport": "🏸 羽毛球",
-      "scale_note": "7.8K挥拍",
+      "scale_note": "Historical scale below has not been rechecked in this revision.",
       "paper_or_source_urls": [
         "https://www.nature.com/articles/s41597-024-03271-5"
       ],
       "access_urls": [],
-      "access_note": "❌ 传感器数据为主，无视频下载入口",
+      "access_note": "Access URLs are entry points; current file access has not been verified.",
       "source_review": "needs_review",
       "source_review_date": null,
       "download_tested": false,
-      "sport_en": "Badminton"
+      "sport_en": "Badminton",
+      "legacy_scale_note": "7.8K挥拍",
+      "legacy_access_note": "❌ 传感器数据为主，无视频下载入口",
+      "resource_type": "unknown",
+      "tasks": [],
+      "modalities": [],
+      "access_status": "unknown",
+      "language_status": "unknown",
+      "license": {
+        "status": "unknown",
+        "name": null,
+        "note": "Dataset/media terms have not been checked for this record."
+      },
+      "official_splits": "Unknown; inspect the original source.",
+      "preparation_note": "Inspect the original annotation schema and media terms before selecting a training pipeline.",
+      "evidence": []
     },
     {
       "id": 30,
       "name": "ALEX-GYM-1",
       "tier_from_original_curation": "C",
       "sport": "💪 健身",
-      "scale_note": "二分类",
+      "scale_note": "Historical scale below has not been rechecked in this revision.",
       "paper_or_source_urls": [],
       "access_urls": [],
-      "access_note": "❌ 无可下载数据集",
+      "access_note": "Access URLs are entry points; current file access has not been verified.",
       "source_review": "needs_review",
       "source_review_date": null,
       "download_tested": false,
-      "sport_en": "Fitness"
+      "sport_en": "Fitness",
+      "legacy_scale_note": "二分类",
+      "legacy_access_note": "❌ 无可下载数据集",
+      "resource_type": "unknown",
+      "tasks": [],
+      "modalities": [],
+      "access_status": "unknown",
+      "language_status": "unknown",
+      "license": {
+        "status": "unknown",
+        "name": null,
+        "note": "Dataset/media terms have not been checked for this record."
+      },
+      "official_splits": "Unknown; inspect the original source.",
+      "preparation_note": "Inspect the original annotation schema and media terms before selecting a training pipeline.",
+      "evidence": []
     },
     {
       "id": 31,
       "name": "CalTennis",
       "tier_from_original_curation": "C",
       "sport": "🎾 网球",
-      "scale_note": "11M帧 · 51小时 · 40人 · 2-6视角",
+      "scale_note": "Paper: 11M+ frames, 51 hours, 40 players and 2–6 synchronized cameras at 60 Hz.",
       "paper_or_source_urls": [
         "https://arxiv.org/abs/2606.20542"
       ],
@@ -550,43 +1567,123 @@
         "https://ilonadem.github.io/caltennis-website/",
         "https://huggingface.co/datasets/demalenk/caltennis"
       ],
-      "access_note": "[项目页](https://ilonadem.github.io/caltennis-website/) [HF](https://huggingface.co/datasets/demalenk/caltennis) · 需转 VLM 格式",
+      "access_note": "Access URLs are entry points; current file access has not been verified.",
       "source_review": "partial_primary_source_check",
-      "source_review_date": "2026-10-03",
+      "source_review_date": "2026-10-04",
       "download_tested": false,
-      "sport_en": "Tennis"
+      "sport_en": "Tennis",
+      "legacy_scale_note": "11M帧 · 51小时 · 40人 · 2-6视角",
+      "legacy_access_note": "[项目页](https://ilonadem.github.io/caltennis-website/) [HF](https://huggingface.co/datasets/demalenk/caltennis) · 需转 VLM 格式",
+      "resource_type": "dataset_and_benchmark",
+      "tasks": [
+        "pose_estimation"
+      ],
+      "modalities": [
+        "video"
+      ],
+      "access_status": "unknown",
+      "language_status": "unknown",
+      "license": {
+        "status": "unknown",
+        "name": null,
+        "note": "Dataset/media terms have not been checked for this record."
+      },
+      "official_splits": "Unknown; inspect the original source.",
+      "preparation_note": "Distinguish multiview evaluation geometry from motion-capture ground-truth poses. Keep player/recording views grouped; no language-QA supervision is established.",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2606.20542",
+          "checked_on": "2026-10-04",
+          "method": "page_read",
+          "fields": [
+            "resource_type",
+            "tasks",
+            "modalities",
+            "scale_note",
+            "preparation_note"
+          ],
+          "summary": "CalTennis paper introduces synchronized multiview tennis video and label-free pose-estimation evaluation."
+        }
+      ]
     },
     {
       "id": 32,
       "name": "FLEX-VideoQA",
       "tier_from_original_curation": null,
       "sport": "健身",
-      "scale_note": "待核实",
+      "scale_note": "Historical scale below has not been rechecked in this revision.",
       "paper_or_source_urls": [
         "https://openreview.net/forum?id=Fje6v8JnB0"
       ],
       "access_urls": [],
-      "access_note": "发布状态待核实",
+      "access_note": "Access URLs are entry points; current file access has not been verified.",
       "source_review": "needs_review",
       "source_review_date": null,
       "download_tested": false,
-      "sport_en": "Fitness"
+      "sport_en": "Fitness",
+      "legacy_scale_note": "待核实",
+      "legacy_access_note": "发布状态待核实",
+      "resource_type": "candidate",
+      "tasks": [],
+      "modalities": [],
+      "access_status": "unknown",
+      "language_status": "unknown",
+      "license": {
+        "status": "unknown",
+        "name": null,
+        "note": "Dataset/media terms have not been checked for this record."
+      },
+      "official_splits": "Unknown; inspect the original source.",
+      "preparation_note": "Inspect the original annotation schema and media terms before selecting a training pipeline.",
+      "evidence": []
     },
     {
       "id": 33,
       "name": "SportSkills",
       "tier_from_original_curation": null,
       "sport": "多运动",
-      "scale_note": "待核实",
+      "scale_note": "Paper: 360k+ instructional videos and 630k+ demonstrations across 55 sports.",
       "paper_or_source_urls": [
         "https://arxiv.org/abs/2603.25163"
       ],
       "access_urls": [],
-      "access_note": "数据发布状态待核实",
-      "source_review": "paper_identity_only",
-      "source_review_date": "2026-10-03",
+      "access_note": "Access URLs are entry points; current file access has not been verified.",
+      "source_review": "partial_primary_source_check",
+      "source_review_date": "2026-10-04",
       "download_tested": false,
-      "sport_en": "Multiple sports"
+      "sport_en": "Multiple sports",
+      "legacy_scale_note": "待核实",
+      "legacy_access_note": "数据发布状态待核实",
+      "resource_type": "candidate",
+      "tasks": [
+        "instructional_retrieval"
+      ],
+      "modalities": [
+        "video"
+      ],
+      "access_status": "unknown",
+      "language_status": "unknown",
+      "license": {
+        "status": "unknown",
+        "name": null,
+        "note": "Dataset/media terms have not been checked for this record."
+      },
+      "official_splits": "Unknown; inspect the original source.",
+      "preparation_note": "Candidate remains separate until release and access are checked; paper-scale claims do not establish available training files.",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2603.25163",
+          "checked_on": "2026-10-04",
+          "method": "page_read",
+          "fields": [
+            "tasks",
+            "modalities",
+            "scale_note",
+            "preparation_note"
+          ],
+          "summary": "SportSkills paper describes instructional sports videos and mistake-conditioned instructional retrieval; release access is unchecked."
+        }
+      ]
     }
   ]
 }
