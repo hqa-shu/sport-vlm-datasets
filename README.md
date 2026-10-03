@@ -8,17 +8,15 @@
 
 [English catalog](CATALOG.md) · [中文](README.zh-CN.md) · [JSON index](data/datasets.json) · [Use the CLI](#search-and-reuse-locally) · [Contribute](CONTRIBUTING.md) · [Cite](#citation)
 
+**33 resources · 31 main entries + 2 candidates · Partial source review**
+
 ## Choose a task
 
-| Goal | Starting point | What to check next |
-|------|----------------|--------------------|
-| Soccer video QA / fine-tuning | [SoccerChat](https://github.com/simula/SoccerChat) | Video + query/response fields; keep the official validation split separate. |
-| Expert action understanding | [ExAct](https://github.com/Texaser/Exact) | Multiple-choice evaluation; a HF split named `train` does not make the benchmark training data. |
-| Repetition counting | [RepCount / TransRAC](https://github.com/SvipRepetitionCounting/TransRAC) | Counting annotations need task-specific preparation rather than assumed language supervision. |
+- **Soccer video QA / fine-tuning:** Start with [SoccerChat](https://github.com/simula/SoccerChat). Inspect video + query/response fields and preserve the official validation split.
+- **Expert action understanding:** Start with [ExAct](https://github.com/Texaser/Exact). It is a multiple-choice benchmark; a Hugging Face split called `train` does not establish training suitability.
+- **Repetition counting:** Start with [RepCount / TransRAC](https://github.com/SvipRepetitionCounting/TransRAC). Counting annotations need task-specific preparation.
 
 These are source-backed entry points, not a best-dataset ranking. Check original media access, usage terms, and official splits before preparing any training data.
-
-**33 resources · 31 main entries + 2 candidates · Partial source review**
 
 Browse in [English](CATALOG.md) or [中文](README.zh-CN.md), or reuse the [JSON index](data/datasets.json).
 
