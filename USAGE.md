@@ -47,6 +47,14 @@ python3 catalog.py --audit
 
 These checks do not confirm that a link is live, media can be downloaded, a license permits your use, or a dataset is suitable for training. A partial source review does not validate every field. See the original papers and dataset cards before preparing model inputs.
 
+## Verify a contribution
+
+```bash
+python3 -m unittest discover -s tests -v
+```
+
+The suite exercises invalid metadata, bilingual filtering, CSV/JSON round trips, command-line errors, execution outside the repository, and catalog/documentation consistency. It runs offline using Python’s standard library.
+
 ## 中文说明
 
 用 `--sport 网球` / `--sport tennis` 搜索运动领域，用 `--query 名称` 查资源；`--format json` 或 `csv` 导出元数据。`--validate` 检查结构，`--audit` 汇总待核查条目。所有操作均在本地执行，不下载数据集、不验证训练效果。

@@ -37,6 +37,11 @@ def validate_catalog(catalog):
         if type(entry.get('id')) is not int:
             errors.append(prefix + 'id must be an integer')
         ids.append(entry.get('id'))
+        for field in ('tier_from_original_curation', 'source_review_date'):
+            if field not in entry:
+                errors.append(prefix + 'missing required field ' + field)
+        if 'sport_en' in entry and (not isinstance(entry['sport_en'], str) or not entry['sport_en'].strip()):
+            errors.append(prefix + 'sport_en must be non-empty text when supplied')
         for key in ('name', 'sport', 'scale_note', 'access_note'):
             if not isinstance(entry.get(key), str) or not entry[key].strip():
                 errors.append(prefix + key + ' must be non-empty text')
