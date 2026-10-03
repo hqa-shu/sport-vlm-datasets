@@ -36,6 +36,35 @@ body:
     validations:
       required: true
   - type: dropdown
+    id: access_status
+    attributes:
+      label: Access status / 访问状态
+      options:
+        - "Unknown / 未核查"
+        - "Open entry point / 公开入口"
+        - "Gated or request required / 登录或申请"
+        - "Unavailable / 当前不可用"
+    validations:
+      required: true
+  - type: textarea
+    id: splits
+    attributes:
+      label: Official splits and training suitability / 划分与训练适用性
+      description: Link the official split documentation; identify evaluation-only data. Unknown is acceptable.
+    validations:
+      required: true
+  - type: dropdown
+    id: verification
+    attributes:
+      label: Evidence level / 实际验证程度
+      options:
+        - "Page or paper only / 仅网页或论文"
+        - "Annotations downloaded / 已下载标注"
+        - "Media downloaded / 已下载媒体"
+        - "Format or training tested / 已验证格式或训练"
+    validations:
+      required: true
+  - type: dropdown
     id: tier
     attributes:
       label: Suggested preparation tier / 建议准备成本分级
@@ -45,4 +74,3 @@ body:
         - "A - QA or instruction candidate"
         - "B - format conversion needed"
         - "C - substantial preparation needed"
-
