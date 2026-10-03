@@ -22,7 +22,8 @@
       "access_note": "[HF](https://huggingface.co/datasets/SimulaMet/SoccerChat) [GitHub](https://github.com/simula/SoccerChat)",
       "source_review": "partial_primary_source_check",
       "source_review_date": "2026-10-03",
-      "download_tested": false
+      "download_tested": false,
+      "sport_en": "Soccer"
     },
     {
       "id": 2,
@@ -39,7 +40,8 @@
       "access_note": "[HF](https://huggingface.co/datasets/raivn/VideoNet)",
       "source_review": "partial_primary_source_check",
       "source_review_date": "2026-10-03",
-      "download_tested": false
+      "download_tested": false,
+      "sport_en": "37 domains"
     },
     {
       "id": 3,
@@ -57,7 +59,8 @@
       "access_note": "[GitHub](https://github.com/LZYAndy/TennisExpert) [GD](https://drive.google.com/drive/folders/1GkLHT6tyFb874HcEEmIu0S47wYzzbhkN)",
       "source_review": "partial_primary_source_check",
       "source_review_date": "2026-10-03",
-      "download_tested": false
+      "download_tested": false,
+      "sport_en": "Tennis"
     },
     {
       "id": 4,
@@ -73,7 +76,8 @@
       "access_note": "⚠️ [申请表](https://forms.gle/PbPTX1eVxGpa3QG88) [GitHub](https://github.com/GaetanoDibenedetto/UMAP25)",
       "source_review": "needs_review",
       "source_review_date": null,
-      "download_tested": false
+      "download_tested": false,
+      "sport_en": "Fitness"
     },
     {
       "id": 5,
@@ -91,7 +95,8 @@
       "access_note": "[GitHub annotations](https://github.com/chili-lab/SportR/tree/main/annotations) · [HF media](https://huggingface.co/datasets/haotianxia/SportR) · ⚠️ 媒体需申请，仅限非商业研究（2026-10-03 核查）",
       "source_review": "partial_primary_source_check",
       "source_review_date": "2026-10-03",
-      "download_tested": false
+      "download_tested": false,
+      "sport_en": "Multiple sports"
     },
     {
       "id": 6,
@@ -108,7 +113,8 @@
       "access_note": "[官网](https://www.soccer-net.org/)",
       "source_review": "partial_primary_source_check",
       "source_review_date": "2026-10-03",
-      "download_tested": false
+      "download_tested": false,
+      "sport_en": "Soccer"
     },
     {
       "id": 7,
@@ -126,7 +132,8 @@
       "access_note": "[Qualcomm官网](https://www.qualcomm.com/developer/software/qevd-dataset/downloads) [HF Benchmark](https://huggingface.co/datasets/Voxel51/qualcomm-exercise-video-dataset-benchmark)",
       "source_review": "partial_primary_source_check",
       "source_review_date": "2026-10-03",
-      "download_tested": false
+      "download_tested": false,
+      "sport_en": "Fitness"
     },
     {
       "id": 8,
@@ -144,7 +151,8 @@
       "access_note": "[HF](https://huggingface.co/datasets/Alexhimself/ExAct) [GitHub](https://github.com/Texaser/Exact)",
       "source_review": "partial_primary_source_check",
       "source_review_date": "2026-10-03",
-      "download_tested": false
+      "download_tested": false,
+      "sport_en": "Multiple domains, including sports"
     },
     {
       "id": 9,
@@ -162,7 +170,8 @@
       "access_note": "[GitHub](https://github.com/chili-lab/SPORTU) [GD](https://drive.google.com/drive/folders/1nvA8gqF32lrhqzhbJ2r39-TwwW5tEvsu)",
       "source_review": "partial_primary_source_check",
       "source_review_date": "2026-10-03",
-      "download_tested": false
+      "download_tested": false,
+      "sport_en": "7 sports"
     },
     {
       "id": 10,
@@ -180,7 +189,8 @@
       "access_note": "[GitHub](https://github.com/HopLee6/Sports-QA) [HF](https://huggingface.co/datasets/HopLeeTop/Sports-QA)",
       "source_review": "partial_primary_source_check",
       "source_review_date": "2026-10-03",
-      "download_tested": false
+      "download_tested": false,
+      "sport_en": "8 sports"
     },
     {
       "id": 11,
@@ -197,7 +207,8 @@
       "access_note": "❌ [arXiv](https://arxiv.org/abs/2603.26938) · 需联系作者",
       "source_review": "partial_primary_source_check",
       "source_review_date": "2026-10-03",
-      "download_tested": false
+      "download_tested": false,
+      "sport_en": "Fitness"
     },
     {
       "id": 12,
@@ -214,7 +225,8 @@
       "access_note": "⚠️ [arXiv](https://arxiv.org/abs/2505.13860) · CVPR 2025 · 数据未公开发布",
       "source_review": "partial_primary_source_check",
       "source_review_date": "2026-10-03",
-      "download_tested": false
+      "download_tested": false,
+      "sport_en": "Soccer"
     },
     {
       "id": 13,
@@ -231,7 +243,8 @@
       "access_note": "[项目页](https://finebadminton.github.io/FineBadminton/) · 需联系作者",
       "source_review": "partial_primary_source_check",
       "source_review_date": "2026-10-03",
-      "download_tested": false
+      "download_tested": false,
+      "sport_en": "Badminton"
     },
     {
       "id": 14,
@@ -250,7 +263,8 @@
       "access_note": "Official repository links annotations and helper scripts; source videos are not redistributed. The authors report different paper/package counts. Dataset page restricts use to non-commercial academic research; no download tested.",
       "source_review": "partial_primary_source_check",
       "source_review_date": "2026-10-04",
-      "download_tested": false
+      "download_tested": false,
+      "sport_en": "Badminton"
     },
     {
       "id": 15,
@@ -267,7 +281,8 @@
       "access_note": "⚠️ [arXiv](https://arxiv.org/abs/2510.14617) · ACM MMSports 2025 · 需联系作者",
       "source_review": "partial_primary_source_check",
       "source_review_date": "2026-10-03",
-      "download_tested": false
+      "download_tested": false,
+      "sport_en": "Badminton"
     },
     {
       "id": 16,
@@ -282,7 +297,8 @@
       "access_note": "[HF](https://huggingface.co/datasets/InternRobotics/MotionMillion) · 需同意条款",
       "source_review": "needs_review",
       "source_review_date": null,
-      "download_tested": false
+      "download_tested": false,
+      "sport_en": "Fitness / martial arts"
     },
     {
       "id": 17,
@@ -299,7 +315,8 @@
       "access_note": "Official repository requires the request form to be completed and sent to the author; no application or download tested.",
       "source_review": "partial_primary_source_check",
       "source_review_date": "2026-10-04",
-      "download_tested": false
+      "download_tested": false,
+      "sport_en": "Tai chi"
     },
     {
       "id": 18,
@@ -317,7 +334,8 @@
       "access_note": "[项目页](https://andytang15.github.io/FLAG3D/) [GitHub](https://github.com/AndyTang15/FLAG3D) · ⚠️ 按官网提交签署的许可协议申请（2026-10-03 核查）",
       "source_review": "partial_primary_source_check",
       "source_review_date": "2026-10-03",
-      "download_tested": false
+      "download_tested": false,
+      "sport_en": "Fitness"
     },
     {
       "id": 19,
@@ -335,7 +353,8 @@
       "access_note": "[GitHub](https://github.com/iSEE-Laboratory/EgoExo-Fitness) [HF](https://huggingface.co/datasets/Lymann/EgoExo-Fitness)",
       "source_review": "partial_primary_source_check",
       "source_review_date": "2026-10-03",
-      "download_tested": false
+      "download_tested": false,
+      "sport_en": "Fitness"
     },
     {
       "id": 20,
@@ -354,7 +373,8 @@
       "access_note": "[官网](https://svip-lab.github.io/dataset/RepCount_dataset.html) [OneDrive](https://shanghaitecheducn-my.sharepoint.com/:f:/g/personal/dongsx_shanghaitech_edu_cn/EqveZdlGsPxPrfBLQcO_IrgBs6bz7KX1zGGSz_GtLDIfAg) [GitHub](https://github.com/SvipRepetitionCounting/TransRAC)",
       "source_review": "partial_primary_source_check",
       "source_review_date": "2026-10-03",
-      "download_tested": false
+      "download_tested": false,
+      "sport_en": "Fitness"
     },
     {
       "id": 21,
@@ -372,7 +392,8 @@
       "access_note": "Official download page requires a valid logged-in account and lists 18 GB training / 1.4 GB test packages; this index has not tested authentication or downloads.",
       "source_review": "partial_primary_source_check",
       "source_review_date": "2026-10-04",
-      "download_tested": false
+      "download_tested": false,
+      "sport_en": "Fitness"
     },
     {
       "id": 22,
@@ -387,7 +408,8 @@
       "access_note": "⚠️ [GitCode](https://gitcode.com/gh_mirrors/sp/SpaceJam) · 可用性存疑",
       "source_review": "needs_review",
       "source_review_date": null,
-      "download_tested": false
+      "download_tested": false,
+      "sport_en": "Basketball"
     },
     {
       "id": 23,
@@ -404,7 +426,8 @@
       "access_note": "[HF](https://huggingface.co/datasets/ming9710/SVHighlights) · KDD 2026 · 需转 VLM 格式",
       "source_review": "partial_primary_source_check",
       "source_review_date": "2026-10-03",
-      "download_tested": false
+      "download_tested": false,
+      "sport_en": "8 sports"
     },
     {
       "id": 24,
@@ -419,7 +442,8 @@
       "access_note": "[GitHub](https://github.com/wywyWang/CoachAI-Projects)",
       "source_review": "needs_review",
       "source_review_date": null,
-      "download_tested": false
+      "download_tested": false,
+      "sport_en": "Badminton"
     },
     {
       "id": 25,
@@ -434,7 +458,8 @@
       "access_note": "[官网](https://lab.osai.ai/) · CC BY-NC-SA 4.0",
       "source_review": "needs_review",
       "source_review_date": null,
-      "download_tested": false
+      "download_tested": false,
+      "sport_en": "Table tennis"
     },
     {
       "id": 26,
@@ -449,7 +474,8 @@
       "access_note": "[GitHub](https://github.com/wrkout/exercises.json) · Unlicense",
       "source_review": "needs_review",
       "source_review_date": null,
-      "download_tested": false
+      "download_tested": false,
+      "sport_en": "Fitness"
     },
     {
       "id": 27,
@@ -462,7 +488,8 @@
       "access_note": "⚠️ 需确认论文中的具体获取方式",
       "source_review": "needs_review",
       "source_review_date": null,
-      "download_tested": false
+      "download_tested": false,
+      "sport_en": "Table tennis"
     },
     {
       "id": 28,
@@ -477,7 +504,8 @@
       "access_note": "❌ [GitLab](https://gitlab.compute.dtu.dk/emilh/table_tennis_data) · 空仓库",
       "source_review": "needs_review",
       "source_review_date": null,
-      "download_tested": false
+      "download_tested": false,
+      "sport_en": "Table tennis"
     },
     {
       "id": 29,
@@ -492,7 +520,8 @@
       "access_note": "❌ 传感器数据为主，无视频下载入口",
       "source_review": "needs_review",
       "source_review_date": null,
-      "download_tested": false
+      "download_tested": false,
+      "sport_en": "Badminton"
     },
     {
       "id": 30,
@@ -505,7 +534,8 @@
       "access_note": "❌ 无可下载数据集",
       "source_review": "needs_review",
       "source_review_date": null,
-      "download_tested": false
+      "download_tested": false,
+      "sport_en": "Fitness"
     },
     {
       "id": 31,
@@ -523,7 +553,8 @@
       "access_note": "[项目页](https://ilonadem.github.io/caltennis-website/) [HF](https://huggingface.co/datasets/demalenk/caltennis) · 需转 VLM 格式",
       "source_review": "partial_primary_source_check",
       "source_review_date": "2026-10-03",
-      "download_tested": false
+      "download_tested": false,
+      "sport_en": "Tennis"
     },
     {
       "id": 32,
@@ -538,7 +569,8 @@
       "access_note": "发布状态待核实",
       "source_review": "needs_review",
       "source_review_date": null,
-      "download_tested": false
+      "download_tested": false,
+      "sport_en": "Fitness"
     },
     {
       "id": 33,
@@ -553,7 +585,8 @@
       "access_note": "数据发布状态待核实",
       "source_review": "paper_identity_only",
       "source_review_date": "2026-10-03",
-      "download_tested": false
+      "download_tested": false,
+      "sport_en": "Multiple sports"
     }
   ]
 }
