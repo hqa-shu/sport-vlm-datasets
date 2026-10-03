@@ -27,4 +27,15 @@ body:
       description: For example, page checked only; no media downloaded.
     validations:
       required: true
-
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Correction type / 修正类型
+      options:
+        - "Source or paper identity / 来源或论文错配"
+        - "Scale or split / 规模或划分"
+        - "Access or license / 访问或许可"
+        - "Catalog/tooling consistency / 目录或工具一致性"
+        - "Other factual correction / 其他事实修正"
+    validations:
+      required: true
