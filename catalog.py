@@ -110,6 +110,11 @@ def validate_catalog(catalog):
         for field in ('official_splits', 'preparation_note', 'legacy_scale_note', 'legacy_access_note'):
             if not isinstance(entry.get(field), str) or not entry[field].strip():
                 errors.append(prefix + field + ' must be non-empty text')
+        if 'notes_zh' in entry:
+            notes = entry['notes_zh']
+            allowed = {'scale_note', 'access_note', 'license_note', 'official_splits', 'preparation_note'}
+            if not isinstance(notes, dict) or any(key not in allowed or not isinstance(value, str) or not value.strip() for key, value in notes.items()):
+                errors.append(prefix + 'invalid notes_zh translations')
         license_info = entry.get('license')
         if not isinstance(license_info, dict):
             errors.append(prefix + 'license must be an object')
@@ -174,7 +179,7 @@ def validate_catalog(catalog):
 def select_entries(entries, query='', sport='', tier=None, review=None, task=None, modality=None, resource_type=None, access=None, language=None):
     selected = []
     for entry in entries:
-        searchable = ' '.join(str(entry.get(key, '')) for key in ('name', 'sport', 'sport_en', 'scale_note', 'access_note', 'tasks', 'modalities', 'preparation_note'))
+        searchable = ' '.join(str(entry.get(key, '')) for key in ('name', 'sport', 'sport_en', 'scale_note', 'access_note', 'tasks', 'modalities', 'preparation_note', 'notes_zh'))
         if query.casefold() not in searchable.casefold():
             continue
         scopes = (entry['sport'].lstrip('⚽🎾💪🌐🏸🥋🏀🏓 ').casefold(), entry.get('sport_en', '').casefold())

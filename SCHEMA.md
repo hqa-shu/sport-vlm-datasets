@@ -15,6 +15,7 @@
 | `license` | `{status: unknown/documented/restricted, name: string/null, note: string}`; describes dataset/media, not automatically the code license |
 | `official_splits` | Source-backed protocol note, or an explicit `Unknown; ...` note |
 | `scale_note`, `access_note`, `preparation_note` | Current notes; unknowns and limitations stay visible |
+| `notes_zh` | Optional Chinese equivalents for scale/access/preparation/split notes and `license_note`; preserve the same source-backed meaning |
 | `evidence` | Dated URL, checked fields, concise source summary and check method |
 | `paper_or_source_urls`, `access_urls` | Primary-source references and access entry points; no file-availability guarantee |
 | `source_review`, `source_review_date` | Legacy record-level review scope/date; a partial check does not verify every field |
