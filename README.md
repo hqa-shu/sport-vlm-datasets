@@ -2,77 +2,81 @@
 
 ![Sports dataset discovery, bilingual catalogs and Python data tools](hero.svg)
 
-**A curated index of sports datasets and benchmarks for VLM fine-tuning, video question answering, and action understanding.**
+**Find sports data for video-language training, action understanding and evaluation — with explicit source evidence and preparation limits.**
 
-体育多模态数据集索引：按运动领域、标注形式与准备成本比较研究资源。
+体育多模态数据资源索引：帮助训练、数据与开发用户按任务选型、核查来源、准备可复现的实验。
 
-[English catalog](CATALOG.md) · [中文](README.zh-CN.md) · [JSON index](data/datasets.json) · [Use the CLI](#search-and-reuse-locally) · [Contribute](CONTRIBUTING.md) · [Cite](#citation)
+[English catalog](CATALOG.md) · [中文目录](README.zh-CN.md) · [JSON](data/datasets.json) · [Preparation guide](PREPARATION.md) · [CLI](USAGE.md) · [Improvement plan](ROADMAP.md)
 
-**33 resources · 31 main entries + 2 candidates · Partial source review**
+[![Catalog checks](https://github.com/hqa-shu/sport-vlm-datasets/actions/workflows/catalog-checks.yml/badge.svg)](https://github.com/hqa-shu/sport-vlm-datasets/actions/workflows/catalog-checks.yml)
 
-## Choose a task
+**33 resources · 31 main + 2 candidates · Schema v2 · 27 records with field-level evidence**
 
-- **Soccer video QA / fine-tuning:** Start with [SoccerChat](https://github.com/simula/SoccerChat). Inspect video + query/response fields and preserve the official validation split.
-- **Expert action understanding:** Start with [ExAct](https://github.com/Texaser/Exact). It is a multiple-choice benchmark; a Hugging Face split called `train` does not establish training suitability.
-- **Repetition counting:** Start with [RepCount / TransRAC](https://github.com/SvipRepetitionCounting/TransRAC). Counting annotations need task-specific preparation.
+## Choose by supervision
 
-These are source-backed entry points, not a best-dataset ranking. Check original media access, usage terms, and official splits before preparing any training data.
+| Goal | Starting point | What to distinguish |
+|---|---|---|
+| Video QA / fine-tuning | [SoccerChat](https://github.com/simula/SoccerChat), [VideoNet](https://huggingface.co/datasets/raivn/VideoNet) | Paired annotations and official splits; VideoNet training and benchmark folders serve different purposes. |
+| Expert action evaluation | [ExAct](https://github.com/Texaser/Exact) | A multiple-choice benchmark; the host's `train` label does not establish SFT suitability. |
+| Repetition counting | [RepCount / TransRAC](https://github.com/SvipRepetitionCounting/TransRAC) | Counting labels need task-specific preparation. |
+| Motion and text | [MotionMillion](https://huggingface.co/datasets/InternRobotics/MotionMillion) | Processed motion/text data; original RGB-video delivery is a separate question. |
+| Ball / event / segmentation | [OpenTTGames](https://lab.osai.ai/) | Vision targets rather than existing conversational QA. |
 
-Browse in [English](CATALOG.md) or [中文](README.zh-CN.md), or reuse the [JSON index](data/datasets.json).
+These are source-backed entry points, not a quality ranking. Access to media, license scope and held-out evaluation data need separate checks.
 
+## Explore and export
 
-## Search and reuse locally
+The **[live dataset explorer](https://hqa-shu.github.io/sport-vlm-datasets/)** provides search, sport/task/modality/type/access/language filters, English/Chinese navigation and filtered JSON export. Its [self-contained HTML](index.html) also works locally: download this repository and open `index.html`; no server or dependencies are required. The Markdown catalogs remain available without JavaScript.
 
-Python **3.9+**, standard library only. No package installation, credentials, or media download required.
+Python **3.9+**, standard library only:
 
 ```bash
 git clone https://github.com/hqa-shu/sport-vlm-datasets.git
 cd sport-vlm-datasets
 python3 catalog.py --sport tennis
-python3 catalog.py --query ExAct --format json
-python3 catalog.py --review needs_review --format csv > review_queue.csv
-python3 catalog.py --validate
+python3 catalog.py --task video_qa --language paired_text --format json
+python3 catalog.py --type benchmark --format csv > benchmarks.csv
+python3 catalog.py --access unknown
+python3 catalog.py --audit
 ```
 
-[CLI usage and output →](USAGE.md) · [Catalog structure](data/datasets.json) · [Contribution checklist](CONTRIBUTING.md)
+[Complete CLI usage](USAGE.md) · [Schema and access definitions](SCHEMA.md) · [Full catalog](CATALOG.md)
 
-<a id="scope-and-evidence"></a>
+## Prepare an experiment
 
-<details>
-<summary><b>Scope, review status & preparation tiers</b></summary>
+Follow the [preparation guide](PREPARATION.md) to choose supervision, record provenance, preserve official splits and create a local video-QA manifest. The included manifest is **synthetic**, with placeholder media paths.
 
-| Coverage | Count |
-|----------|------:|
-| Main catalog entries | 31 |
-| Additional candidates | 2 |
-| Unique resources in this index | 33 |
+```bash
+# Check every shard together for declared source-group leakage.
+python3 manifest.py example-manifest.jsonl
+```
 
-Counts describe catalog entries, including benchmarks and candidate resources; they do not imply 33 downloadable training datasets. Aliases grouped in one row count as one resource.
+This audit checks JSON format, IDs, temporal boundaries and declared source groups. It does not decode media, confirm rights or validate model quality.
 
-**Review: 2026-10-04, partial.** This revision checked selected original papers and project pages, corrected mismatched references, and updated selected access notes. Other sizes and access notes are inherited from the earlier curation and may be outdated. No full dataset download or end-to-end fine-tuning validation was performed. Old availability totals were removed because they could not be reconciled with the rows.
+## Evidence and scope
 
-The S/A/B/C tiers preserve the original maintainer's preparation-cost grouping; they are not a measured quality ranking. Availability and license restrictions are independent of tier. Paper identity checks do not establish that media are accessible or suitable for training.
+**Revision: 2026-10-04.** This index contains datasets, benchmarks, reference databases and candidates. It does not imply 33 ready-to-download training datasets. Twenty-seven records have new field-level evidence; the other six have no field-level evidence in this revision. Earlier partial checks and paper-identity checks remain labeled separately.
 
-**Highlighted corrections:** [TennisVL / TennisExpert](https://arxiv.org/abs/2603.13397), [QEVD official source](https://www.qualcomm.com/developer/software/qevd-dataset), [FLAG3D](https://arxiv.org/abs/2212.04638), and [RepCount / TransRAC](https://arxiv.org/abs/2204.01018). [SportR](https://huggingface.co/datasets/haotianxia/SportR) now provides annotation and media entry points, with gated non-commercial media access. References still needing repair are explicitly marked in the catalog.
+Every asserted classification, task, modality, language/access state, known license and known split requires a dated primary-source reference. Unknown fields remain `unknown` or empty lists. A source-page read is not a download test: **zero dataset downloads or training runs have been validated**.
 
+Historical scale/access notes and original S/A/B/C preparation groups are retained in expandable catalog details. They are not current availability guarantees or measured quality scores. Run `python3 catalog.py --audit` to inspect the remaining evidence queue.
 
-</details>
+## Maintain one source of truth
 
-<a id="catalog"></a>
+Edit `data/datasets.json`, then regenerate both catalogs and the explorer:
 
-## Browse the catalog
+```bash
+python3 catalog.py --validate
+python3 generate_catalogs.py
+python3 generate_catalogs.py --check
+python3 -m unittest discover -s tests -v
+```
 
-- **[English catalog →](CATALOG.md)** — 33 resources with sports, preparation tiers, and source-review status.
-- **[中文详表 →](README.zh-CN.md)** — 规模、论文、访问说明和原整理的运动方向速查。
-- **[Structured JSON →](data/datasets.json)** — reusable names, source URLs, access notes, and provenance fields.
-
-## Latest update
-
-**2026-10-04:** Added an English catalog; repaired BFMD, TaiChi-AQA, and Fit3D / AIFit source references. BFMD paper and released-package sizes differ; Fit3D requires account login. Details and dated limits are in the [Chinese catalog](README.zh-CN.md) and [JSON](data/datasets.json).
+CI runs offline checks on Python 3.9 and 3.12. The generator detects stale outputs. See [CONTRIBUTING.md](CONTRIBUTING.md) for evidence requirements, and [ROADMAP.md](ROADMAP.md) for priorities.
 
 ## Citation
 
-If this index helps your research, please cite the collection and the original datasets you use. GitHub's citation menu is configured through [CITATION.cff](CITATION.cff).
+Please cite the original datasets used in your work as well as this index when it helps discovery. GitHub's citation menu uses [CITATION.cff](CITATION.cff).
 
 ```bibtex
 @misc{huang2026sportvlm,
@@ -83,14 +87,8 @@ If this index helps your research, please cite the collection and the original d
 }
 ```
 
-## Contributing
+Maintained by [Qian'an Huang (@hqa-shu)](https://github.com/hqa-shu). [Suggest a resource](https://github.com/hqa-shu/sport-vlm-datasets/issues/new?template=dataset.yml) · [Correct a record](https://github.com/hqa-shu/sport-vlm-datasets/issues/new?template=correction.yml). 中英文贡献均可。
 
-Corrections, new datasets, and clearer access notes are welcome. Use the [dataset suggestion](https://github.com/hqa-shu/sport-vlm-datasets/issues/new?template=dataset.yml) or [correction](https://github.com/hqa-shu/sport-vlm-datasets/issues/new?template=correction.yml) form. See [CONTRIBUTING.md](CONTRIBUTING.md) for the evidence checklist and JSON schema.
+## License
 
-Maintained by [Qian'an Huang (@hqa-shu)](https://github.com/hqa-shu). 中英文反馈均可。
-
-## License and access notes
-
-This repository's original documentation and index are under [MIT](LICENSE). Linked datasets, media, annotations, and papers retain their own licenses and access conditions; the index's MIT license does not grant rights to them.
-
-Catalog symbols are inherited access notes: ✅ a download path was previously recorded; ⚠️ application, partial access, or restrictions; ❌ previously unavailable or unpublished. Unless a row says otherwise, these are historical notes rather than a current download guarantee.
+Original index, documentation and tools: [MIT](LICENSE). Linked datasets, media, annotations and papers retain their own terms. This project's MIT license grants no rights to those third-party resources.

@@ -1,60 +1,52 @@
-# Search, export, and audit the catalog
+# Using the catalog tools
 
-[Overview](README.md) · [English catalog](CATALOG.md) · [中文详表](README.zh-CN.md)
+Python 3.9+, standard library only. Run from the checkout or use an absolute script path; the default catalog resolves relative to the script, not your current directory. None of these commands downloads media or needs credentials.
 
-The dependency-free Python CLI operates on this repository’s metadata. It never loads model weights or downloads dataset media. Python 3.9+ is supported.
-
-## Search
-
-Run from a clone of this repository:
+## Search and combine filters
 
 ```bash
 python3 catalog.py --sport tennis
-python3 catalog.py --sport 羽毛球 --tier B
 python3 catalog.py --query ExAct --format json
+python3 catalog.py --task video_qa --modality video --language paired_text
+python3 catalog.py --type benchmark --format csv > benchmarks.csv
+python3 catalog.py --access unknown --format json > access-review.json
+python3 catalog.py --review needs_review --format csv > review-queue.csv
 ```
 
-Filters combine with AND. `--sport` matches an exact Chinese or English scope label, ignoring case and leading sport symbols; tennis and table tennis are separate. `--query` searches names, scope, scale, and access notes. Preparation tiers are inherited, not quality rankings.
+Filters combine with AND. Search is case-insensitive across names, scope, tasks, modalities and preparation notes. Sport is an exact Chinese or English scope label; `tennis` does not match `table tennis`. Task/modality/type/access/language filters use the controlled values in [SCHEMA.md](SCHEMA.md); use `--help` for allowed values. Empty task/modality lists mean unchecked and do not match a known-task filter.
 
-Example result for `--sport tennis` (2026-10-04 catalog):
+`--tier S/A/B/C/candidate` preserves historical preparation groups, not measured quality. It remains for compatibility; use task and evidence fields for selection.
 
-```text
-ID  Name       Sport / scope  Tier  Source review
-3   TennisVL   Tennis         S     partial_primary_source_check
-31  CalTennis  Tennis         C     partial_primary_source_check
-2 resource(s). Tiers are inherited preparation groups, not quality scores.
-```
+## Exports and exit codes
 
-Text output uses tabs. An empty search returns a header and zero resources, with exit code 0.
+JSON is an array of complete selected records; zero matches produces `[]` successfully. CSV includes JSON-encoded arrays/objects in nested columns; parse those cells as JSON when reusing them. Text is a human-readable tab-separated summary.
 
-## Reuse
+The catalog CLI returns `0` on success and `2` for bad arguments, unreadable JSON or invalid catalog structure. It writes error messages to stderr and exports to stdout, so piping JSON does not include progress messages.
 
-```bash
-python3 catalog.py --query ExAct --format json > exact.json
-python3 catalog.py --review needs_review --format csv > review_queue.csv
-```
-
-JSON output is an array of complete records, not the full catalog envelope. CSV contains common fields, source URLs, and access notes; URL lists are JSON strings inside CSV cells. Output goes to stdout and the shell writes redirected files. A custom index can be supplied with `--catalog /path/to/datasets.json`. The default catalog path is relative to the script, so it works from another directory.
-
-## Check structure and review gaps
+## Audit and validate
 
 ```bash
 python3 catalog.py --validate
 python3 catalog.py --audit
+python3 catalog.py --catalog /path/to/another/catalog.json --validate
 ```
 
-`--validate` checks counts, consecutive unique IDs, duplicate names, field types, tiers, review dates, and HTTP(S) URL structure. It returns 0 on success and 2 for invalid data or input. `--audit` prints review counts, records without primary sources, and the number of tested downloads. Both operate on the full catalog; search filters cannot be combined with them.
+Audit reports primary-reference gaps, field-evidence gaps, unknown licenses/access and download-test counts. It audits the entire catalog; combining audit/validation with selection filters is rejected. Structural validation checks evidence coverage, not the factual correctness of a claim or live link availability.
 
-These checks do not confirm that a link is live, media can be downloaded, a license permits your use, or a dataset is suitable for training. A partial source review does not validate every field. See the original papers and dataset cards before preparing model inputs.
-
-## Verify a contribution
+## Generate the published views
 
 ```bash
-python3 -m unittest discover -s tests -v
+python3 generate_catalogs.py
+python3 generate_catalogs.py --check
 ```
 
-The suite exercises invalid metadata, bilingual filtering, CSV/JSON round trips, command-line errors, execution outside the repository, and catalog/documentation consistency. It runs offline using Python’s standard library.
+The generator creates `CATALOG.md`, `README.zh-CN.md` and `index.html` from the JSON and `explorer-template.html`. `--check` returns `1` for stale output; malformed input returns `2`. Do not manually edit generated files. Open `index.html` locally for a self-contained search UI and filtered JSON export.
 
-## 中文说明
+## Audit a video-QA manifest
 
-用 `--sport 网球` / `--sport tennis` 搜索运动领域，用 `--query 名称` 查资源；`--format json` 或 `csv` 导出元数据。`--validate` 检查结构，`--audit` 汇总待核查条目。所有操作均在本地执行，不下载数据集、不验证训练效果。
+```bash
+python3 manifest.py example-manifest.jsonl
+python3 manifest.py train.jsonl validation.jsonl test.jsonl
+```
+
+Pass all shards together to detect cross-file leakage. See [PREPARATION.md](PREPARATION.md) for required fields, globally scoped source groups and limitations. The checked-in example is synthetic, with nonexistent media paths; no training result is claimed.
