@@ -113,8 +113,8 @@ class CatalogTests(unittest.TestCase):
         self.assertEqual(audit['field_evidence_count'], 27)
         self.assertEqual(len(audit['without_field_evidence']), 6)
 
-    def test_required_nullable_fields_cannot_be_omitted(self):
-        for field in ('tier_from_original_curation', 'source_review_date'):
+    def test_required_fields_cannot_be_omitted(self):
+        for field in ('tier_from_original_curation', 'source_review_date', 'sport_en'):
             bad = copy.deepcopy(self.data)
             del bad['datasets'][-1][field]
             self.assertIn('missing required field ' + field, '\n'.join(catalog.validate_catalog(bad)))
