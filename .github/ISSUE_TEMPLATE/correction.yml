@@ -24,7 +24,7 @@ body:
     id: date
     attributes:
       label: Verification date and scope / 核查日期与范围
-      description: For example, page checked only; no media downloaded.
+      description: Name the specific checked fields and date. For example, access_status page read only; no download.
     validations:
       required: true
   - type: dropdown

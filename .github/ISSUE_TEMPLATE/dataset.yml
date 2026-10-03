@@ -1,5 +1,5 @@
 name: Suggest a dataset / 推荐数据集
-description: Add a sports vision-language dataset or benchmark with primary sources.
+description: Suggest a sports data resource with field-level primary-source evidence.
 title: "[Dataset] "
 body:
   - type: input
@@ -32,7 +32,7 @@ body:
     id: evidence
     attributes:
       label: What did you verify, and when? / 核查内容及日期
-      description: Separate viewing a page, downloading media, and testing a training format.
+      description: Name the checked fields and supporting primary URLs. Separate page reading, actual downloads and experiments.
     validations:
       required: true
   - type: dropdown
@@ -42,8 +42,9 @@ body:
       options:
         - "Unknown / 未核查"
         - "Open entry point / 公开入口"
-        - "Gated or request required / 登录或申请"
-        - "Unavailable / 当前不可用"
+        - "Gated / 账户或条款"
+        - "Request required / 作者申请"
+        - "Mixed components / 组件条件不同"
     validations:
       required: true
   - type: textarea
@@ -65,12 +66,16 @@ body:
     validations:
       required: true
   - type: dropdown
-    id: tier
+    id: resource_type
     attributes:
-      label: Suggested preparation tier / 建议准备成本分级
+      label: Resource type / 资源类型
       options:
-        - "Unknown / 待核实"
-        - "S - priority candidate"
-        - "A - QA or instruction candidate"
-        - "B - format conversion needed"
-        - "C - substantial preparation needed"
+        - "Unknown / 未核查"
+        - "Dataset / 数据集"
+        - "Benchmark / 评估基准"
+        - "Dataset and benchmark / 数据集及基准"
+        - "Reference / 参考资料"
+        - "Research work / 研究工作"
+        - "Candidate / 候选"
+    validations:
+      required: true
